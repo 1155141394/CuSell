@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <title>Login</title>
-    <link rel="stylesheet" href="../static/css/bootstrap.min.css">
-    <link href="../static/css/style.css" rel="stylesheet">
-    <script src="../static/js/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="../../../static/css/bootstrap.min.css">
+    <link href="../../../static/css/style.css" rel="stylesheet">
+    <script src="../../../static/js/jquery-3.6.0.min.js"></script>
 </head>
 
 <body>
@@ -13,12 +13,12 @@
         <nav class="navbar-dark fixed-top bg-dark" style="border-radius: 0 0 10px 10px;">
             <div class="navigator">
                 <div style="display: flex;">
-                    <img src="../static/pic/CuSell_icon.jpeg" alt="Icon" height="30px" width="30px" style="margin-top: 4.5px; margin-left: 10px; margin-right: 3px; border-radius: 5px;">
-                    <a class="navbar-brand" href="/mainpage" style="padding-top: 2px; padding-bottom: 0;">
+                    <img src="../../../static/pic/CuSell_icon.jpeg" alt="Icon" height="30px" width="30px" style="margin-top: 4.5px; margin-left: 10px; margin-right: 3px; border-radius: 5px;">
+                    <a class="navbar-brand" href="/templates/mainpage.html" style="padding-top: 2px; padding-bottom: 0;">
                         <b><span style="color: purple; font-size: x-large;">Cu</span><span style="color: orange; font-size: x-large;">Sell</span></b>
                     </a>
                     <ul class="nav"> 
-                        <li><a href="/mainpage" class="nav-link px-2 text-white top_item">Home</a></li>
+                        <li><a href="/templates/mainpage.html" class="nav-link px-2 text-white top_item">Home</a></li>
                         <li><a href="#" class="nav-link px-2 text-white top_item">Profile</a></li>
                         <li><a href="#" class="nav-link px-2 text-white top_item">Liked</a></li>
                         <li><a href="#" class="nav-link px-2 text-white top_item">Chat</a></li>
@@ -26,14 +26,14 @@
                     </ul>
                 </div>
                 <div style="padding-right: 10px;">
-                    <button type="button" class="btn btn-secondary me-2" onclick="window.open('/login', '_self')">
+                    <button type="button" class="btn btn-secondary me-2" onclick="window.open('/templates/login.html', '_self')">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-box-arrow-in-right" viewBox="3 2 13.5 13.5">
                             <path fill-rule="evenodd" d="M6 3.5a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-2a.5.5 0 0 0-1 0v2A1.5 1.5 0 0 0 6.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-8A1.5 1.5 0 0 0 5 3.5v2a.5.5 0 0 0 1 0v-2z"/>
                             <path fill-rule="evenodd" d="M11.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H1.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z"/>
                         </svg>
                         Login
                     </button>
-                    <button type="button" class="btn btn-primary" onclick="window.open('/registration', '_self')">
+                    <button type="button" class="btn btn-primary" onclick="window.open('/templates/registration.html', '_self')">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0.5 16 16">
                             <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
                             <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
@@ -62,7 +62,7 @@
                     </svg>
                 </div>
                 <div class="first-layer">
-                    <img src="../static/pic/CuSell_icon.jpeg" alt="Icon">
+                    <img src="../../../static/pic/CuSell_icon.jpeg" alt="Icon">
                 </div>
                 <div class="second-layer"></div>
                 <div class="third-layer">
@@ -71,14 +71,14 @@
                     </svg>
                 </div>
                 <div class="forth-layer">
-                <img src="../static/pic/CuSell_icon.png" alt="1">
+                <img src="../../../static/pic/CuSell_icon.png" alt="4">
                 </div>
             </div>
             <div class="login-box">
                 <p style="font-size: 40px; padding: 0; margin: 0; color: rgba(70, 70, 70, 0.8); margin-top: 20px;"><b>Welcome To</b></p>
                 <div style="display: flex;">
-                    <img src="../static/pic/CuSell_icon.jpeg" alt="Icon" height="40px" width="40px" style="margin-top: 0px;margin-right: 3px; border-radius: 5px;">
-                    <a class="navbar-brand" href="/mainpage" style="padding-top: 0px; padding-bottom: 0; top: -10px; position: relative;">
+                    <img src="../../../static/pic/CuSell_icon.jpeg" alt="Icon" height="40px" width="40px" style="margin-top: 0px;margin-right: 3px; border-radius: 5px;">
+                    <a class="navbar-brand" href="/templates/mainpage.html" style="padding-top: 0px; padding-bottom: 0; top: -10px; position: relative;">
                         <b><span style="color: purple; font-size: 40px;">Cu</span><span style="color: orange; font-size: 40px;">Sell</span></b>
                     </a>
                 </div>
@@ -107,7 +107,7 @@
                         <button id="submit-button" type="submit" class="btn btn-primary mb-2" style="margin-top: 20px;">Login</button>
                     </div>
 
-                    <a href="/registration">
+                    <a href="/templates/registration.html">
                         <p  style="text-align: center;margin-top: 45px;">
                             Do not have an account?<br>Sign up NOW!
                         </p>

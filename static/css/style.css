@@ -43,9 +43,9 @@ nav .navigator{
 }
 .container{
   position: relative;
-  top: -80px;
+  top: -100px;
   display: flex;
-  justify-content: space-evenly ;
+  justify-content: space-evenly;
   align-items: center;
   max-width: 100%;
   flex-wrap: wrap;
@@ -128,7 +128,7 @@ nav .navigator{
 
 .reg-form{
   align-items: flex-start;
-  top: -40px;
+  top: -60px;
   padding-top: 30px;
   width: 400px;
   box-shadow: 20px 20px 50px rgba(0, 0, 0, 0.5);
