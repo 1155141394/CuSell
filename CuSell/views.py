@@ -6,3 +6,6 @@ def index(request):
 
 def reg(request):
     return render(request,'registration.html')
+
+def log(request):
+    return render(request,'login.html')
