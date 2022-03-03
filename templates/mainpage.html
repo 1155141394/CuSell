@@ -3,10 +3,10 @@
     <head>
         <meta charset="utf-8">
         <title>CuSell</title>
-        <link href="/static/css/bootstrap.min.css" rel="stylesheet">
-        <link href="/static/css/style.css" rel="stylesheet">
-        <script src="/static/js/bootstrap.bundle.min.js"></script>
-        <script src="/static/js/jquery-3.6.0.min.js"></script>
+        <link href="../static/css/bootstrap.min.css" rel="stylesheet">
+        <link href="../static/css/style.css" rel="stylesheet">
+        <script src="../static/js/bootstrap.bundle.min.js"></script>
+        <script src="../static/js/jquery-3.6.0.min.js"></script>
         <script>
             $(document).ready(function(){
                 $(".card").mouseenter(function(){
@@ -27,25 +27,39 @@
             <nav class="navbar-dark fixed-top bg-dark" style="border-radius: 0 0 10px 10px;">
                 <div class="navigator">
                     <div style="display: flex;">
-                        <img src="/static/pic/CuSell_icon.jpeg" alt="Icon" height="30px" width="30px" style="margin-top: 4.5px; margin-left: 10px; margin-right: 3px; border-radius: 5px;">
-                        <a class="navbar-brand" href="mainpage.html" style="padding-top: 0px; padding-bottom: 0;">
+                        <img src="../static/pic/CuSell_icon.jpeg" alt="Icon" height="30px" width="30px" style="margin-top: 4.5px; margin-left: 10px; margin-right: 3px; border-radius: 5px;">
+                        <a class="navbar-brand" href="/mainpage" style="padding-top: 2px; padding-bottom: 0;">
                             <b><span style="color: purple; font-size: x-large;">Cu</span><span style="color: orange; font-size: x-large;">Sell</span></b>
                         </a>
                         <ul class="nav"> 
-                            <li><button onClick="window.open('mainpage.html', '_self');" type="button" class="btn btn-outline-secondary active top_item">
+                            <li><a href='/mainpage' class="nav-link px-2 text-white top_item" style="background-color: #6c757d; border-collapse: collapse; border-radius: 5px;">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="24" fill="currentColor" class="bi bi-house-fill" viewBox="0 2 16 16">
                                     <path fill-rule="evenodd" d="m8 3.293 6 6V13.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5V9.293l6-6zm5-.793V6l-2-2V2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5z"/>
                                     <path fill-rule="evenodd" d="M7.293 1.5a1 1 0 0 1 1.414 0l6.647 6.646a.5.5 0 0 1-.708.708L8 2.207 1.354 8.854a.5.5 0 1 1-.708-.708L7.293 1.5z"/>
                                 </svg>
-                                Home</button></li>
-                            <li><a href="#" class="nav-link px-2 text-white top_item">Profile</a></li>
+                                Home</a></li>
+                            <li><a id="profile" href="#" class="nav-link px-2 text-white top_item">Profile</a></li>
+                            <script>
+                                var userStatus = 0;
+                                $("#profile").click(function() {
+                                    if (userStatus == 0) {
+                                        $("#profile").attr("href", "/login")
+                                    } else if (userStatus == 1){
+                                        $("#profile").attr("href", "/profile")
+                                    }
+                                });
+                            </script>
                             <li><a href="#" class="nav-link px-2 text-white top_item">Liked</a></li>
                             <li><a href="#" class="nav-link px-2 text-white top_item">Chat</a></li>
                             <li><a target="_blank" href="https://github.com/1155141394/CuSell" class="nav-link px-2 text-white top_item">About Us</a></li>
                         </ul>
                     </div>
-                    <div style="padding-right: 10px;">
-                        <button type="button" class="btn btn-secondary me-2">
+
+                    <div id="user-head" style="border: #6c757d 2px solid; width: 42px; height: 42px; border-radius: 21px; margin-right: 10px;">
+                    </div>
+
+                    <div id="sign-log-button" style="padding-right: 10px;">
+                        <button type="button" class="btn btn-secondary me-2" onclick="window.open('/login', '_self')">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-box-arrow-in-right" viewBox="3 2 13.5 13.5">
                                 <path fill-rule="evenodd" d="M6 3.5a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-2a.5.5 0 0 0-1 0v2A1.5 1.5 0 0 0 6.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-8A1.5 1.5 0 0 0 5 3.5v2a.5.5 0 0 0 1 0v-2z"/>
                                 <path fill-rule="evenodd" d="M11.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H1.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z"/>
@@ -59,6 +73,15 @@
                             </svg>
                             Sign Up</button>
                     </div>
+                    <script>
+                        if (userStatus == 1) {
+                            $("#sign-log-button").addClass("hide-item");
+                            $("#user-head").removeClass("hide-item");
+                        } else if (userStatus == 0){
+                            $("#sign-log-button").removeClass("hide-item");
+                            $("#user-head").addClass("hide-item");
+                        }
+                    </script>
                 </div>
             </nav>
         </header>
@@ -75,8 +98,28 @@
 
 
         <div class="img_box">
-            <img class="icon" src="/static/pic/CuSell_icon.jpeg" alt="Icon" height="100px" width="100px" style="border-radius: 15px;">
-            <img class="cu_img" src="/static/pic/CuSell.png" alt="CuSell" height="200px" width="400px">
+            <div style="height: 150px; width: 150px; margin-top: 10px;">
+                <div class="icon-container">
+                    <div class="zero-layer">
+                        <svg color="rgba(70, 70, 70, 0.2)" xmlns="http://www.w3.org/2000/svg" width="100" hight="100" fill="currentColor" class="bi bi-bag-heart-fill" viewBox="0 0 16 16">
+                            <path d="M11.5 4v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4h-3.5ZM8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1Zm0 6.993c1.664-1.711 5.825 1.283 0 5.132-5.825-3.85-1.664-6.843 0-5.132Z"/>
+                        </svg>
+                    </div>
+                    <div class="first-layer">
+                        <img src="../static/pic/CuSell_icon.jpeg" alt="Icon">
+                    </div>
+                    <div class="second-layer"></div>
+                    <div class="third-layer">
+                        <svg  color="rgba(70, 70, 70, 0.2)" xmlns="http://www.w3.org/2000/svg" width="100" hight="100" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
+                            <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+                        </svg>
+                    </div>
+                    <div class="forth-layer">
+                    <img src="../static/pic/CuSell_icon.png" alt="#">
+                    </div>
+                </div>
+            </div>
+            <img class="cu_img" src="../static/pic/CuSell_glow.png" alt="CuSell" height="200px" width="400px">
         </div>
         
         <div class="container">

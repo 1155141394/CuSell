@@ -22,9 +22,8 @@ from CuSell import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('mainpage.html/',views.index),
-    path('registration.html/',views.reg),
-    
-    
-    
+    path('mainpage/',views.index),
+    path('registration/',views.reg),
+    path('login/',views.login),
+    path('error/',views.error),
 ]
