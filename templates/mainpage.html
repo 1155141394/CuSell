@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>CuSell</title>
+        <link href="/static/css/bootstrap.min.css" rel="stylesheet">
+        <link href="/static/css/style.css" rel="stylesheet">
+        <script src="/static/js/bootstrap.bundle.min.js"></script>
+        <script src="/static/js/jquery-3.6.0.min.js"></script>
+        <script>
+            $(document).ready(function(){
+                $(".card").mouseenter(function(){
+                    $(".card:hover").animate({top: '-20'}, 300);
+                    $(".card:hover").removeClass("shadow-pulse-inverse");
+                    $(".card:hover").addClass("selectedCard shadow-pulse");
+                }).mouseleave(function(){
+                    $(".selectedCard").animate({top: '0'}, 300);
+                    $(".selectedCard").addClass("shadow-pulse-inverse");
+                    $(".selectedCard").removeClass("selectedCard shadow-pulse");
+                });
+            });
+        </script>
+    </head>
+
+    <body>
+        <header>
+            <nav class="navbar-dark fixed-top bg-dark" style="border-radius: 0 0 10px 10px;">
+                <div class="navigator">
+                    <div style="display: flex;">
+                        <img src="/static/pic/CuSell_icon.jpeg" alt="Icon" height="30px" width="30px" style="margin-top: 4.5px; margin-left: 10px; margin-right: 3px; border-radius: 5px;">
+                        <a class="navbar-brand" href="mainpage.html" style="padding-top: 0px; padding-bottom: 0;">
+                            <b><span style="color: purple; font-size: x-large;">Cu</span><span style="color: orange; font-size: x-large;">Sell</span></b>
+                        </a>
+                        <ul class="nav"> 
+                            <li><button onClick="window.open('mainpage.html', '_self');" type="button" class="btn btn-outline-secondary active top_item">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="24" fill="currentColor" class="bi bi-house-fill" viewBox="0 2 16 16">
+                                    <path fill-rule="evenodd" d="m8 3.293 6 6V13.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5V9.293l6-6zm5-.793V6l-2-2V2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5z"/>
+                                    <path fill-rule="evenodd" d="M7.293 1.5a1 1 0 0 1 1.414 0l6.647 6.646a.5.5 0 0 1-.708.708L8 2.207 1.354 8.854a.5.5 0 1 1-.708-.708L7.293 1.5z"/>
+                                </svg>
+                                Home</button></li>
+                            <li><a href="#" class="nav-link px-2 text-white top_item">Profile</a></li>
+                            <li><a href="#" class="nav-link px-2 text-white top_item">Liked</a></li>
+                            <li><a href="#" class="nav-link px-2 text-white top_item">Chat</a></li>
+                            <li><a target="_blank" href="https://github.com/1155141394/CuSell" class="nav-link px-2 text-white top_item">About Us</a></li>
+                        </ul>
+                    </div>
+                    <div style="padding-right: 10px;">
+                        <button type="button" class="btn btn-secondary me-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-box-arrow-in-right" viewBox="3 2 13.5 13.5">
+                                <path fill-rule="evenodd" d="M6 3.5a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-2a.5.5 0 0 0-1 0v2A1.5 1.5 0 0 0 6.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-8A1.5 1.5 0 0 0 5 3.5v2a.5.5 0 0 0 1 0v-2z"/>
+                                <path fill-rule="evenodd" d="M11.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H1.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z"/>
+                            </svg>
+                            Login
+                        </button>
+                        <button type="button" class="btn btn-primary" onclick="window.open('/registration', '_self')">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0.5 16 16">
+                                <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+                                <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
+                            </svg>
+                            Sign Up</button>
+                    </div>
+                </div>
+            </nav>
+        </header>
+        
+        <div style="width: 100%; height: 90%; position: fixed; z-index: -1; display: flex; justify-content: flex-end; align-items: flex-end;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="500" height="500" fill="currentColor" class="bi bi-bag-heart" viewBox="0 0 16 16" style="opacity: 0.4; color: orange">
+                <path fill-rule="evenodd" d="M10.5 3.5a2.5 2.5 0 0 0-5 0V4h5v-.5Zm1 0V4H15v10a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V4h3.5v-.5a3.5 3.5 0 1 1 7 0ZM14 14V5H2v9a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1ZM8 7.993c1.664-1.711 5.825 1.283 0 5.132-5.825-3.85-1.664-6.843 0-5.132Z"/>
+            </svg>
+        </div>
+        <svg xmlns="http://www.w3.org/2000/svg" width="500" height="500" fill="currentColor" class="bi bi-cart-check-fill" viewBox="0 0 16 16" style="opacity: 0.3; position:fixed ; z-index: -1; left: 10px; top: 30px; color: purple">
+            <path d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1H.5zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm-1.646-7.646-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L8 8.293l2.646-2.647a.5.5 0 0 1 .708.708z"/>
+        </svg>
+        
+
+
+        <div class="img_box">
+            <img class="icon" src="/static/pic/CuSell_icon.jpeg" alt="Icon" height="100px" width="100px" style="border-radius: 15px;">
+            <img class="cu_img" src="/static/pic/CuSell.png" alt="CuSell" height="200px" width="400px">
+        </div>
+        
+        <div class="container">
+            <div class="bg">
+                <div class="card">
+                    <div class="content">
+                        <h2>02</h2>
+                        <h3><b>Fast & Convenient</b></h3>
+                        <p>Discription here</p>
+                    </div>
+                </div>
+            </div>
+            <div class="bg">
+                <div class="card">
+                    <div class="content">
+                        <h2>01</h2>
+                        <h3><b>Best Platform</b></h3>
+                        <p>Discription here</p>
+                    </div>
+                </div>
+            </div>
+            <div class="bg">
+                <div class="card">
+                    <div class="content">
+                        <h2>03</h2>
+                        <h3><b>Safe & Secured</b></h3>
+                        <p>Discription here</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+
+
+</html>
