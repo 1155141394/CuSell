@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <link rel="stylesheet" href="../../../static/css/bootstrap.min.css">
+    <link href="../../../static/css/style.css" rel="stylesheet">
+    <script src="../../../static/js/jquery-3.6.0.min.js"></script>
+</head>
+
+<body>
+    <header>
+        <nav class="navbar-dark fixed-top bg-dark" style="border-radius: 0 0 10px 10px;">
+            <div class="navigator">
+                <div style="display: flex;">
+                    <img src="../../../static/pic/CuSell_icon.jpeg" alt="Icon" height="30px" width="30px" style="margin-top: 4.5px; margin-left: 10px; margin-right: 3px; border-radius: 5px;">
+                    <a class="navbar-brand" href="/templates/mainpage.html" style="padding-top: 2px; padding-bottom: 0;">
+                        <b><span style="color: purple; font-size: x-large;">Cu</span><span style="color: orange; font-size: x-large;">Sell</span></b>
+                    </a>
+                    <ul class="nav"> 
+                        <li><a href="/templates/mainpage.html" class="nav-link px-2 text-white top_item">Home</a></li>
+                        <li><a href="#" class="nav-link px-2 text-white top_item">Profile</a></li>
+                        <li><a href="#" class="nav-link px-2 text-white top_item">Liked</a></li>
+                        <li><a href="#" class="nav-link px-2 text-white top_item">Chat</a></li>
+                        <li><a target="_blank" href="https://github.com/1155141394/CuSell" class="nav-link px-2 text-white top_item">About Us</a></li>
+                    </ul>
+                </div>
+                <div style="padding-right: 10px;">
+                    <button type="button" class="btn btn-secondary me-2" onclick="window.open('/templates/login.html', '_self')">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-box-arrow-in-right" viewBox="3 2 13.5 13.5">
+                            <path fill-rule="evenodd" d="M6 3.5a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-2a.5.5 0 0 0-1 0v2A1.5 1.5 0 0 0 6.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-8A1.5 1.5 0 0 0 5 3.5v2a.5.5 0 0 0 1 0v-2z"/>
+                            <path fill-rule="evenodd" d="M11.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H1.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z"/>
+                        </svg>
+                        Login
+                    </button>
+                    <button type="button" class="btn btn-primary" onclick="window.open('/templates/registration.html', '_self')">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0.5 16 16">
+                            <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+                            <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
+                        </svg>
+                        Sign Up</button>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div style="width: 100%; height: 90%; position: fixed; z-index: -1; display: flex; justify-content: flex-end; align-items: flex-end;">
+        <svg xmlns="http://www.w3.org/2000/svg" width="500" height="500" fill="currentColor" class="bi bi-bag-heart" viewBox="0 0 16 16" style="opacity: 0.4; color: orange">
+            <path fill-rule="evenodd" d="M10.5 3.5a2.5 2.5 0 0 0-5 0V4h5v-.5Zm1 0V4H15v10a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V4h3.5v-.5a3.5 3.5 0 1 1 7 0ZM14 14V5H2v9a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1ZM8 7.993c1.664-1.711 5.825 1.283 0 5.132-5.825-3.85-1.664-6.843 0-5.132Z"/>
+        </svg>
+    </div>
+    <svg xmlns="http://www.w3.org/2000/svg" width="500" height="500" fill="currentColor" class="bi bi-cart-check-fill" viewBox="0 0 16 16" style="opacity: 0.3; position:fixed ; z-index: -1; left: 10px; top: 30px; color: purple">
+        <path d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1H.5zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm-1.646-7.646-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L8 8.293l2.646-2.647a.5.5 0 0 1 .708.708z"/>
+    </svg>
+
+    <div class="body-container">
+        <div class="card-box" style="width: 900px; height: 500px; align-items: flex-end; animation: show 1s; animation-fill-mode:forwards;">
+            <div class="icon-container" style="width: 400px; height: 400px; left: 70px;">
+                <div class="zero-layer">
+                    <svg color="rgba(70, 70, 70, 0.2)" xmlns="http://www.w3.org/2000/svg" width= "100" height= "100"fill="currentColor" class="bi bi-bag-heart-fill" viewBox="0 0 16 16">
+                        <path d="M11.5 4v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4h-3.5ZM8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1Zm0 6.993c1.664-1.711 5.825 1.283 0 5.132-5.825-3.85-1.664-6.843 0-5.132Z"/>
+                    </svg>
+                </div>
+                <div class="first-layer">
+                    <img src="../../../static/pic/CuSell_icon.jpeg" alt="Icon">
+                </div>
+                <div class="second-layer"></div>
+                <div class="third-layer">
+                    <svg  color="rgba(70, 70, 70, 0.2)" xmlns="http://www.w3.org/2000/svg" width="100" height="100" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
+                        <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+                    </svg>
+                </div>
+                <div class="forth-layer">
+                <img src="../../../static/pic/CuSell_icon.png" alt="4">
+                </div>
+            </div>
+            <div class="login-box">
+                <p style="font-size: 40px; padding: 0; margin: 0; color: rgba(70, 70, 70, 0.8); margin-top: 20px;"><b>Welcome To</b></p>
+                <div style="display: flex;">
+                    <img src="../../../static/pic/CuSell_icon.jpeg" alt="Icon" height="40px" width="40px" style="margin-top: 0px;margin-right: 3px; border-radius: 5px;">
+                    <a class="navbar-brand" href="/templates/mainpage.html" style="padding-top: 0px; padding-bottom: 0; top: -10px; position: relative;">
+                        <b><span style="color: purple; font-size: 40px;">Cu</span><span style="color: orange; font-size: 40px;">Sell</span></b>
+                    </a>
+                </div>
+                <form id="signupForm" method="post" style="width: 300px;">
+                    <label for="inputEmail" class="form-label" style="margin: 0; padding: 0; margin-top: 10px;">CUHK Email Address: </label>
+                    <div class="input-group mb-2">
+                        <span class="input-group-text">
+                            <svg xmlns="http://www.w3.org/2000/svg" color="gray" width="24" height="24" fill="currentColor" class="bi bi-envelope" viewBox="0 0 16 16">
+                                <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4Zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2Zm13 2.383-4.708 2.825L15 11.105V5.383Zm-.034 6.876-5.64-3.471L8 9.583l-1.326-.795-5.64 3.47A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.741ZM1 11.105l4.708-2.897L1 5.383v5.722Z"/>
+                            </svg>
+                        </span>
+                        <input id="inputEmail" type="email" placeholder="example@link.cuhk.edu.hk" class="form-control" name="email" aria-describedby="emailHelp">
+                    </div>
+                    <label for="inputPassword" class="form-label" style="margin: 0; padding: 0; margin-top: 10px;">Password</label>
+                    <div class="input-group mb-2">
+                        <span class="input-group-text">
+                            <svg xmlns="http://www.w3.org/2000/svg" color="gray" width="24" height="24" fill="currentColor" class="bi bi-shield-lock" viewBox="0 0 16 16">
+                                <path d="M5.338 1.59a61.44 61.44 0 0 0-2.837.856.481.481 0 0 0-.328.39c-.554 4.157.726 7.19 2.253 9.188a10.725 10.725 0 0 0 2.287 2.233c.346.244.652.42.893.533.12.057.218.095.293.118a.55.55 0 0 0 .101.025.615.615 0 0 0 .1-.025c.076-.023.174-.061.294-.118.24-.113.547-.29.893-.533a10.726 10.726 0 0 0 2.287-2.233c1.527-1.997 2.807-5.031 2.253-9.188a.48.48 0 0 0-.328-.39c-.651-.213-1.75-.56-2.837-.855C9.552 1.29 8.531 1.067 8 1.067c-.53 0-1.552.223-2.662.524zM5.072.56C6.157.265 7.31 0 8 0s1.843.265 2.928.56c1.11.3 2.229.655 2.887.87a1.54 1.54 0 0 1 1.044 1.262c.596 4.477-.787 7.795-2.465 9.99a11.775 11.775 0 0 1-2.517 2.453 7.159 7.159 0 0 1-1.048.625c-.28.132-.581.24-.829.24s-.548-.108-.829-.24a7.158 7.158 0 0 1-1.048-.625 11.777 11.777 0 0 1-2.517-2.453C1.928 10.487.545 7.169 1.141 2.692A1.54 1.54 0 0 1 2.185 1.43 62.456 62.456 0 0 1 5.072.56z"/>
+                                <path d="M9.5 6.5a1.5 1.5 0 0 1-1 1.415l.385 1.99a.5.5 0 0 1-.491.595h-.788a.5.5 0 0 1-.49-.595l.384-1.99a1.5 1.5 0 1 1 2-1.415z"/>
+                            </svg>
+                        </span>
+                        <input id="inputPassword" type="password" placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;" class="form-control" name="password">
+                    </div>
+    
+                    <div class="d-grid gap-2">
+                        {% csrf_token %}
+                        <button id="submit-button" type="submit" class="btn btn-primary mb-2" style="margin-top: 20px;">Login</button>
+                    </div>
+
+                    <a href="/templates/registration.html">
+                        <p  style="text-align: center;margin-top: 45px;">
+                            Do not have an account?<br>Sign up NOW!
+                        </p>
+                    </a>
+                    
+                    
+    
+                </form>
+            </div>
+        </div>
+
+    </div>
+</body>
+
+
+</html>

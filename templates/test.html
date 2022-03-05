@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Test</title>
+    <script src="../../../static/js/jquery-3.6.0.min.js"></script>
+    <script src="../../../static/js/vue@3.js"></script>
+</head>
+
+<body>
+    <button id="btn">A Buttton</button>
+    <script>
+        $("#btn").click(function () {
+            alert(123);
+            window.location.href = '/templates/mainpage.html';
+        });
+    </script>
+
+    <!--Test View-->
+
+    <div id="app">{{ message }}</div>
+    <script>
+        Vue.createApp({
+            data() {
+                return {
+                    message: 'Hello Vue!'
+                }
+            }
+        }).mount('#app')
+    </script>
+
+    <div id="imgs">
+        <img v-bind:src="imgSrc" :style="sty" alt="#">
+        <script>
+            var wd = 200
+            var ht = 100
+            Vue.createApp({
+                data() {
+                    return {
+                        imgSrc: '../static/pic/CuSell.png',
+                        sty: "width:"+wd+"px; height:"+ht+"px"
+                    }
+                }
+            }).mount("#imgs");
+        </script>
+    </div>
+
+
+
+</body>
+</html>
