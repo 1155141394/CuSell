@@ -81,7 +81,7 @@
     </div>
     
     <div class="container reg-form">
-        <form id="signupForm" style="width: 300px;">
+        <form id="signupForm" method="post" style="width: 300px;">
             <label for="userName" class="form-label">Username: </label>
             <div class="input-group mb-2">
                 <span class="input-group-text">
@@ -128,18 +128,11 @@
             </div>
 
             <div class="d-grid gap-2">
+                {% csrf_token %}
                 <button id="submit-button" type="submit" class="disabled btn btn-primary mb-2">Submit</button>
             </div>
             
-            <script>
-                $("#signupForm").submit(function(){
-                    var userName = $("#userName").val();
-                    var email = $("#inputEmail").val();
-                    var passwd = $("#confirmPassword").val();
-                    window.location.href = "/templates/mainpage.html";
-                    return false;
-                });
-            </script>
+            
 
         </form>
     </div> 
