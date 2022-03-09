@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Profile</title>
+    <link rel="stylesheet" href="../../../static/css/bootstrap.min.css">
+    <link href="../../../static/css/style.css" rel="stylesheet">
+    <script src="../../../static/js/bootstrap.bundle.min.js"></script>
+    <script src="../../../static/js/jquery-3.6.0.min.js"></script>
+</head>
+
+<body>
+    <header>
+        <nav class="navbar-dark fixed-top bg-dark" style="border-radius: 0 0 10px 10px;">
+            <div class="navigator">
+                <div style="display: flex;">
+                    <img src="../../../static/pic/CuSell_icon.jpeg" alt="Icon" height="30px" width="30px" style="margin-top: 4.5px; margin-left: 10px; margin-right: 3px; border-radius: 5px;">
+                    <a class="navbar-brand" href="/templates/mainpage.html" style="padding-top: 2px; padding-bottom: 0;">
+                        <b><span style="color: purple; font-size: x-large;">Cu</span><span style="color: orange; font-size: x-large;">Sell</span></b>
+                    </a>
+                    <ul class="nav"> 
+                        <li><a href="/templates/mainpage.html" class="nav-link px-2 text-white top_item">Home</a></li>
+                        <li><a href="#" class="nav-link px-2 text-white top_item" style="background-color: #6c757d; border-collapse: collapse; border-radius: 5px;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="24" fill="currentColor" class="bi bi-person-bounding-box" viewBox="0 0 16 16">
+                                <path d="M1.5 1a.5.5 0 0 0-.5.5v3a.5.5 0 0 1-1 0v-3A1.5 1.5 0 0 1 1.5 0h3a.5.5 0 0 1 0 1h-3zM11 .5a.5.5 0 0 1 .5-.5h3A1.5 1.5 0 0 1 16 1.5v3a.5.5 0 0 1-1 0v-3a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 1-.5-.5zM.5 11a.5.5 0 0 1 .5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 1 0 1h-3A1.5 1.5 0 0 1 0 14.5v-3a.5.5 0 0 1 .5-.5zm15 0a.5.5 0 0 1 .5.5v3a1.5 1.5 0 0 1-1.5 1.5h-3a.5.5 0 0 1 0-1h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 1 .5-.5z"/>
+                                <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm8-9a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+                            </svg>
+                            Profile</a></li>
+                        <li><a href="#" class="nav-link px-2 text-white top_item">Liked</a></li>
+                        <li><a href="#" class="nav-link px-2 text-white top_item">Chat</a></li>
+                        <li><a target="_blank" href="https://github.com/1155141394/CuSell" class="nav-link px-2 text-white top_item">About Us</a></li>
+                    </ul>
+                </div>
+
+                <div style="padding-right: 10px; display: flex; align-items: center;">
+                    <p style="color: white; margin-bottom: 0; font-size: larger; margin-right: 10px;">Hello, {{userName}}!</p>
+                    <div id="user-head-nav">
+                        <!-- User head image here -->
+                    </div>
+                </div>
+
+            </div>
+        </nav>
+    </header>
+
+
+     
+    <div style="width: 100%; height: 90%; position: fixed; z-index: -1; display: flex; justify-content: flex-end; align-items: flex-end;">
+        <svg xmlns="http://www.w3.org/2000/svg" width="500" height="500" fill="currentColor" class="bi bi-bag-heart" viewBox="0 0 16 16" style="opacity: 0.4; color: orange">
+            <path fill-rule="evenodd" d="M10.5 3.5a2.5 2.5 0 0 0-5 0V4h5v-.5Zm1 0V4H15v10a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V4h3.5v-.5a3.5 3.5 0 1 1 7 0ZM14 14V5H2v9a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1ZM8 7.993c1.664-1.711 5.825 1.283 0 5.132-5.825-3.85-1.664-6.843 0-5.132Z"/>
+        </svg>
+    </div>
+    <svg xmlns="http://www.w3.org/2000/svg" width="500" height="500" fill="currentColor" class="bi bi-cart-check-fill" viewBox="0 0 16 16" style="opacity: 0.3; position:fixed ; z-index: -1; left: 10px; top: 30px; color: purple">
+        <path d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1H.5zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm-1.646-7.646-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L8 8.293l2.646-2.647a.5.5 0 0 1 .708.708z"/>
+    </svg>
+
+    <div class="card-box" style="width: 90%; margin: 0 auto; margin-top: 30px; justify-content: flex-start;">
+        <div id="user-head">
+            <div id="edit-box" class="edit-box hide-item">
+                <div style="width: 100%; display: flex; justify-content: center; padding-top: 12px;">
+                    <a id="upload-head-link" href="#" style="font-size: 25px; color: white;">Upload</a>
+                    <input id="upload-head" type="file" style="display: none;">
+                </div>
+            </div>
+            <!-- User head image here -->
+        </div>
+
+        <script>
+            $("#user-head").mouseenter(function(){
+                $("#edit-box").removeClass("hide-item")
+            }).mouseleave(function(){
+                $("#edit-box").addClass("hide-item")
+            });
+            $("#upload-head-link").click(function(){
+                $("#upload-head").click()
+            });
+        </script>
+
+        <div id="userName-box" style="display: flex; margin-top: 10px;">
+            <p id="userName" style="font-size: xx-large; margin-left: 40px; color: rgb(230, 150, 0);">
+                <b>{{userName}}</b>
+            </p>
+            <a href="#" id="userName-icon" class="transparent" style="pointer-events: none;">
+                <svg xmlns="http://www.w3.org/2000/svg" style="margin-top: 10; margin-left: 10;" width="30" height="30" fill="currentColor" class="bi bi-pencil-square text-primary" viewBox="0 0 16 16">
+                    <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+                    <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
+                </svg>
+            </a>
+        </div>
+
+        <script>
+            $("#userName").mouseenter(function(){
+                $("#userName-icon").removeClass("transparent").css("pointer-events","auto")
+            });
+            $("#userName-box").mouseleave(function(){
+                $("#userName-icon").addClass("transparent").css("pointer-events","none")
+            });
+            $("#userName-icon").click(function(){
+                prompt('Input your new User Name here')
+            })
+        </script>
+
+        <div class="discription">
+            <div id="discription-box" style="display: flex;">
+                <p id="discription" style="font-size: x-large; margin-top: 10px; margin-bottom: 10px; margin-left: 30px; color: purple;">
+                    About Me
+                </p>
+                <a href="#" id="discription-icon" class="transparent" style="pointer-events: none;">
+                    <svg xmlns="http://www.w3.org/2000/svg" style="margin-top: 18; margin-left: 10;" width="20" height="20" fill="currentColor" class="bi bi-pencil-square text-primary" viewBox="0 0 16 16">
+                        <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+                        <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
+                    </svg>
+                </a>
+            </div>
+
+            <script>
+                $("#discription").mouseenter(function(){
+                    $("#discription-icon").removeClass("transparent").css("pointer-events","auto")
+                });
+                $("#discription-box").mouseleave(function(){
+                    $("#discription-icon").addClass("transparent").css("pointer-events","none")
+                });
+                $("#discription-icon").click(function(){
+                    prompt('Input your new "About Me" here')
+                })
+            </script>
+
+            <p style="margin-top: 0; padding-top: 0; color: purple;">
+                {{discription}}
+            </p>
+        </div>
+    </div>
+</body>
+</html>
