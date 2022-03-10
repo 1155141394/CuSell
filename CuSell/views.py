@@ -6,6 +6,7 @@ def index(request):
     return render(request, 'mainpage.html')
 
 def reg(request):
+    
     if request.method == 'POST':
         email = request.POST.get('email')
         username = request.POST.get('username')
@@ -22,3 +23,10 @@ def login(request):
 
 def error(request):
     return render(request,'error.html')
+
+def profile(request):
+    dic = {
+        "userName":"Jason",
+        "discription":"Very handsome",
+    }
+    return render(request,'profile.html',dic)

@@ -26,4 +26,5 @@ urlpatterns = [
     path('templates/registration.html/',views.reg),
     path('templates/login.html/',views.login),
     path('templates/error.html/',views.error),
+    path('templates/profile.html/',views.profile)
 ]
