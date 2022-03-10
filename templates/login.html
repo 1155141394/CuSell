@@ -106,7 +106,7 @@
                     </div>
     
                     <div class="d-grid gap-2">
-                        {% csrf_token %}
+                        <span style="display: none;">{% csrf_token %}</span>
                         <button id="submit-button" type="submit" class="btn btn-primary mb-2" style="margin-top: 20px;">Login</button>
                     </div>
 
@@ -115,9 +115,6 @@
                             Do not have an account?<br>Sign up NOW!
                         </p>
                     </a>
-                    
-
-    
                 </form>
             </div>
         </div>

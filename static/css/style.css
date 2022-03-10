@@ -10,6 +10,9 @@ body {
 .hide-item {
   display: none;
 }
+.transparent {
+  opacity: 0;
+}
 nav .navigator{
   display: flex;
   justify-content: space-between;
@@ -235,7 +238,7 @@ nav .navigator{
 .icon-container .forth-layer{
   z-index: 4;
   transform: rotate(15deg);
-  box-shadow: 2px 2px 5px rgba(255, 255, 255, 0);
+  filter: drop-shadow(0px 0px 10px rgba(255, 255, 255, 0.5))
 }
 
 .body-container{
@@ -261,6 +264,7 @@ nav .navigator{
   border-top: rgba(128, 128, 128, 0.3) 2px solid;
   backdrop-filter: blur(5px);
   -webkit-backdrop-filter: blur(5px);
+  overflow: hidden;
 }
 
 .login-box{
@@ -279,4 +283,41 @@ nav .navigator{
 @keyframes log-in-show {
   0% {top: 10000px;}
   100% {top: 0px;}
+}
+
+#user-head-nav {
+  border: #6c757d 2px solid;
+  width: 42px;
+  height: 42px;
+  border-radius: 21px;
+  margin-right: 10px;
+}
+
+#user-head {
+  width: 250px;
+  height: 250px;
+  margin-top: 30px;
+  border: #6c757d 2px solid;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.discription {
+  width: 100%;
+  height: 145px;
+  border-radius: inherit;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  background-color: #d57aff;
+  background-image: linear-gradient(to top, #a18cd1c0 0%, #fbc2ebc0 100%);
+}
+
+.edit-box {
+  width: 100%;
+  height: 50%;
+  position: relative;
+  top: 70%;
+  background-color: rgba(0, 0, 0, 0.5);
 }

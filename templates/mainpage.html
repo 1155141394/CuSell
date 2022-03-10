@@ -55,7 +55,11 @@
                         </ul>
                     </div>
 
-                    <div id="user-head" style="border: #6c757d 2px solid; width: 42px; height: 42px; border-radius: 21px; margin-right: 10px;">
+                    <div  style="padding-right: 10px; display: flex; align-items: center;">
+                        <p id="hello-message" class="hide-item" style="color: white; margin-bottom: 0; font-size: larger; margin-right: 10px;">Hello, {{userName}}!</p>
+                        <div id="user-head-nav" class="hide-item">
+                            <!-- User head image here -->
+                        </div>
                     </div>
 
                     <div id="sign-log-button" style="padding-right: 10px;">
@@ -77,10 +81,12 @@
                     <script>
                         if (userStatus == 1) {
                             $("#sign-log-button").addClass("hide-item");
-                            $("#user-head").removeClass("hide-item");
+                            $("#user-head-nav").removeClass("hide-item");
+                            $("#hello-message").removeClass("hide-item");
                         } else if (userStatus == 0){
                             $("#sign-log-button").removeClass("hide-item");
-                            $("#user-head").addClass("hide-item");
+                            $("#user-head-nav").addClass("hide-item");
+                            $("#hello-message").addClass("hide-item");
                         }
                     </script>
                 </div>
