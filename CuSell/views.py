@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.shortcuts import HttpResponse
+from .models import User, Merchandise, Image
 # Create your views here.
 def index(request):
     
@@ -25,8 +26,18 @@ def error(request):
     return render(request,'error.html')
 
 def profile(request):
-    dic = {
-        "userName":"Jason",
-        "discription":"Very handsome",
-    }
+    if request.method == 'GET':
+        return render(request, 'profile.html')
+
+    elif request.method == 'POST':
+        user_id = request.GET.get('')
+        try:
+            user = User.objects.get(sid=user_id)
+        except Exception as e:
+            print('Get user error is %s' % e)
+
+
+
+
+
     return render(request,'profile.html',dic)
