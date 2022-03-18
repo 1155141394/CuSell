@@ -9,6 +9,8 @@ def index(request):
 def reg(request):
     
     if request.method == 'POST':
+        button_name = request.POST.get('submit')
+        print(button_name)
         email = request.POST.get('email')
         username = request.POST.get('username')
         password = request.POST.get('password')

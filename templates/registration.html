@@ -127,7 +127,7 @@
                     <input id="inputVerify" placeholder="Verification Code" class="form-control" name="verify" aria-describedby="verifyHelp">
                 </div>
                 <div class="d-grid gap-2">
-                    <button id="send-button" type="submit" class="btn btn-primary mb-2" style="width: 80px; margin-left: 10px;">Send</button>
+                    <button name="send" id="send-button" type="submit" class="btn btn-primary mb-2" style="width: 80px; margin-left: 10px;">Send</button>
                 </div>
             </div>
 
@@ -138,7 +138,7 @@
 
             <div class="d-grid gap-2">
                 <span style="display: none;">{% csrf_token %}</span>
-                <button id="submit-button" type="submit" class="disabled btn btn-primary mb-2">Submit</button>
+                <button name="submit" id="submit-button" type="submit" class="disabled btn btn-primary mb-2">Submit</button>
             </div>
         </form>
     </div> 
