@@ -9,13 +9,26 @@ def index(request):
 def reg(request):
     
     if request.method == 'POST':
-        button_name = request.POST.get('submit')
-        print(button_name)
+        flag = request.POST.get('submit')
         email = request.POST.get('email')
         username = request.POST.get('username')
         password = request.POST.get('password')
-        print(email,username,password) 
-    return render(request,'registration.html')
+        print(email, username, password)
+        if flag == 'yes':
+            print(flag)
+            # email = request.POST.get('email')
+            # username = request.POST.get('username')
+            # password = request.POST.get('password')
+            # print(email,username,password)
+            return render(request, 'registration.html', locals())
+
+        else:
+            return render(request, 'registration.html', locals())
+
+    if request.method == 'GET':
+        return render(request, 'registration.html')
+
+
 
 def login(request):
     if request.method == 'POST':

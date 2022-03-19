@@ -90,7 +90,7 @@
                         <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
                     </svg>
                 </span>
-                <input id="userName" type="text" class="form-control" placeholder="Username" name="username" aria-describedby="userNameHelp">
+                <input id="userName" type="text" class="form-control" placeholder="Username" name="username" aria-describedby="userNameHelp" value={{ username }}>
             </div>
             <label for="inputEmail" class="form-label">CUHK Email Address: </label>
             <div class="input-group mb-2">
@@ -99,7 +99,7 @@
                         <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4Zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2Zm13 2.383-4.708 2.825L15 11.105V5.383Zm-.034 6.876-5.64-3.471L8 9.583l-1.326-.795-5.64 3.47A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.741ZM1 11.105l4.708-2.897L1 5.383v5.722Z"/>
                     </svg>
                 </span>
-                <input id="inputEmail" type="email" placeholder="example@link.cuhk.edu.hk" class="form-control" name="email" aria-describedby="emailHelp">
+                <input id="inputEmail"  type="email" placeholder="example@link.cuhk.edu.hk" class="form-control" name="email" aria-describedby="emailHelp" value={{ email }}>
             </div>
             <label for="inputPassword" class="form-label">Password</label>
             <div class="input-group mb-2">
@@ -109,7 +109,7 @@
                         <path d="M9.5 6.5a1.5 1.5 0 0 1-1 1.415l.385 1.99a.5.5 0 0 1-.491.595h-.788a.5.5 0 0 1-.49-.595l.384-1.99a1.5 1.5 0 1 1 2-1.415z"/>
                     </svg>
                 </span>
-                <input id="inputPassword" type="password" placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;" class="form-control" name="password">
+                <input id="inputPassword" type="password" placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;" class="form-control" name="password" value={{ password }}>
             </div>
             <label for="confirmPassword" class="form-label">Confirm Password</label>
             <div class="input-group mb-2">
@@ -119,7 +119,7 @@
                         <path d="M9.5 6.5a1.5 1.5 0 0 1-1 1.415l.385 1.99a.5.5 0 0 1-.491.595h-.788a.5.5 0 0 1-.49-.595l.384-1.99a1.5 1.5 0 1 1 2-1.415z"/>
                     </svg>
                 </span>
-                <input id="confirmPassword" type="password" placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;" class="form-control" name="confirmPassword">
+                <input id="confirmPassword"  type="password" placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;" class="form-control" name="confirmPassword" value={{ password }}>
             </div>
 
             <div class="input-group mb-2" style="margin: 0; padding: 0;">
@@ -127,7 +127,7 @@
                     <input id="inputVerify" placeholder="Verification Code" class="form-control" name="verify" aria-describedby="verifyHelp">
                 </div>
                 <div class="d-grid gap-2">
-                    <button name="send" id="send-button" type="submit" class="btn btn-primary mb-2" style="width: 80px; margin-left: 10px;">Send</button>
+                    <button name="send" value="yes" id="send-button" type="submit" class="btn btn-primary mb-2" style="width: 80px; margin-left: 10px;">Send</button>
                 </div>
             </div>
 
@@ -138,7 +138,7 @@
 
             <div class="d-grid gap-2">
                 <span style="display: none;">{% csrf_token %}</span>
-                <button name="submit" id="submit-button" type="submit" class="disabled btn btn-primary mb-2">Submit</button>
+                <button name="submit" value="yes" id="submit-button" type="submit" class=" btn btn-primary mb-2">Submit</button>
             </div>
         </form>
     </div> 
@@ -201,16 +201,16 @@
                     $("#confirmPassword").hasClass("is-invalid") ||
                     $("#inputEmail").hasClass("is-invalid") || 
                     $("#inputName").hasClass("is-invalid")){
-                        $("#submit-button").addClass("disabled");
+                        {#$("#submit-button").addClass("disabled");#}
                 };
             },
             unhighlight: function (element, errorClass, validClass) {
                 $(element).addClass("is-valid").removeClass("is-invalid");
-                if($("#inputPassword").hasClass("is-valid") && 
-                    $("#confirmPassword").hasClass("is-valid") && 
-                    $("#inputEmail").hasClass("is-valid") && 
+                if($("#inputPassword").hasClass("is-valid") &&
+                    $("#confirmPassword").hasClass("is-valid") &&
+                    $("#inputEmail").hasClass("is-valid") &&
                     $("#userName").hasClass("is-valid")){
-                        $("#submit-button").removeClass("disabled");
+                        {#$("#submit-button").removeClass("disabled");#}
                 };
             }
         });
