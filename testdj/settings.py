@@ -131,3 +131,12 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+#Email setting
+EMAIL_HOST='smtp.163.com'
+EMAIL_POST='465'
+EMAIL_HOST_USER='cusell2022@163.com' #password csci3100C1    MWATYWPMUGTUDCEU
+EMAIL_HOST_PASSWORD='MWATYWPMUGTUDCEU' #授权码
+EMAIL_USER_SSL=True     #PORT: 465/994
+EMAIL_USER_TLS=False    #PORT: 25
