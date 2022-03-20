@@ -17,7 +17,6 @@ def reg(request):
         email = request.POST.get('email')
         username = request.POST.get('username')
         password = request.POST.get('password')
-        sent=request.POST.get('sent')
         print(email, username, password)
 
         # check whether this email or username has been used
@@ -29,29 +28,33 @@ def reg(request):
         # when user click submit
         if flag == 'yes':
             print(flag)
-            veriCode = request.POST.get('verify')
-            sent = request.POST.get('sent')
-            for x in range(len(sent)):
-                if sent[x] != veriCode[x]:
-                    print("Verification Failed, click SEND again to get another email");
+            #compare the sent_veriCode and input_veriCode
+            input_veriCode = request.POST.get('verify')
+            sent_veriCode=request.POST.get('sent_veriCode')
+            for x in range(len(sent_veriCode)):
+                if sent_veriCode[x] != input_veriCode[x]:
+                    print("Verification Failed, click SEND again to get another email")
                     return render(request, 'registration.html', locals())
-            user1 = User()
-            user1.sid = email[0:10]
-            user1.name = username
-            user1.email = email
-            user1.password = password
-            user1.save()
+            #store the user information into database
+            user = User()
+            user.sid = email[0:10]
+            user.name = username
+            user.email = email
+            user.password = password
+            user.save()
             return render(request, 'registration.html', locals())
 
         # when user click send
         else:
-            sent = '%d%d%d%d%d%d' % (
+            #randomly get a sent_vericode
+            sent_veriCode = '%d%d%d%d%d%d' % (
             random.randint(0, 9), random.randint(0, 9), random.randint(0, 9), random.randint(0, 9),
             random.randint(0, 9), random.randint(0, 9))
             subject = 'CuSell VeriCode'
-            message = '[CuSell] Your Verification Code for resgistrition is %s.\nUse this code to finish registrition' %sent + '\n\nPlease ignore this mail if it is not performed by yourself.' + '\n\nIf there is any confusion or recommandation, please feel free to contact us at cusell2022@163.com'
+            message = '[CuSell] Your Verification Code for resgistrition is %s.\nUse this code to finish registrition' %sent_veriCode + '\n\nPlease ignore this mail if it is not performed by yourself.' + '\n\nIf there is any confusion or recommandation, please feel free to contact us at cusell2022@163.com'
+            #send email to the user
             send_mail(subject, message, settings.EMAIL_HOST_USER, [email])
-            print(sent)
+
             return render(request, 'registration.html', locals())
 
     if request.method == 'GET':
@@ -66,19 +69,19 @@ def login(request):
         print(email,password)
 
         # check whether such a user exist
-        user = User.objects.all(email=email)
+        users = User.objects.all(email=email)
         if len(user)==0:
             print('no such user,please regisiter')
         else:
-            for t in user:
+            for user in users:
 
                 #check whether the email match the password
-                if t.password == password:
+                if user.password == password:
                     print('Logined in')
-                    break;
+                    break
                 else:
                     print('Wrong password! Please Try Again to use "Get Back Password"')
-                    break;
+                    break
     return render(request,'login.html')
 
 def error(request):
