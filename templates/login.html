@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="../../../static/css/bootstrap.min.css">
     <link href="../../../static/css/style.css" rel="stylesheet">
     <script src="../../../static/js/jquery-3.6.0.min.js"></script>
+    <script src="../../../static/js/jquery.validate.min.js"></script>
 </head>
 
 <body>
@@ -95,6 +96,7 @@
                         <input id="inputEmail" type="email" placeholder="example@link.cuhk.edu.hk" class="form-control" name="email" aria-describedby="emailHelp">
                     </div>
                     <label for="inputPassword" class="form-label" style="margin: 0; padding: 0; margin-top: 10px;">Password</label>
+                    <button type="submit" class="btn btn-link" style="padding: 0; margin-left: 5px;">Forget?</button>
                     <div class="input-group mb-2">
                         <span class="input-group-text">
                             <svg xmlns="http://www.w3.org/2000/svg" color="gray" width="24" height="24" fill="currentColor" class="bi bi-shield-lock" viewBox="0 0 16 16">
@@ -111,7 +113,7 @@
                     </div>
 
                     <a href="/templates/registration.html">
-                        <p  style="text-align: center;margin-top: 45px;">
+                        <p style="text-align: center; position: absolute; top: 420px; margin-left: 60px; text-decoration: underline;">
                             Do not have an account?<br>Sign up NOW!
                         </p>
                     </a>
@@ -121,6 +123,32 @@
 
     </div>
 </body>
+
+<script>
+    $("#signupForm").validate({
+            rules: {
+                email: {
+                    required: true,
+                    email: true,
+                }
+            },
+            errorElement: "div",
+            errorPlacement: function (error, element) {
+                error.addClass("invalid-feedback");
+                if (element.prop("type") === "checkbox") {
+                    error.insertAfter(element.next("label"));
+                } else {
+                element.parent().append(error);
+                }
+            },
+            highlight: function (element, errorClass, validClass) {
+                $(element).addClass("is-invalid").removeClass("is-valid");
+            },
+            unhighlight: function (element, errorClass, validClass) {
+                $(element).addClass("is-valid").removeClass("is-invalid");
+            }
+        });
+</script>
 
 
 </html>
