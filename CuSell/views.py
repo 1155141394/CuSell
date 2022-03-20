@@ -20,8 +20,8 @@ def reg(request):
         print(email, username, password)
 
         # check whether this email or username has been used
-        p = User.objects.raw('SELECT * FROM user a WHERE a.name=\'%s\' or a.email=\'%s\'' % (username, email))
-        if len(p) != 0:
+        check_user = User.objects.raw('SELECT * FROM user a WHERE a.name=\'%s\' or a.email=\'%s\'' % (username, email))
+        if len(check_user) != 0:
             print('Used email or name')
             return render(request, 'registration.html')    #end check
 
@@ -69,12 +69,12 @@ def login(request):
         print(email,password)
 
         # check whether such a user exist
-        users = User.objects.all(email=email)
-        if len(user)==0:
+        users = User.objects.raw('SELECT * FROM user a WHERE a.email=\'%s\'' % (email))
+        if len(users)==0:
             print('no such user,please regisiter')
         else:
             for user in users:
-
+                print(user)
                 #check whether the email match the password
                 if user.password == password:
                     print('Logined in')

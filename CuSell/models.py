@@ -6,7 +6,7 @@ class User(models.Model):
     sid = models.CharField('User ID', max_length=10, default='', primary_key=True)
     name = models.CharField('Name', max_length=10, default='')
     email = models.EmailField('Email', default='')
-    password = models.CharField('Password', max_length=20),
+    password = models.CharField('Password', max_length=20,default='')
     introduction = models.TextField('Personal introduction', default='')
     creation_date = models.DateTimeField('Creation date', auto_now_add=True)
     is_active = models.BooleanField('Active', default=True)
