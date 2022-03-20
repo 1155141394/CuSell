@@ -122,9 +122,13 @@
                 <input id="confirmPassword"  type="password" placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;" class="form-control" name="confirmPassword" value={{ password }}>
             </div>
 
+            <div class="input-group mb-2">
+                <input id="sent" class="form-control" name="sent" style="display: none" value={{ sent }}>
+            </div>
+
             <div class="input-group mb-2" style="margin: 0; padding: 0;">
                 <div style="width: 208px;">
-                    <input id="inputVerify" placeholder="Verification Code" class="form-control" name="verify" aria-describedby="verifyHelp">
+                    <input id="inputVerify" type= "text" placeholder="Verification Code" class="form-control" name="verify" aria-describedby="verifyHelp">
                 </div>
                 <div class="d-grid gap-2">
                     <button name="send" value="yes" id="send-button" type="submit" class="btn btn-primary mb-2" style="width: 80px; margin-left: 10px;">Send</button>
