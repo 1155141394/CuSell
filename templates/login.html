@@ -125,11 +125,16 @@
 </body>
 
 <script>
+    jQuery.validator.addMethod("cuEmail", function(value, element) {
+        var cuEmail = /^\w+([-+.]\w+)*@link.cuhk.edu.hk/;
+        return this.optional(element) || (cuEmail.test(value));
+    }, "Invalid CUHK Email address");
     $("#signupForm").validate({
             rules: {
                 email: {
                     required: true,
                     email: true,
+                    cuEmail: true
                 }
             },
             errorElement: "div",
