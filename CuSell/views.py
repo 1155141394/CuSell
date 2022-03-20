@@ -20,9 +20,9 @@ def reg(request):
         print(email, username, password)
 
         # check whether this email or username has been used
-        check_user = User.objects.raw('SELECT * FROM user a WHERE a.name=\'%s\' or a.email=\'%s\'' % (username, email))
+        check_user = User.objects.raw('SELECT * FROM user a WHERE a.email=\'%s\'' % email)
         if len(check_user) != 0:
-            print('Used email or name')
+            print('Used email, please try to get back your preset password')
             return render(request, 'registration.html')    #end check
 
         # when user click submit
@@ -67,21 +67,19 @@ def login(request):
         email = request.POST.get('email')
         password = request.POST.get('password')
         print(email,password)
-
         # check whether such a user exist
-        users = User.objects.raw('SELECT * FROM user a WHERE a.email=\'%s\'' % (email))
-        if len(users)==0:
-            print('no such user,please regisiter')
-        else:
-            for user in users:
-                print(user)
-                #check whether the email match the password
-                if user.password == password:
-                    print('Logined in')
-                    break
-                else:
-                    print('Wrong password! Please Try Again to use "Get Back Password"')
-                    break
+        try:
+            user = User.objects.get(email=email)
+
+            # check whether the email match the password
+            if user.password == password:
+                print('Logined in')
+            else:
+                print('Wrong password! Please Try Again to use "Get Back Password"')
+
+        except Exception as e:
+            print('No such user, try again or sign up')
+
     return render(request,'login.html')
 
 def error(request):
