@@ -10,11 +10,9 @@
         <script>
             $(document).ready(function(){
                 $(".card").mouseenter(function(){
-                    $(".card:hover").animate({top: '-20'}, 300);
                     $(".card:hover").removeClass("shadow-pulse-inverse");
                     $(".card:hover").addClass("selectedCard shadow-pulse");
                 }).mouseleave(function(){
-                    $(".selectedCard").animate({top: '0'}, 300);
                     $(".selectedCard").addClass("shadow-pulse-inverse");
                     $(".selectedCard").removeClass("selectedCard shadow-pulse");
                 });
@@ -130,34 +128,92 @@
         </div>
         
         <div class="container">
-            <div class="bg">
-                <div class="card">
-                    <div class="content">
-                        <h2>02</h2>
-                        <h3><b>Fast & Convenient</b></h3>
-                        <p>Discription here</p>
+            <a id="1" href="#" style="text-decoration: none; color: black;">
+                <div class="bg">
+                    <div class="card">
+                        <div class="content">
+                            
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="bg">
-                <div class="card">
-                    <div class="content">
-                        <h2>01</h2>
-                        <h3><b>Best Platform</b></h3>
-                        <p>Discription here</p>
+            </a>
+            <a id="2" href="#" style="text-decoration: none; color: black;">
+                <div class="bg">
+                    <div class="card">
+                        <div class="content">
+                            
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="bg">
-                <div class="card">
-                    <div class="content">
-                        <h2>03</h2>
-                        <h3><b>Safe & Secured</b></h3>
-                        <p>Discription here</p>
+            </a>
+            <a id="3" href="#" style="text-decoration: none; color: black;">
+                <div class="bg">
+                    <div class="card">
+                        <div class="content">
+                            
+                        </div>
                     </div>
                 </div>
-            </div>
+            </a>
+            <a id="4" href="#" style="text-decoration: none; color: black;">
+                <div class="bg">
+                    <div class="card">
+                        <div class="content">
+                            
+                        </div>
+                    </div>
+                </div>
+            </a>
+            <a id="5" href="#" style="text-decoration: none; color: black;">
+                <div class="bg">
+                    <div class="card">
+                        <div class="content">
+                        </div>
+                    </div>
+                </div>
+            </a>
+            <a id="6" href="#" style="text-decoration: none; color: black;">
+                <div class="bg">
+                    <div class="card">
+                        <div class="content">
+                            
+                        </div>
+                    </div>
+                </div>
+            </a>
         </div>
+        
+        <div style="display: flex; justify-content: center;">
+            <button id="show-more" type="button" class="btn btn-primary btn-lg" style="position: relative; top: -60px;">Show More</button>        
+        </div>
+
+        <script>
+            var times = 1
+            $("#show-more").click(function(){
+                for (i=0; i<6; i++){
+                    $(".container").append('<a id="0" href="#" style="text-decoration: none; color: black;"><div class="bg"><div class="card"><div class="content"></div></div></div></a>')
+                    $(".container a:last-child").attr("id", i+1+6*times)
+                    $(".card").mouseenter(function(){
+                        $(".card:hover").removeClass("shadow-pulse-inverse");
+                        $(".card:hover").addClass("selectedCard shadow-pulse");
+                    }).mouseleave(function(){
+                        $(".selectedCard").addClass("shadow-pulse-inverse");
+                        $(".selectedCard").removeClass("selectedCard shadow-pulse");
+                    });
+                }
+                times = times + 1
+            })
+        </script>
+
+        <div id="error-box" style="display: none;"></div>
+        <script>
+            var error = "{{error}}";
+             $("#error-box").bind("DOMNodeInserted",function(e){
+                alert(error)
+            });
+            $('#error-box').html(error);
+        </script>
+
     </body>
 
 
