@@ -77,7 +77,7 @@
                 </div>
             </div>
         </div>
-        <img class="cu_img" src="../../../static/pic/CuSell_glow.png" alt="CuSell" height="200px" width="400px">
+        <img class="cu_img" src="../../../static/pic/CuSell.png" alt="CuSell" height="200px" width="400px">
     </div>
     
     <div class="container reg-form">
@@ -142,7 +142,7 @@
 
             <div class="d-grid gap-2">
                 <span style="display: none;">{% csrf_token %}</span>
-                <button name="submit" value="yes" id="submit-button" type="submit" class=" btn btn-primary mb-2">Submit</button>
+                <button name="submit" value="yes" id="submit-button" type="submit" class=" btn btn-primary mb-2">Sign Up</button>
             </div>
         </form>
     </div> 
@@ -220,6 +220,13 @@
         });
     </script>
 
-
+    <div id="error-box" style="display: none;"></div>
+        <script>
+            var error = "{{error}}";
+             $("#error-box").bind("DOMNodeInserted",function(e){
+                alert(error)
+            });
+            $('#error-box').html(error);
+        </script>
 </body>
 </html>

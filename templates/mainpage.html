@@ -10,11 +10,9 @@
         <script>
             $(document).ready(function(){
                 $(".card").mouseenter(function(){
-                    $(".card:hover").animate({top: '-20'}, 300);
                     $(".card:hover").removeClass("shadow-pulse-inverse");
                     $(".card:hover").addClass("selectedCard shadow-pulse");
                 }).mouseleave(function(){
-                    $(".selectedCard").animate({top: '0'}, 300);
                     $(".selectedCard").addClass("shadow-pulse-inverse");
                     $(".selectedCard").removeClass("selectedCard shadow-pulse");
                 });
@@ -38,8 +36,8 @@
                                     <path fill-rule="evenodd" d="M7.293 1.5a1 1 0 0 1 1.414 0l6.647 6.646a.5.5 0 0 1-.708.708L8 2.207 1.354 8.854a.5.5 0 1 1-.708-.708L7.293 1.5z"/>
                                 </svg>
                                 Home</a></li>
-                            <li><a id="profile" href="#" class="nav-link px-2 text-white top_item">Profile</a></li>
-                            <script>
+                            <li><a id="profile" href="/templates/profile.html" class="nav-link px-2 text-white top_item">Profile</a></li>
+                            <!-- <script>
                                 var userStatus = 0;
                                 $("#profile").click(function() {
                                     if (userStatus == 0) {
@@ -48,7 +46,7 @@
                                         $("#profile").attr("href", "/templates/profile.html")
                                     }
                                 });
-                            </script>
+                            </script> -->
                             <li><a href="#" class="nav-link px-2 text-white top_item">Liked</a></li>
                             <li><a href="#" class="nav-link px-2 text-white top_item">Chat</a></li>
                             <li><a target="_blank" href="https://github.com/1155141394/CuSell" class="nav-link px-2 text-white top_item">About Us</a></li>
@@ -126,38 +124,96 @@
                     </div>
                 </div>
             </div>
-            <img class="cu_img" src="../../../static/pic/CuSell_glow.png" alt="CuSell" height="200px" width="400px">
+            <img class="cu_img" src="../../../static/pic/CuSell.png" alt="CuSell" height="200px" width="400px">
         </div>
         
         <div class="container">
-            <div class="bg">
-                <div class="card">
-                    <div class="content">
-                        <h2>02</h2>
-                        <h3><b>Fast & Convenient</b></h3>
-                        <p>Discription here</p>
+            <a id="1" href="#" style="text-decoration: none; color: black;">
+                <div class="bg">
+                    <div class="card">
+                        <div class="content">
+                            
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="bg">
-                <div class="card">
-                    <div class="content">
-                        <h2>01</h2>
-                        <h3><b>Best Platform</b></h3>
-                        <p>Discription here</p>
+            </a>
+            <a id="2" href="#" style="text-decoration: none; color: black;">
+                <div class="bg">
+                    <div class="card">
+                        <div class="content">
+                            
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="bg">
-                <div class="card">
-                    <div class="content">
-                        <h2>03</h2>
-                        <h3><b>Safe & Secured</b></h3>
-                        <p>Discription here</p>
+            </a>
+            <a id="3" href="#" style="text-decoration: none; color: black;">
+                <div class="bg">
+                    <div class="card">
+                        <div class="content">
+                            
+                        </div>
                     </div>
                 </div>
-            </div>
+            </a>
+            <a id="4" href="#" style="text-decoration: none; color: black;">
+                <div class="bg">
+                    <div class="card">
+                        <div class="content">
+                            
+                        </div>
+                    </div>
+                </div>
+            </a>
+            <a id="5" href="#" style="text-decoration: none; color: black;">
+                <div class="bg">
+                    <div class="card">
+                        <div class="content">
+                        </div>
+                    </div>
+                </div>
+            </a>
+            <a id="6" href="#" style="text-decoration: none; color: black;">
+                <div class="bg">
+                    <div class="card">
+                        <div class="content">
+                            
+                        </div>
+                    </div>
+                </div>
+            </a>
         </div>
+        
+        <div style="display: flex; justify-content: center;">
+            <button id="show-more" type="button" class="btn btn-primary btn-lg" style="position: relative; top: -60px;">Show More</button>        
+        </div>
+
+        <script>
+            var times = 1
+            $("#show-more").click(function(){
+                for (i=0; i<6; i++){
+                    $(".container").append('<a id="0" href="#" style="text-decoration: none; color: black;"><div class="bg"><div class="card"><div class="content"></div></div></div></a>')
+                    $(".container a:last-child").attr("id", i+1+6*times)
+                    $(".card").mouseenter(function(){
+                        $(".card:hover").removeClass("shadow-pulse-inverse");
+                        $(".card:hover").addClass("selectedCard shadow-pulse");
+                    }).mouseleave(function(){
+                        $(".selectedCard").addClass("shadow-pulse-inverse");
+                        $(".selectedCard").removeClass("selectedCard shadow-pulse");
+                    });
+                }
+                times = times + 1
+            })
+        </script>
+
+        <div id="error-box" style="display: none;"></div>
+        <script>
+            var error = "{{error}}";
+             $("#error-box").bind("DOMNodeInserted",function(e){
+                alert(error)
+            });
+            $('#error-box').html(error);
+        </script>
+
     </body>
 
 
