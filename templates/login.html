@@ -122,6 +122,14 @@
         </div>
 
     </div>
+    <div id="error-box" style="display: none;"></div>
+        <script>
+            var error = "{{error}}";
+             $("#error-box").bind("DOMNodeInserted",function(e){
+                alert(error)
+            });
+            $('#error-box').html(error);
+        </script>
 </body>
 
 <script>

@@ -62,10 +62,11 @@ def reg(request):
 
 
 def login(request):
+    error = ''
     if request.method == 'POST':
         email = request.POST.get('email')
         password = request.POST.get('password')
-        print(email,password)
+        
         # check whether such a user exist
         try:
             user = User.objects.get(email=email)
@@ -79,23 +80,28 @@ def login(request):
                 rep.set_cookie('sid',email[0:10],max_age=2000)
                 return rep
             else:
-                print('Wrong password! Please Try Again to use "Get Back Password"')
+                error = 'Wrong password! Please Try Again or click Forget? button'
+                print('Wrong password! Please Try Again or use "Get Back Password"')
 
         except Exception as e:
+            error = 'No such user, try again or sign up'
             print('No such user, try again or sign up')
+            return render(request,'login.html',locals())
 
-    return render(request,'login.html')
+    return render(request,'login.html',locals())
 
 def error(request):
     return render(request,'error.html')
 
 def profile(request):
+    error = ''
     #check whether user is login
     is_login = request.COOKIES.get('is_login')
     #if not, get back to login page
     if not is_login:
         print('user have not login ')
-        return render(request,'login.html')
+        error = 'User has not login, please log in or sign up your account first'
+        return render(request,'mainpage.html',locals())
 
     if request.method == 'GET':
         #get the user information from cookie and database
