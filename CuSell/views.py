@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from django.shortcuts import HttpResponse
 from .models import User, Merchandise, Image
 import random
@@ -13,7 +13,7 @@ def index(request):
 def reg(request):
     
     if request.method == 'POST':
-        flag = request.POST.get('submit')
+        submit_button = request.POST.get('submit')
         email = request.POST.get('email')
         username = request.POST.get('username')
         password = request.POST.get('password')
@@ -26,8 +26,7 @@ def reg(request):
             return render(request, 'registration.html')    #end check
 
         # when user click submit
-        if flag == 'yes':
-            print(flag)
+        if submit_button == 'yes':
             #compare the sent_veriCode and input_veriCode
             input_veriCode = request.POST.get('verify')
             sent_veriCode=request.POST.get('sent_veriCode')
@@ -74,6 +73,11 @@ def login(request):
             # check whether the email match the password
             if user.password == password:
                 print('Logined in')
+                rep = redirect('/templates/profile.html/')
+                #set the cookie that user has been login (max_age's unit is second)
+                rep.set_cookie('is_login',True,max_age=2000)
+                rep.set_cookie('sid',email[0:10],max_age=2000)
+                return rep
             else:
                 print('Wrong password! Please Try Again to use "Get Back Password"')
 
@@ -86,7 +90,17 @@ def error(request):
     return render(request,'error.html')
 
 def profile(request):
+    #check whether user is login
+    is_login = request.COOKIES.get('is_login')
+    #if not, get back to login page
+    if not is_login:
+        print('user have not login ')
+        return render(request,'login.html')
+
     if request.method == 'GET':
+        #get the user information from cookie and database
+        sid = request.COOKIES.get('sid')
+        print(sid)
         return render(request, 'profile.html')
 
     elif request.method == 'POST':
