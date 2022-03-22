@@ -156,3 +156,15 @@ def test_upload(request):
         myfile = request.FILES['my_file']
         User.objects.create(sid=3, portrait=myfile)
         return HttpResponse('Success')
+    
+#Upload protrait
+def portrait(request):
+    if request.method == 'GET':
+        imgs = Image.objects.all()
+        return render(request, 'profile.html', {'imgs': imgs})
+    elif request.method == 'POST':
+        imgfile = request.FILES.get('img')
+        # imgfile.content_type
+        img = User(profile_photo=imgfile)
+        img.save()
+        return render(request, 'profile.html')
