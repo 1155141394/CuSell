@@ -51,11 +51,6 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'testdj.urls'
-STATIC_URL = '/static/'
-
-STATICFILES_DIRS=[
-    os.path.join(BASE_DIR,'static')
-]
 
 TEMPLATES = [
     {
@@ -84,7 +79,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'CuSell',
         'USER': 'root',
-        'PASSWORD': '#tao134010',
+        'PASSWORD': 'Csci3100^',
         'HOST': '127.0.0.1',
         'PORT': '3306'
     }
@@ -125,8 +120,8 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
-STATIC_URL = 'static/'
-
+STATIC_URL = '/static/'
+STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
@@ -140,3 +135,7 @@ EMAIL_HOST_USER='cusell2022@163.com' #password csci3100C1    MWATYWPMUGTUDCEU
 EMAIL_HOST_PASSWORD='MWATYWPMUGTUDCEU' #授权码
 EMAIL_USER_SSL=True     #PORT: 465/994
 EMAIL_USER_TLS=False    #PORT: 25
+
+# Media Setting
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')

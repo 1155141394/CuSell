@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <title>Profile</title>
-    <link rel="stylesheet" href="../../../static/css/bootstrap.min.css">
-    <link href="../../../static/css/style.css" rel="stylesheet">
-    <script src="../../../static/js/bootstrap.bundle.min.js"></script>
-    <script src="../../../static/js/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+    <link href="/static/css/style.css" rel="stylesheet">
+    <script src="/static/js/bootstrap.bundle.min.js"></script>
+    <script src="/static/js/jquery-3.6.0.min.js"></script>
 </head>
 
 <body>
@@ -14,7 +14,7 @@
         <nav class="navbar-dark fixed-top bg-dark" style="border-radius: 0 0 10px 10px;">
             <div class="navigator">
                 <div style="display: flex;">
-                    <img src="../../../static/pic/CuSell_icon.jpeg" alt="Icon" height="30px" width="30px" style="margin-top: 4.5px; margin-left: 10px; margin-right: 3px; border-radius: 5px;">
+                    <img src="/static/pic/CuSell_icon.jpeg" alt="Icon" height="30px" width="30px" style="margin-top: 4.5px; margin-left: 10px; margin-right: 3px; border-radius: 5px;">
                     <a class="navbar-brand" href="/templates/mainpage.html" style="padding-top: 2px; padding-bottom: 0;">
                         <b><span style="color: purple; font-size: x-large;">Cu</span><span style="color: orange; font-size: x-large;">Sell</span></b>
                     </a>
@@ -33,9 +33,9 @@
                 </div>
 
                 <div style="padding-right: 10px; display: flex; align-items: center;">
-                    <p style="color: white; margin-bottom: 0; font-size: larger; margin-right: 10px;">Hello, {{userName}}!</p>
+                    <p style="color: white; margin-bottom: 0; font-size: larger; margin-right: 10px;">Hello, {{user.name}}!</p>
                     <div id="user-head-nav">
-                        <!-- User head image here -->
+                        <img src={{ user.portrait }} height="30px" width="30px">
                     </div>
                 </div>
 
@@ -62,7 +62,7 @@
                     <input id="upload-head" type="file" style="display: none;">
                 </div>
             </div>
-            <!-- User head image here -->
+            <img src={{ user.portrait }} height="300px" width="300px">
         </div>
 
         <script>

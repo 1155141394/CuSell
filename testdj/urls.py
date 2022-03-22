@@ -16,15 +16,17 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from CuSell import views
-
-
-
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('templates/mainpage.html/',views.index),
-    path('templates/registration.html/',views.reg),
-    path('templates/login.html/',views.login),
-    path('templates/error.html/',views.error),
-    path('templates/profile.html/',views.profile)
+    path('templates/mainpage.html/', views.index),
+    path('templates/registration.html/', views.reg),
+    path('templates/login.html/', views.login),
+    path('templates/error.html/', views.error),
+    path('templates/profile.html/', views.profile),
+    path('test_upload', views.test_upload)
 ]
+
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
