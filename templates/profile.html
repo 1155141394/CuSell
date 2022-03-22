@@ -34,8 +34,8 @@
 
                 <div style="padding-right: 10px; display: flex; align-items: center;">
                     <p style="color: white; margin-bottom: 0; font-size: larger; margin-right: 10px;">Hello, {{user.name}}!</p>
-                    <div id="user-head-nav">
-                        <img src={{ user.portrait }} height=100% width=100%>
+                    <div id="user-head-nav" style="overflow: hidden;">
+                        <img src={{ user.portrait }} width="110%" height="110%" style="position: relative; left: -5%; top: -5%;">
                     </div>
                 </div>
 
@@ -56,20 +56,23 @@
 
     <div class="card-box" style="width: 90%; margin: 0 auto; margin-top: 30px; justify-content: flex-start;">
         <div id="user-head">
-            <div id="edit-box" class="edit-box hide-item">
+            <div id="edit-box" class="edit-box transparent">
                 <div style="width: 100%; display: flex; justify-content: center; padding-top: 12px;">
                     <a id="upload-head-link" href="#" style="font-size: 25px; color: white;">Upload</a>
                     <input id="upload-head" type="file" style="display: none;">
                 </div>
             </div>
-            <img src={{ user.portrait }} height=100% width=100%>
+            <div style="height: 250px; width: 250px; position: absolute; z-index: -100; top: 30px; border-radius: 50%; overflow: hidden;">
+                <img src={{ user.portrait }} height="250px" width="250px">
+            </div>
+            
         </div>
 
         <script>
             $("#user-head").mouseenter(function(){
-                $("#edit-box").removeClass("hide-item")
+                $("#edit-box").removeClass("transparent")
             }).mouseleave(function(){
-                $("#edit-box").addClass("hide-item")
+                $("#edit-box").addClass("transparent")
             });
             $("#upload-head-link").click(function(){
                 $("#upload-head").click()
