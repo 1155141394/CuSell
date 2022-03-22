@@ -59,7 +59,10 @@
             <div id="edit-box" class="edit-box hide-item">
                 <div style="width: 100%; display: flex; justify-content: center; padding-top: 12px;">
                     <a id="upload-head-link" href="#" style="font-size: 25px; color: white;">Upload</a>
-                    <input id="upload-head" type="file" style="display: none;">
+                    <form id="portrait" action="{% url 'portrait' %}" method = "post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <input id="upload-head" type="file" style="display: none;">
+                    </form>
                 </div>
             </div>
             <img src={{ user.portrait }} height="300px" width="300px">
@@ -73,6 +76,29 @@
             });
             $("#upload-head-link").click(function(){
                 $("#upload-head").click()
+            });
+            $("#upload-head").change(function(){
+                alert("change");
+                var imgs = $('#upload-head').get(0).files[0];
+                var formData = new FormData();
+                formData.append('image', imgs);
+                formData.append('Authorization', '{$id}');//id
+                $.ajax({
+                    type: 'POST',
+                    url: 'upload_profile_photo',
+                    headers: {
+                        'yl-authorization': obj.mobile
+                    },
+                data: formData,
+                contentType:false,
+                processData:false,
+                dataType: 'json',
+                success: function (data) {
+                    console.log(data);
+                },
+                error: function (err) {
+                }
+                });
             });
         </script>
 
