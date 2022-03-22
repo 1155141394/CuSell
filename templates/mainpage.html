@@ -77,11 +77,12 @@
                             Sign Up</button>
                     </div>
                     <script>
-                        if (userStatus == 1) {
+                        var userStatus = $.cookie('is_login');
+                        if (userStatus) {
                             $("#sign-log-button").addClass("hide-item");
                             $("#user-head-nav").removeClass("hide-item");
                             $("#hello-message").removeClass("hide-item");
-                        } else if (userStatus == 0){
+                        } else {
                             $("#sign-log-button").removeClass("hide-item");
                             $("#user-head-nav").addClass("hide-item");
                             $("#hello-message").addClass("hide-item");
