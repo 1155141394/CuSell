@@ -11,7 +11,7 @@ class User(models.Model):
     creation_date = models.DateTimeField('Creation date', auto_now_add=True)
     portrait = models.ImageField('User portrait', upload_to='portrait', default='/media/portrait/default.jpg')
     is_active = models.BooleanField('Active', default=True)
-
+    
     def __str__(self):
         return '%s|%s|%s|%s|%s|%s' % (
         self.sid, self.name, self.email, self.password, self.introduction, self.creation_date)
@@ -27,7 +27,8 @@ class Merchandise(models.Model):
     description = models.TextField('Description', default='')
     pub_date = models.DateTimeField('Publish time', auto_now_add=True)
     update_date = models.DateTimeField('Update time', auto_now=True)
-
+    image = models.ImageField("image", upload_to='upload_image', default='')
+    
     def __str__(self):
         return '%s|%s|%s|%s|%s' % (self.mid, self.price, self.description, self.pub_date, self.update_date)
 

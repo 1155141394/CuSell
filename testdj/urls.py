@@ -27,6 +27,7 @@ urlpatterns = [
     path('templates/error.html/', views.error),
     path('templates/profile.html/', views.profile),
     path('test_upload', views.test_upload)
+    path('', views.portrait, name='portrait'),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

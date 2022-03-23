@@ -64,7 +64,11 @@
             <div id="edit-box" class="edit-box transparent">
                 <div style="width: 100%; display: flex; justify-content: center; padding-top: 12px;">
                     <a id="upload-head-link" href="#" style="font-size: 25px; color: white;">Upload</a>
-                    <input id="upload-head" type="file" style="display: none;">
+                    <form id="portrait" action="{% url 'portrait' %}" method = "post" enctype="multipart/form-data" onchange="submit.click()">
+                        {% csrf_token %}
+                        <input id="upload-head" type="file" style="display: none;">
+                        <button id="submit" type="submit" hidden="hidden"></button>
+                    </form>
                 </div>
             </div>
 <<<<<<< HEAD
