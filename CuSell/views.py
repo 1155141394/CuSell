@@ -81,6 +81,19 @@ def login(request):
     if request.method == 'POST':
         email = request.POST.get('email')
         password = request.POST.get('password')
+        forget_button = request.POST.get('forget_button')
+        if forget_button == 'true':
+            check_user = User.objects.raw('SELECT * FROM user a WHERE a.email=\'%s\'' % email)
+            if len(check_user)==0:
+                print("No such user, try again")
+            else:
+                for x in check_user:
+                    subject = 'CuSell Password'
+                    message = '[CuSell] Please ignore this emain if the operation is not done by yourself!\nYour Passowrd is %s.\nUse this code to login' % x.password + '\n\nIf there is any confusion or recommandation, please feel free to contact us at cusell2022@163.com'
+                    # send email to the user
+                    send_mail(subject, message, settings.EMAIL_HOST_USER, [email])
+                    break
+            return render(request, 'login.html', dict)
         # check whether such a user exist
         try:
             user = User.objects.get(email=email)
