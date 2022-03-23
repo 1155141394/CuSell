@@ -79,7 +79,7 @@
                     </div>
                     <script>
                         var userStatus = $.cookie('is_login');
-                        if (userStatus) {
+                        if (userStatus=="True") {
                             $("#sign-log-button").addClass("hide-item");
                             $("#user-head-nav").removeClass("hide-item");
                             $("#hello-message").removeClass("hide-item");

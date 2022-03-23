@@ -37,7 +37,11 @@
                     <div id="user-head-nav" style="overflow: hidden;">
                         <img src={{ user.portrait }} width="110%" height="110%" style="position: relative; left: -5%; top: -5%;">
                     </div>
-                    <button type="button" value="signout" class="btn btn-primary">Sign Out</button>
+                    <form id="signupForm" method="post" >
+                        <span style="display: none;">{% csrf_token %}</span>
+                        <button name="signout" type="submit" id="signout_button" value="True" class="btn btn-primary">Sign Out</button>
+                    </form>
+                    
                 </div>
 
             </div>

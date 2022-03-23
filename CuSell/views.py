@@ -50,7 +50,7 @@ def reg(request):
             user.save()
             rep = redirect('/templates/profile.html/')
             # set the cookie that user has been login (max_age's unit is second)
-            rep.set_cookie('is_login', True, max_age=1000)
+            rep.set_cookie('is_login', 'True', max_age=1000)
             rep.set_cookie('sid', email[0:10], max_age=1000)
             return rep
 
@@ -90,7 +90,7 @@ def login(request):
                 print('Logined in')
                 rep = redirect('/templates/profile.html/')
                 # set the cookie that user has been login (max_age's unit is second)
-                rep.set_cookie('is_login', True, max_age=1000)
+                rep.set_cookie('is_login', 'True', max_age=1000)
                 rep.set_cookie('sid', email[0:10], max_age=1000)
                 return rep
             else:
@@ -113,10 +113,13 @@ def profile(request):
     # check whether user is login
     is_login = request.COOKIES.get('is_login')
     # if not, get back to login page
-    if not is_login:
+    print(is_login)
+    if is_login != 'True':
         print('user have not login')
         rep = redirect('/templates/login.html/')
         return rep
+
+
     # return the profile page and user information back to front end
     if request.method == 'GET':
         # get the user information from cookie and database
@@ -125,10 +128,21 @@ def profile(request):
             user = User.objects.get(sid=user_id)
         except Exception as e:
             print('Get user error is %s ' % e)
-        print(user.portrait)
         return render(request, 'profile.html', locals())
-    #
+
+    
     elif request.method == 'POST':
+
+        sign_out = request.POST.get('signout')
+        # if user click signout
+        print(sign_out)
+        if sign_out == 'True':
+            rep = redirect('/templates/mainpage.html/')
+            rep.set_cookie('is_login','False')
+            rep.delete_cookie("sid")
+            return rep
+        
+
         user_id = request.COOKIES.get('sid')
         try:
             user = User.objects.get(sid=user_id)
