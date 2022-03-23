@@ -164,7 +164,11 @@ def portrait(request):
         return render(request, 'profile.html', {'imgs': imgs})
     elif request.method == 'POST':
         imgfile = request.FILES.get('img')
-        # imgfile.content_type
-        img = User(profile_photo=imgfile)
-        img.save()
+        user_id = request.COOKIES.get('sid')
+        try:
+            user = User.objects.get(sid=user_id)
+        except Exception as e:
+            print('Get user error is %s ' % e)
+        user.portrait = imgfile
+        user.save()
         return render(request, 'profile.html')
