@@ -86,7 +86,7 @@ def login(request):
             check_user = User.objects.raw('SELECT * FROM user a WHERE a.email=\'%s\'' % email)
             if len(check_user)==0:
                 print('No such user, try again')
-                error = 'No such user, try again'
+                dict['error'] = 'No such user, try again'
             else:
                 for x in check_user:
                     subject = 'CuSell Password'
