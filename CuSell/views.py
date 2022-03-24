@@ -170,8 +170,11 @@ def profile(request):
             new_name = request.POST.get('name')
         elif request.FILES['img'] is not None:
             new_portrait = request.FILES['img']
-            user.portrait.delete()
-            user.portrait = new_portrait
+            if user.portrait == 'default/default.jpg':
+                user.portrait = new_portrait
+            else:
+                user.portrait.delete()
+                user.portrait = new_portrait
         user.save()
     return HttpResponseRedirect('/templates/profile.html/')
 
