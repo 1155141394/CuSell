@@ -35,9 +35,13 @@
                 <div style="padding-right: 10px; display: flex; align-items: center;">
                     <p style="color: white; margin-bottom: 0; font-size: larger; margin-right: 10px;">Hello, {{user.name}}!</p>
                     <div id="user-head-nav" style="overflow: hidden;">
-                        <img src={{ user.portrait }} width="110%" height="110%" style="position: relative; left: -5%; top: -5%;">
+                        <img src="{{ MEDIA_URL }}{{ user.portrait }}" width="110%" height="110%" style="position: relative; left: -5%; top: -5%;">
                     </div>
-                    <button type="button" value="signout" class="btn btn-primary">Sign Out</button>
+                    <form id="signupForm" method="post" >
+                        <span style="display: none;">{% csrf_token %}</span>
+                        <button name="signout" type="submit" id="signout_button" value="True" class="btn btn-primary">Sign Out</button>
+                    </form>
+                    
                 </div>
 
             </div>
@@ -59,13 +63,24 @@
         <div id="user-head">
             <div id="edit-box" class="edit-box transparent">
                 <div style="width: 100%; display: flex; justify-content: center; padding-top: 12px;">
-                    <a id="upload-head-link" href="#" style="font-size: 25px; color: white;">Upload</a>
-                    <input id="upload-head" type="file" style="display: none;">
+                    <form id="upload" action="/templates/profile.html/" method = "post" enctype="multipart/form-data" onchange="submit.click()">
+                        {% csrf_token %}
+                        <a id="upload-head-link" href="#" style="font-size: 25px; color: white;">Upload</a>
+                        <input id="upload-head" type="file" name="img" style="display: none;">
+                        <button id="submit" type="submit" hidden="hidden"></button>
+                    </form>>
                 </div>
             </div>
+<<<<<<< HEAD
             <div style="height: 250px; width: 250px; position: absolute; z-index: -100; top: 30px; border-radius: 50%; overflow: hidden;">
             <div style="border: #6c757d 2px solid; height: 250px; width: 250px; position: absolute; z-index: -100; top: 30px; border-radius: 50%; overflow: hidden;">
                 <img src={{ user.portrait }} height="250px" width="250px">
+=======
+
+            <div style="border: #6c757d 2px solid; height: 250px; width: 250px; position: absolute; z-index: -100; top: 30px; border-radius: 50%; overflow: hidden;">
+
+                <img src="{{ MEDIA_URL }}{{ user.portrait }}" height="250px" width="250px">
+>>>>>>> c9079986879a4e6ca0b39bc1b11434a7117ff22d
             </div>
             
         </div>
