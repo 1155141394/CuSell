@@ -188,3 +188,6 @@ def test_upload(request):
         myfile = request.FILES['my_file']
         User.objects.create(sid=3, portrait=myfile)
         return HttpResponse('Success')
+
+def post_mech(request):
+    print('hello')
