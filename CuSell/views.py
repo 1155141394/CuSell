@@ -10,6 +10,19 @@ from django.http import HttpResponseRedirect
 
 # Create your views here.
 def index(request):
+    # get the page from the mainpage
+    if request.method == 'GET':
+        # get the user information from cookie and database
+        user_id = request.COOKIES.get('sid')
+        try:
+            user = User.objects.get(sid=user_id)
+        except Exception as e:
+            print('Get user error is %s ' % e)
+        return render(request, 'mainpage.html', locals())
+    # Get the post information from front end.
+    elif request.method == 'POST':
+        pass
+
     return render(request, 'mainpage.html')
 
 
