@@ -9,7 +9,7 @@ class User(models.Model):
     password = models.CharField('Password', max_length=20,default='')
     introduction = models.TextField('Personal introduction', default='')
     creation_date = models.DateTimeField('Creation date', auto_now_add=True)
-    portrait = models.ImageField('User portrait', upload_to='portrait', default='/media/portrait/default.jpg')
+    portrait = models.ImageField('User portrait', upload_to='portrait', default='portrait/default.jpg')
     is_active = models.BooleanField('Active', default=True)
 
     def __str__(self):

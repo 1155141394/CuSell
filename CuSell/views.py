@@ -168,11 +168,12 @@ def profile(request):
             user.introduction = new_introduction
         elif request.POST.get('name') is not None:
             new_name = request.POST.get('name')
-        elif request.FILES['portrait'] is not None:
-            new_portrait = request.FILES['portrait']
+        elif request.FILES['img'] is not None:
+            new_portrait = request.FILES['img']
+            user.portrait.delete()
             user.portrait = new_portrait
-
-    return HttpResponseRedirect('templates/profile.html/')
+        user.save()
+    return HttpResponseRedirect('/templates/profile.html/')
 
 
 # Test for the picture uploading
