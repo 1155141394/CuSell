@@ -8,8 +8,8 @@
     <script src="/static/js/bootstrap.bundle.min.js"></script>
     <script src="/static/js/jquery-3.6.0.min.js"></script>
 
-    <script src="../static/js/jquery.dialog.js"></script>
-    <link rel="stylesheet" href="../static/css/dialog.css">
+    <script src="/static/js/jquery.dialog.js"></script>
+    <link rel="stylesheet" href="/static/css/dialog.css">
 </head>
 
 <body>
@@ -62,7 +62,7 @@
         <path d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1H.5zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm-1.646-7.646-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L8 8.293l2.646-2.647a.5.5 0 0 1 .708.708z"/>
     </svg>
 
-    <div class="card-box" style="width: 90%; margin: 0 auto; margin-top: 30px; justify-content: flex-start;">
+    <div class="card-box" style="width: 90%; margin: 0 auto; margin-top: 30px; justify-content: space-between;">
         <div id="user-head">
             <div id="edit-box" class="edit-box transparent">
                 <div style="width: 100%; display: flex; justify-content: center; padding-top: 12px;">
@@ -94,7 +94,7 @@
 
         <div id="userName-box" style="display: flex; margin-top: 10px;">
             <p id="userName" style="font-size: xx-large; margin-left: 40px;">
-                <b>{{userName}}</b>
+                <b>{{user.name}}</b>
             </p>
             <a href="#" id="userName-icon" class="transparent" style="pointer-events: none;">
                 <svg xmlns="http://www.w3.org/2000/svg" style="margin-top: 10px; margin-left: 10px;" width="30" height="30" fill="currentColor" class="bi bi-pencil-square text-primary" viewBox="0 0 16 16">
@@ -121,6 +121,7 @@
                 <p id="discription" style="font-size: x-large; margin-top: 10px; margin-bottom: 10px; margin-left: 30px; color: purple;">
                     About Me
                 </p>
+                
                 <a href="#" id="discription-icon" class="transparent" style="pointer-events: none;">
                     <svg xmlns="http://www.w3.org/2000/svg" style="margin-top: 18px; margin-left: 10px;" width="20" height="20" fill="currentColor" class="bi bi-pencil-square text-primary" viewBox="0 0 16 16">
                         <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
@@ -128,6 +129,7 @@
                     </svg>
                 </a>
             </div>
+            <p style="font-size: x-large;">{{user.introduction}}</p>
 
             <script>
                 $("#discription").mouseenter(function(){
@@ -137,31 +139,30 @@
                     $("#discription-icon").addClass("transparent").css("pointer-events","none")
                 });
             </script>
-
-            <p style="margin-top: 0; padding-top: 0; color: purple;">
-                {{discription}}
-            </p>
         </div>
     </div>
-    
-    <!-- 用于提交introduction的表格 -->
-    <form id="intro">
-        <button id="submit-intro" type="submit" hidden="hidden"></button>
-    </form>
-    <button id="edit-intro" hidden="hidden">123</button>
+
+    <button id="edit-intro" hidden="hidden">/button>
     <script>
         $("#discription-icon").click(function(){
-            $("#edit-intro").click();
-        });
+            $('#edit-intro').click()
+        })
         $('#edit-intro').click(function() {
             $.sendConfirm({
                 title: 'Write Something About You!',
                 withNoMinWidth: true,
                 width: '600px',
-                content: '<textarea form=“intro” style="width:100%; height:300px; font-size: x-large; padding: 10px;"></textarea>',
+                content: '<form id="intro" method="post">'
+                    + '{% csrf_token %}'
+                    + '<textarea name="introduction" style="width:100%; height:300px; font-size: x-large; padding: 10px;"></textarea>'
+                    + '<button id="submit-intro" type="submit" hidden="hidden"></button>'
+                    + '</form>',
                 button: {
                     confirm: 'Confirm',
                     cancel: 'Cancel'
+                },
+                onBeforeConfirm: function() {
+                    $('#submit-intro').click();
                 },
                 onConfirm: function() {
                     $('#submit-intro').click();

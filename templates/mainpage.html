@@ -9,8 +9,8 @@
         <script src="../../../static/js/jquery-3.6.0.min.js"></script>
         <script src="../../../static/js/jquery.cookie.js"></script>
 
-        <script src="../static/js/jquery.dialog.js"></script>
-        <link rel="stylesheet" href="../static/css/dialog.css">
+        <script src="/static/js/jquery.dialog.js"></script>
+        <link rel="stylesheet" href="/static/css/dialog.css">
         <script>
             $(document).ready(function(){
                 $(".card").mouseenter(function(){
@@ -40,7 +40,7 @@
                                     <path fill-rule="evenodd" d="M7.293 1.5a1 1 0 0 1 1.414 0l6.647 6.646a.5.5 0 0 1-.708.708L8 2.207 1.354 8.854a.5.5 0 1 1-.708-.708L7.293 1.5z"/>
                                 </svg>
                                 Home</a></li>
-                            <li><a id="profile" href="/templates/profile.html" class="nav-link px-2 text-white top_item">Profile</a></li>
+                            <li><a id="profile" href="#" class="nav-link px-2 text-white top_item">Profile</a></li>
                             <!-- <script>
                                 var userStatus = 0;
                                 $("#profile").click(function() {
@@ -60,7 +60,7 @@
                     <div  style="padding-right: 10px; display: flex; align-items: center;">
                         <p id="hello-message" class="hide-item" style="color: white; margin-bottom: 0; font-size: larger; margin-right: 10px;">Hello, {{user.name}}!</p>
                         <div id="user-head-nav" class="hide-item" style="overflow: hidden;">
-                            <img src={{ user.portrait }} width="110%" height="110%" style="position: relative; left: -5%; top: -5%;">
+                            <img src={{ MEDIA_URL }}{{ user.portrait }} width="110%" height="110%" style="position: relative; left: -5%; top: -5%;">
                         </div>
                     </div>
 
@@ -210,17 +210,18 @@
             })
         </script>
 
-        <div id="error-box" style="display: none;"></div>
+        <button id="show-error" hidden="hidden"></button>
         <script>
+            var userStatus = $.cookie('is_login');
             var error = "{{error}}";
-            $("#error-box").bind("DOMNodeInserted",function(e){
+            $("#show-error").click(function(){
                 $.sendConfirm({
                     title: 'Error!',
                     withNoMinWidth: true,
-                    width: '600px',
+                    width: '400px',
                     content: error,
                     button: {
-                        confirm: 'Confirm',
+                        confirm: 'Login',
                         cancel: 'Cancel'
                     },
                     onConfirm: function() {
@@ -234,7 +235,14 @@
                     }
                 });
             });
-            $('#error-box').html(error);
+            $("#profile").click(function(){
+                if (userStatus=="True") {
+                    window.open('/templates/profile.html', '_self')
+                } else {
+                    $("#show-error").click()
+                };
+            });
+            
         </script>
 
     </body>
