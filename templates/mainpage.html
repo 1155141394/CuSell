@@ -213,7 +213,7 @@
         <div id="error-box" style="display: none;"></div>
         <script>
             var error = "{{error}}";
-             $("#error-box").bind("DOMNodeInserted",function(e){
+            $("#error-box").bind("DOMNodeInserted",function(e){
                 $.sendConfirm({
                     title: 'Error!',
                     withNoMinWidth: true,
@@ -224,7 +224,7 @@
                         cancel: 'Cancel'
                     },
                     onConfirm: function() {
-                        $('#submit-intro').click();
+                        window.open('/templates/profile.html', '_self');
                     },
                     onCancel: function() {
                         console.log('点击取消！');
