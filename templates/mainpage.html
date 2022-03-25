@@ -8,6 +8,9 @@
         <script src="../../../static/js/bootstrap.bundle.min.js"></script>
         <script src="../../../static/js/jquery-3.6.0.min.js"></script>
         <script src="../../../static/js/jquery.cookie.js"></script>
+
+        <script src="../static/js/jquery.dialog.js"></script>
+        <link rel="stylesheet" href="../static/css/dialog.css">
         <script>
             $(document).ready(function(){
                 $(".card").mouseenter(function(){
@@ -211,7 +214,25 @@
         <script>
             var error = "{{error}}";
              $("#error-box").bind("DOMNodeInserted",function(e){
-                alert(error)
+                $.sendConfirm({
+                    title: 'Error!',
+                    withNoMinWidth: true,
+                    width: '600px',
+                    content: error,
+                    button: {
+                        confirm: 'Confirm',
+                        cancel: 'Cancel'
+                    },
+                    onConfirm: function() {
+                        $('#submit-intro').click();
+                    },
+                    onCancel: function() {
+                        console.log('点击取消！');
+                    },
+                    onClose: function() {
+                        console.log('点击关闭！');
+                    }
+                });
             });
             $('#error-box').html(error);
         </script>
