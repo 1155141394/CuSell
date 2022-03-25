@@ -7,6 +7,9 @@
     <link href="/static/css/style.css" rel="stylesheet">
     <script src="/static/js/bootstrap.bundle.min.js"></script>
     <script src="/static/js/jquery-3.6.0.min.js"></script>
+
+    <script src="../static/js/jquery.dialog.js"></script>
+    <link rel="stylesheet" href="../static/css/dialog.css">
 </head>
 
 <body>
@@ -68,13 +71,12 @@
                         <a id="upload-head-link" href="#" style="font-size: 25px; color: white;">Upload</a>
                         <input id="upload-head" type="file" name="img" style="display: none;">
                         <button id="submit" type="submit" hidden="hidden"></button>
-                    </form>>
+                    </form>
                 </div>
             </div>
-
+            <div style="height: 250px; width: 250px; position: absolute; z-index: -100; top: 30px; border-radius: 50%; overflow: hidden;">
             <div style="border: #6c757d 2px solid; height: 250px; width: 250px; position: absolute; z-index: -100; top: 30px; border-radius: 50%; overflow: hidden;">
-
-                <img src="{{ MEDIA_URL }}{{ user.portrait }}" height="250px" width="250px">
+                <img src={{ user.portrait }} height="250px" width="250px">
             </div>
             
         </div>
@@ -134,9 +136,6 @@
                 $("#discription-box").mouseleave(function(){
                     $("#discription-icon").addClass("transparent").css("pointer-events","none")
                 });
-                $("#discription-icon").click(function(){
-                    prompt('Input your new "About Me" here')
-                })
             </script>
 
             <p style="margin-top: 0; padding-top: 0; color: purple;">
@@ -144,5 +143,36 @@
             </p>
         </div>
     </div>
+    
+    <!-- 用于提交introduction的表格 -->
+    <form id="intro">
+        <button id="edit-intro" type="submit" hidden="hidden"></button>
+    </form>
+    <script>
+        $("#discription-icon").click(function(){
+            $("#edit-intro").click();
+        });
+        $('#edit-intro').click(function() {
+            $.sendConfirm({
+                title: 'Write Something About You!',
+                withNoMinWidth: true,
+                width: '600px',
+                content: '<textarea form=“intro” style="width:100%; height:300px; font-size: x-large; padding: 10px;"></textarea>',
+                button: {
+                    confirm: 'Confirm',
+                    cancel: 'Cancel'
+                },
+                onConfirm: function() {
+                    $('#submit-intro').click();
+                },
+                onCancel: function() {
+                    console.log('点击取消！');
+                },
+                onClose: function() {
+                    console.log('点击关闭！');
+                }
+            });
+        });
+    </script>
 </body>
 </html>

@@ -1,52 +1,70 @@
-<!doctype html>
-<html lang="en">
-
+<!DOCTYPE html>
+<html lang="zh">
 <head>
-    <meta charset="utf-8">
-    <title>Test</title>
-    <script src="../../../static/js/jquery-3.6.0.min.js"></script>
-    <script src="../../../static/js/vue@3.js"></script>
+	<meta charset="UTF-8">
+
+	<title>jQuery弹窗对话框插件|DEMO_jQuery之家-自由分享jQuery、html5、css3的插件库</title>
+  	      <script src="../static/js/jquery-3.6.0.min.js"></script>
+	<script src="../static/js/jquery.dialog.js"></script>
+    <link rel="stylesheet" href="../static/css/dialog.css">
+
 </head>
-
 <body>
-    <button id="btn">A Buttton</button>
-    <script>
-        $("#btn").click(function () {
-            alert(123);
-            window.location.href = '/templates/mainpage.html';
-        });
-    </script>
+	<button id="confirmCustomButton">确认框：自定义button属性</button>
+    <button id="confirmWithCustom">确认框：自定义内容格式，阻止onConfrim的执行</button>
+	
+	
+	<script>
+		// 原始弹窗
 
-    <!--Test View-->
-
-    <div id="app">{{ message }}</div>
-    <script>
-        Vue.createApp({
-            data() {
-                return {
-                    message: 'Hello Vue!'
-                }
-            }
-        }).mount('#app')
-    </script>
-
-    <div id="imgs">
-        <img v-bind:src="imgSrc" :style="sty" alt="#">
-        <script>
-            var wd = 200
-            var ht = 100
-            Vue.createApp({
-                data() {
-                    return {
-                        imgSrc: '../static/pic/CuSell.png',
-                        sty: "width:"+wd+"px; height:"+ht+"px"
-                    }
-                }
-            }).mount("#imgs");
-        </script>
-    </div>
-
-
-
+    // 确认框：自定义button属性
+    $('#confirmWithCustom').click(function() {
+      $.sendConfirm({
+        title: '自定义内容格式，阻止onConfrim的执行',
+        withNoMinWidth: true,
+        width: '800px',
+        content: '<textarea style="width:100%;height:100%;"> 123 </textarea>',
+        button: {
+          confirm: '确认',
+          cancel: '取消'
+        },
+        onConfirm: function() {
+          console.log('点击确认！');
+        },
+        onCancel: function() {
+          console.log('点击取消！');
+        },
+        onClose: function() {
+          console.log('点击关闭！');
+        }
+      });
+    });
+    $('#confirmCustomButton').click(function() {
+      $.sendConfirm({
+        hideHeader: true,
+        hideClose: false,
+        withIcon: false,
+        withCenter: true,
+        msg: '成功加入发货清单！',
+        button: {
+          confirm: {
+            text: '立即去结算',
+            target: '_blank',
+            href: '/order/ordercheck'
+          },
+          cancel: '继续查找商品'
+        },
+        onConfirm: function() {
+          console.log('点击确认！');
+        },
+        onCancel: function() {
+          console.log('点击取消！');
+        },
+        onClose: function() {
+          console.log('点击关闭！');
+        }
+      });
+    });
+	</script>
 </body>
 </html>
