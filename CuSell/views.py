@@ -94,8 +94,8 @@ def login(request):
     if request.method == 'POST':
         email = request.POST.get('email')
         password = request.POST.get('password')
-        forget_button = request.POST.get('forget_button')
-        if forget_button == 'true':
+        
+        if 'forget_button' in request.POST :
             check_user = User.objects.raw('SELECT * FROM user a WHERE a.email=\'%s\'' % email)
             if len(check_user)==0:
                 print('No such user, try again')
