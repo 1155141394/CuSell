@@ -3,10 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <title>Login</title>
-    <link rel="stylesheet" href="../../../static/css/bootstrap.min.css">
-    <link href="../../../static/css/style.css" rel="stylesheet">
-    <script src="../../../static/js/jquery-3.6.0.min.js"></script>
-    <script src="../../../static/js/jquery.validate.min.js"></script>
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+    <link href="/static/css/style.css" rel="stylesheet">
+    <script src="/static/js/jquery-3.6.0.min.js"></script>
+    <script src="/static/js/jquery.validate.min.js"></script>
+
+    <script src="/static/js/jquery.dialog.js"></script>
+    <link rel="stylesheet" href="/static/css/dialog.css">
 </head>
 
 <body>
@@ -14,7 +17,7 @@
         <nav class="navbar-dark fixed-top bg-dark" style="border-radius: 0 0 10px 10px;">
             <div class="navigator">
                 <div style="display: flex;">
-                    <img src="../../../static/pic/CuSell_icon.jpeg" alt="Icon" height="30px" width="30px" style="margin-top: 4.5px; margin-left: 10px; margin-right: 3px; border-radius: 5px;">
+                    <img src="/static/pic/CuSell_icon.jpeg" alt="Icon" height="30px" width="30px" style="margin-top: 4.5px; margin-left: 10px; margin-right: 3px; border-radius: 5px;">
                     <a class="navbar-brand" href="/templates/mainpage.html" style="padding-top: 2px; padding-bottom: 0;">
                         <b><span style="color: purple; font-size: x-large;">Cu</span><span style="color: orange; font-size: x-large;">Sell</span></b>
                     </a>
@@ -63,7 +66,7 @@
                     </svg>
                 </div>
                 <div class="first-layer">
-                    <img src="../../../static/pic/CuSell_icon.jpeg" alt="Icon">
+                    <img src="/static/pic/CuSell_icon.jpeg" alt="Icon">
                 </div>
                 <div class="second-layer"></div>
                 <div class="third-layer">
@@ -72,13 +75,13 @@
                     </svg>
                 </div>
                 <div class="forth-layer">
-                <img src="../../../static/pic/CuSell_icon.png" alt="4">
+                <img src="/static/pic/CuSell_icon.png" alt="4">
                 </div>
             </div>
             <div class="login-box">
                 <p style="font-size: 40px; padding: 0; margin: 0; color: rgba(70, 70, 70, 0.8); margin-top: 20px;"><b>Welcome To</b></p>
                 <div style="display: flex;">
-                    <img src="../../../static/pic/CuSell_icon.jpeg" alt="Icon" height="40px" width="40px" style="margin-top: 0px;margin-right: 3px; border-radius: 5px;">
+                    <img src="/static/pic/CuSell_icon.jpeg" alt="Icon" height="40px" width="40px" style="margin-top: 0px;margin-right: 3px; border-radius: 5px;">
                     <a class="navbar-brand" href="/templates/mainpage.html" style="padding-top: 0px; padding-bottom: 0; top: -10px; position: relative;">
                         <b><span style="color: purple; font-size: 40px;">Cu</span><span style="color: orange; font-size: 40px;">Sell</span></b>
                     </a>
@@ -97,7 +100,7 @@
                     </div>
                     <label for="inputPassword" class="form-label" style="margin: 0; padding: 0; margin-top: 10px;">Password</label>
                         <span style="display: none;">{% csrf_token %}</span>
-                        <button name="forget_button" value="true" type="submit" class="btn btn-link" style="padding: 0; margin-left: 5px;">Forget?</button>
+                        <button name="forget_button" value="True" type="submit" class="btn btn-link" style="padding: 0; margin-left: 5px;">Forget?</button>
                     <div class="input-group mb-2">
                         <span class="input-group-text">
                             <svg xmlns="http://www.w3.org/2000/svg" color="gray" width="24" height="24" fill="currentColor" class="bi bi-shield-lock" viewBox="0 0 16 16">
@@ -121,16 +124,39 @@
                 </form>
             </div>
         </div>
-
     </div>
+
+
+    <button id="show-error" hidden="hidden"></button>
     <div id="error-box" style="display: none;"></div>
-        <script>
-            var error = "{{error}}";
-             $("#error-box").bind("DOMNodeInserted",function(e){
-                alert(error)
+    <script>
+        var error = "{{error}}";
+        $("#show-error").click(function(){
+            $.sendConfirm({
+                title: 'Error!',
+                withNoMinWidth: true,
+                width: '400px',
+                content: error,
+                button: {
+                    confirm: 'Confirm',
+                    cancel: 'Cancel'
+                },
+                onConfirm: function() {
+                    console.log('点击确定！');
+                },
+                onCancel: function() {
+                    console.log('点击取消！');
+                },
+                onClose: function() {
+                    console.log('点击关闭！');
+                }
             });
-            $('#error-box').html(error);
-        </script>
+        });
+        $("#error-box").bind("DOMNodeInserted",function(e){
+            $("#show-error").click()
+        });
+        $('#error-box').html(error);
+    </script>
 </body>
 
 <script>
