@@ -101,6 +101,7 @@ def login(request):
                 print('No such user, try again')
                 dict['error'] = 'No such user, try again'
             else:
+                dict['error'] = 'info'
                 for x in check_user:
                     subject = 'CuSell Password'
                     message = '[CuSell] Please ignore this emain if the operation is not done by yourself!\nYour Passowrd is %s.\nUse this code to login' % x.password + '\n\nIf there is any confusion or recommandation, please feel free to contact us at cusell2022@163.com'
