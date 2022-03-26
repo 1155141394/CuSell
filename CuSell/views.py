@@ -206,4 +206,4 @@ def test_upload(request):
         return HttpResponse('Success')
 
 def post_mech(request):
-    print('hello')
+    return render(request, 'post.html')
