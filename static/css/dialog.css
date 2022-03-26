@@ -1,5 +1,6 @@
 .dialog-confirm .dialog-submit {
   border: none;
+  border-radius: 5px;
   background-color: #6f55c0;
   color: #fff;
   text-align: center;
@@ -15,6 +16,7 @@
 
 .dialog-confirm .dialog-cancel {
   border: 1px solid #ddd;
+  border-radius: 5px;
   color: #666;
   text-align: center;
   text-decoration: none; }
@@ -42,6 +44,8 @@
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#88000000,endColorstr=#88000000); }
 
 .dialog-section {
+  border-radius: 10px;
+  overflow: hidden;
   opacity: 0;
   filter: alpha(opacity=0);
   display: none;

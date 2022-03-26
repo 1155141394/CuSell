@@ -3,11 +3,14 @@
 <head>
     <meta charset="utf-8">
     <title>Registrition</title>
-    <link  href="../../../static/css/bootstrap.min.css" rel="stylesheet">
-    <link href="../../../static/css/style.css" rel="stylesheet">
-    <script src="../../../static/js/bootstrap.bundle.min.js"></script>
-    <script src="../../../static/js/jquery-3.6.0.min.js"></script>
-    <script src="../../../static/js/jquery.validate.min.js"></script>
+    <link  href="/static/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/static/css/style.css" rel="stylesheet">
+    <script src="/static/js/bootstrap.bundle.min.js"></script>
+    <script src="/static/js/jquery-3.6.0.min.js"></script>
+    <script src="/static/js/jquery.validate.min.js"></script>
+
+    <script src="/static/js/jquery.dialog.js"></script>
+    <link rel="stylesheet" href="/static/css/dialog.css">
 </head>
 
 <body>
@@ -15,7 +18,7 @@
         <nav class="navbar-dark fixed-top bg-dark" style="border-radius: 0 0 10px 10px;">
             <div class="navigator">
                 <div style="display: flex;">
-                    <img src="../../../static/pic/CuSell_icon.jpeg" alt="Icon" height="30px" width="30px" style="margin-top: 4.5px; margin-left: 10px; margin-right: 3px; border-radius: 5px;">
+                    <img src="/static/pic/CuSell_icon.jpeg" alt="Icon" height="30px" width="30px" style="margin-top: 4.5px; margin-left: 10px; margin-right: 3px; border-radius: 5px;">
                     <a class="navbar-brand" href="/templates/mainpage.html" style="padding-top: 2px; padding-bottom: 0;">
                         <b><span style="color: purple; font-size: x-large;">Cu</span><span style="color: orange; font-size: x-large;">Sell</span></b>
                     </a>
@@ -64,7 +67,7 @@
                     </svg>
                 </div>
                 <div class="first-layer">
-                    <img src="../../../static/pic/CuSell_icon.jpeg" alt="Icon">
+                    <img src="/static/pic/CuSell_icon.jpeg" alt="Icon">
                 </div>
                 <div class="second-layer"></div>
                 <div class="third-layer">
@@ -73,11 +76,11 @@
                     </svg>
                 </div>
                 <div class="forth-layer">
-                <img src="../../../static/pic/CuSell_icon.png" alt="1">
+                <img src="/static/pic/CuSell_icon.png" alt="1">
                 </div>
             </div>
         </div>
-        <img class="cu_img" src="../../../static/pic/CuSell.png" alt="CuSell" height="200px" width="400px">
+        <img class="cu_img" src="/static/pic/CuSell.png" alt="CuSell" height="200px" width="400px">
     </div>
     
     <div class="container reg-form">
@@ -146,6 +149,8 @@
             </div>
         </form>
     </div> 
+
+    <div style="height: 50px;"></div>
     
     <script>
         jQuery.validator.addMethod("cuEmail", function(value, element) {
@@ -220,13 +225,35 @@
         });
     </script>
 
+    <button id="show-error" hidden="hidden"></button>
     <div id="error-box" style="display: none;"></div>
-        <script>
-            var error = "{{error}}";
-             $("#error-box").bind("DOMNodeInserted",function(e){
-                alert(error)
+    <script>
+        var error = "{{error}}";
+        $("#show-error").click(function(){
+            $.sendConfirm({
+                title: 'Error!',
+                withNoMinWidth: true,
+                width: '400px',
+                content: error,
+                button: {
+                    confirm: 'Confirm',
+                    cancel: 'Cancel'
+                },
+                onConfirm: function() {
+                    console.log('点击确定！');
+                },
+                onCancel: function() {
+                    console.log('点击取消！');
+                },
+                onClose: function() {
+                    console.log('点击关闭！');
+                }
             });
-            $('#error-box').html(error);
-        </script>
+        });
+        $("#error-box").bind("DOMNodeInserted",function(e){
+            $("#show-error").click()
+        });
+        $('#error-box').html(error);
+    </script>
 </body>
 </html>
