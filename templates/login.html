@@ -100,35 +100,7 @@
                     </div>
                     <label for="inputPassword" class="form-label" style="margin: 0; padding: 0; margin-top: 10px;">Password</label>
                         <span style="display: none;">{% csrf_token %}</span>
-
-                        <button id="forget" name="forget_button" value="true" type="submit" class="btn btn-link" style="padding: 0; margin-left: 5px;">Forget?</button>
-
-                        <script>
-                            $("#forget").click(function(){
-                                if (($("#inputEmail").hasClass("is-valid"))){
-                                    $.sendConfirm({
-                                        withNoMinWidth: true,
-                                        width: '400px',
-                                        content: "Your Password Has Been Sent To Your Email!",
-                                        button: {
-                                            confirm: 'Confirm',
-                                            cancel: 'Cancel'
-                                        },
-                                        onConfirm: function() {
-                                            console.log('点击确定！');
-                                        },
-                                        onCancel: function() {
-                                            console.log('点击取消！');
-                                        },
-                                        onClose: function() {
-                                            console.log('点击关闭！');
-                                        }
-                                    });
-                                }
-                                
-                            });
-                        </script>
-                        
+                        <button name="forget_button" value="true" type="submit" class="btn btn-link" style="padding: 0; margin-left: 5px;">Forget?</button>
                     <div class="input-group mb-2">
                         <span class="input-group-text">
                             <svg xmlns="http://www.w3.org/2000/svg" color="gray" width="24" height="24" fill="currentColor" class="bi bi-shield-lock" viewBox="0 0 16 16">
@@ -159,27 +131,48 @@
     <div id="error-box" style="display: none;"></div>
     <script>
         var error = "{{error}}";
-        $("#show-error").click(function(){
-            $.sendConfirm({
-                title: 'Error!',
-                withNoMinWidth: true,
-                width: '400px',
-                content: error,
-                button: {
-                    confirm: 'Confirm',
-                    cancel: 'Cancel'
-                },
-                onConfirm: function() {
-                    console.log('点击确定！');
-                },
-                onCancel: function() {
-                    console.log('点击取消！');
-                },
-                onClose: function() {
-                    console.log('点击关闭！');
-                }
+        if (error == "info"){
+            $("#show-error").click(function(){
+                $.sendConfirm({
+                    title: 'Information',
+                    withNoMinWidth: true,
+                    width: '400px',
+                    content: "Your password has been sent to your Email account",
+                    button: {
+                        confirm: 'Confirm',
+                        cancel: null,
+                    },
+                    onConfirm: function() {
+                        console.log('点击确定！');
+                    },
+                    onClose: function() {
+                        console.log('点击关闭！');
+                    }
+                });
             });
-        });
+        } else {
+            $("#show-error").click(function(){
+                $.sendConfirm({
+                    title: 'Error',
+                    withNoMinWidth: true,
+                    width: '400px',
+                    content: error,
+                    button: {
+                        confirm: 'Confirm',
+                        cancel: 'Cancel'
+                    },
+                    onConfirm: function() {
+                        console.log('点击确定！');
+                    },
+                    onCancel: function() {
+                        console.log('点击取消！');
+                    },
+                    onClose: function() {
+                        console.log('点击关闭！');
+                    }
+                });
+            });
+        }
         $("#error-box").bind("DOMNodeInserted",function(e){
             $("#show-error").click()
         });
