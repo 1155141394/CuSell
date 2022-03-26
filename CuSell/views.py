@@ -94,8 +94,8 @@ def login(request):
     if request.method == 'POST':
         email = request.POST.get('email')
         password = request.POST.get('password')
-        forget_button = request.POST.get('forget_button')
-        if forget_button == 'true':
+        
+        if 'forget_button' in request.POST :
             check_user = User.objects.raw('SELECT * FROM user a WHERE a.email=\'%s\'' % email)
             if len(check_user)==0:
                 print('No such user, try again')
@@ -175,12 +175,15 @@ def profile(request):
             user = User.objects.get(sid=user_id)
         except Exception as e:
             print('Get user error is %s' % e)
-        print(request.POST.get('introduction'))
+        # update user introduction
         if request.POST.get('introduction') is not None:
             new_introduction = request.POST.get('introduction')
             user.introduction = new_introduction
+        # update user name
         elif request.POST.get('name') is not None:
             new_name = request.POST.get('name')
+            user.name = new_name
+        # update user portrait
         elif request.POST.get('img') is not None:
             new_portrait = request.FILES['img']
             if user.portrait == 'default/default.jpg':
