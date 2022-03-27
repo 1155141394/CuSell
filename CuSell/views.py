@@ -185,7 +185,7 @@ def profile(request):
             new_name = request.POST.get('name')
             user.name = new_name
         # update user portrait
-        elif request.POST.get('img') is not None:
+        elif request.FILES.get('img') is not None:
             new_portrait = request.FILES['img']
             if user.portrait == 'default/default.jpg':
                 user.portrait = new_portrait
