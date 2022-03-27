@@ -31,7 +31,6 @@ def reg(request):
         'error': ''
     }
     if request.method == 'POST':
-        submit_button = request.POST.get('submit')
         email = request.POST.get('email')
         username = request.POST.get('username')
         password = request.POST.get('password')
@@ -45,15 +44,15 @@ def reg(request):
             return render(request, 'registration.html', dict)  # end check
 
         # when user click submit
-        if submit_button == 'yes':
+        if 'submit' in request.POST:
             # compare the sent_veriCode and input_veriCode
             input_veriCode = request.POST.get('verify')
             sent_veriCode = request.POST.get('sent_veriCode')
-            for x in range(len(sent_veriCode)):
-                if sent_veriCode[x] != input_veriCode[x]:
-                    print('Verification Failed, click SEND again to get another email')
-                    dict['error'] = 'Verification Failed, click SEND again to get another email'
-                    return render(request, 'registration.html', locals())
+            
+            if sent_veriCode != input_veriCode or len(sent_veriCode) != 6:
+                print('Verification Failed, click SEND again to get another email')
+                dict['error'] = 'Verification Failed, click SEND again or use another email'
+                return render(request, 'registration.html', locals())
             # store the user information into database
             user = User()
             user.sid = email[0:10]
