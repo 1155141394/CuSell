@@ -126,6 +126,17 @@
         </div>
     </div>
 
+    <script>
+        $(document).ready(function() {
+            $("input").keypress(function(e) {
+                if (e.which == 13) {
+                $('#submit-button').click();
+                return false;
+                }
+                return true;
+            });
+        });
+    </script>
 
     <button id="show-error" hidden="hidden"></button>
     <div id="error-box" style="display: none;"></div>
