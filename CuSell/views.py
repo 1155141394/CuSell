@@ -48,7 +48,7 @@ def reg(request):
             # compare the sent_veriCode and input_veriCode
             input_veriCode = request.POST.get('verify')
             sent_veriCode = request.POST.get('sent_veriCode')
-            
+            # check the vericode and check wether user has gotten the code
             if sent_veriCode != input_veriCode or len(sent_veriCode) != 6:
                 print('Verification Failed, click SEND again to get another email')
                 dict['error'] = 'Verification Failed, click SEND again or use another email'
