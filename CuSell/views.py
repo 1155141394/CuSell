@@ -206,4 +206,41 @@ def test_upload(request):
         return HttpResponse('Success')
 
 def post_mech(request):
+    # check whether user is login
+    is_login = request.COOKIES.get('is_login')
+    # if not, get back to login page
+    if is_login != 'True':
+        print('user have not login')
+        rep = redirect('/templates/login.html/')
+        return rep
+
+    if request.method == 'POST':
+        sign_out = request.POST.get('signout')
+        # if user click signout
+        print(sign_out)
+        if sign_out == 'True':
+            rep = redirect('/templates/mainpage.html/')
+            rep.set_cookie('is_login', 'False')
+            rep.delete_cookie("sid")
+            return rep
+
+        user_id = request.COOKIES.get('sid')
+        merchandise_name=request.POST.name
+        price = request.POST.price
+        keyword=request.POST.price
+        description = request.POST['description']
+        image_1 = request.FILES['image_1']
+        image_2 = request.FILES['image_2']
+        image_3 = request.FILES['image_3']
+        image_4 = request.FILES['image_4']
+        merchandise = Merchandise()
+        merchandise.sid = user_id
+        merchandise.name = merchandise_name
+        merchandise.price = price
+        merchandise.description = description
+        merchandise.image_1 = image_1
+        merchandise.image_2 = image_2
+        merchandise.image_3 = image_3
+        merchandise.image_4 = image_4
+        merchandise.save()
     return render(request, 'post.html')
