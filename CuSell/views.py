@@ -156,10 +156,8 @@ def profile(request):
         return render(request, 'profile.html', locals())
 
     elif request.method == 'POST':
-        sign_out = request.POST.get('signout')
         # if user click signout
-        print(sign_out)
-        if sign_out == 'True':
+        if 'signout' in request.POST :
             rep = redirect('/templates/mainpage.html/')
             rep.set_cookie('is_login','False')
             rep.delete_cookie("sid")
@@ -221,10 +219,8 @@ def post_mech(request):
         return render(request, 'post.html', locals())
 
     elif request.method == 'POST':
-        sign_out = request.POST.get('signout')
         # if user click signout
-        print(sign_out)
-        if sign_out == 'True':
+        if 'signout' in request.POST :
             rep = redirect('/templates/mainpage.html/')
             rep.set_cookie('is_login', 'False')
             rep.delete_cookie("sid")
@@ -235,16 +231,16 @@ def post_mech(request):
         price = request.POST.get('postPrice')
         keyword = request.POST.get('postKeyword')
         description = request.POST.get('description')
-        image_1 = request.FILES.get('image_1')
-        image_2 = request.FILES.get('image_2')
-        image_3 = request.FILES.get('image_3')
-        image_4 = request.FILES.get('image_4')
+        image_1 = request.FILES.get('pic-1')
+        image_2 = request.FILES.get('pic-2')
+        image_3 = request.FILES.get('pic-3')
+        image_4 = request.FILES.get('pic-4')
         merchandise = Merchandise()
         merchandise.sid = user_id
         merchandise.name = merchandise_name
         merchandise.price = price
         merchandise.keyword = keyword
-        # merchandise.description = description
+        #merchandise.description = description
         merchandise.image_1 = image_1
         merchandise.image_2 = image_2
         merchandise.image_3 = image_3
