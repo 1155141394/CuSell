@@ -131,7 +131,6 @@ def login(request):
             return render(request, 'login.html', dict)
 
 
-
 def error(request):
     return render(request, 'error.html')
 
@@ -146,7 +145,6 @@ def profile(request):
         rep = redirect('/templates/login.html/')
         return rep
 
-
     # return the profile page and user information back to front end
     if request.method == 'GET':
         # get the user information from cookie and database
@@ -157,9 +155,7 @@ def profile(request):
             print('Get user error is %s ' % e)
         return render(request, 'profile.html', locals())
 
-    
     elif request.method == 'POST':
-
         sign_out = request.POST.get('signout')
         # if user click signout
         print(sign_out)
@@ -206,4 +202,55 @@ def test_upload(request):
         return HttpResponse('Success')
 
 def post_mech(request):
+    # check whether user is login
+    is_login = request.COOKIES.get('is_login')
+    # if not, get back to login page
+    if is_login != 'True':
+        print('user have not login')
+        rep = redirect('/templates/login.html/')
+        return rep
+
+    # return the post page and user information back to front end
+    if request.method == 'GET':
+        # get the user information from cookie and database
+        user_id = request.COOKIES.get('sid')
+        try:
+            user = User.objects.get(sid=user_id)
+        except Exception as e:
+            print('Get user error is %s ' % e)
+        return render(request, 'post.html', locals())
+
+    elif request.method == 'POST':
+        sign_out = request.POST.get('signout')
+        # if user click signout
+        print(sign_out)
+        if sign_out == 'True':
+            rep = redirect('/templates/mainpage.html/')
+            rep.set_cookie('is_login', 'False')
+            rep.delete_cookie("sid")
+            return rep
+
+        user_id = request.COOKIES.get('sid')
+        merchandise_name=request.POST.get('postName')
+        price = request.POST.get('postPrice')
+        keyword = request.POST.get('postKeyword')
+        description = request.POST.get('description')
+        image_1 = request.FILES.get('image_1')
+        image_2 = request.FILES.get('image_2')
+        image_3 = request.FILES.get('image_3')
+        image_4 = request.FILES.get('image_4')
+        merchandise = Merchandise()
+        merchandise.sid = user_id
+        merchandise.name = merchandise_name
+        merchandise.price = price
+        merchandise.keyword = keyword
+        # merchandise.description = description
+        merchandise.image_1 = image_1
+        merchandise.image_2 = image_2
+        merchandise.image_3 = image_3
+        merchandise.image_4 = image_4
+        merchandise.save()
+        rep = redirect('/templates/profile.html/')
+        return rep
+
     return render(request, 'post.html')
