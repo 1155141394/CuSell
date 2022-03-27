@@ -236,7 +236,7 @@ def post_mech(request):
         image_4 = request.FILES['image_4']
         merchandise = Merchandise()
         merchandise.sid = user_id
-        # merchandise.name = merchandise_name
+        merchandise.name = merchandise_name
         merchandise.price = price
         merchandise.description = description
         merchandise.image_1 = image_1
