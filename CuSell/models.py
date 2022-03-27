@@ -23,10 +23,19 @@ class User(models.Model):
 
 class Merchandise(models.Model):
     mid = models.CharField('Merchandise ID', max_length=10, primary_key=True, default='')
+    sid = models.CharField('User ID', max_length=10, default='')
+    name = models.CharField("Merchandise Name", max_length=30, default='')
     price = models.DecimalField('Price', max_digits=10, decimal_places=2, default=0)
     description = models.TextField('Description', default='')
     pub_date = models.DateTimeField('Publish time', auto_now_add=True)
     update_date = models.DateTimeField('Update time', auto_now=True)
+    image_1 = models.ImageField('image_1', upload_to='image', default='')
+    image_2 = models.ImageField('image_2', upload_to='image', default='')
+    image_3 = models.ImageField('image_3', upload_to='image', default='')
+    image_4 = models.ImageField('image_4', upload_to='image', default='')
+
+
+
 
     def __str__(self):
         return '%s|%s|%s|%s|%s' % (self.mid, self.price, self.description, self.pub_date, self.update_date)
