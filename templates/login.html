@@ -98,7 +98,7 @@
                         </span>
                         <input id="inputEmail" type="email" placeholder="example@link.cuhk.edu.hk" class="form-control" name="email" aria-describedby="emailHelp">
                     </div>
-                    <label for="inputPassword" class="form-label" style="margin: 0; padding: 0; margin-top: 10px;">Password</label>
+                    <label for="inputPassword" class="form-label" onkeydown= style="margin: 0; padding: 0; margin-top: 10px;">Password</label>
                         <span style="display: none;">{% csrf_token %}</span>
                         <button name="forget_button" value="true" type="submit" class="btn btn-link" style="padding: 0; margin-left: 5px;">Forget?</button>
                     <div class="input-group mb-2">
@@ -108,7 +108,7 @@
                                 <path d="M9.5 6.5a1.5 1.5 0 0 1-1 1.415l.385 1.99a.5.5 0 0 1-.491.595h-.788a.5.5 0 0 1-.49-.595l.384-1.99a1.5 1.5 0 1 1 2-1.415z"/>
                             </svg>
                         </span>
-                        <input id="inputPassword" type="password" placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;" class="form-control"  onkeydown='if(event.keyCode==13){submit-button.click()}' name="password">
+                        <input id="inputPassword" type="password" placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;" class="form-control" name="password">
                     </div>
     
                     <div class="d-grid gap-2">
@@ -126,17 +126,6 @@
         </div>
     </div>
 
-    <script>
-        $(document).ready(function() {
-            $("input").keypress(function(e) {
-                if (e.which == 13) {
-                $('#submit-button').click();
-                return false;
-                }
-                return true;
-            });
-        });
-    </script>
 
     <button id="show-error" hidden="hidden"></button>
     <div id="error-box" style="display: none;"></div>

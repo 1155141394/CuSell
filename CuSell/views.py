@@ -240,7 +240,7 @@ def post_mech(request):
         merchandise.name = merchandise_name
         merchandise.price = price
         merchandise.keyword = keyword
-        #merchandise.description = description
+        merchandise.description = description
         merchandise.image_1 = image_1
         merchandise.image_2 = image_2
         merchandise.image_3 = image_3
