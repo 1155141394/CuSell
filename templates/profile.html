@@ -21,7 +21,7 @@
                     <a class="navbar-brand" href="/templates/mainpage.html" style="padding-top: 2px; padding-bottom: 0;">
                         <b><span style="color: purple; font-size: x-large;">Cu</span><span style="color: orange; font-size: x-large;">Sell</span></b>
                     </a>
-                    <ul class="nav"> 
+                    <ul class="nav">
                         <li><a href="/templates/mainpage.html" class="nav-link px-2 text-white top_item">Home</a></li>
                         <li><a href="#" class="nav-link px-2 text-white top_item" style="background-color: #6c757d; border-collapse: collapse; border-radius: 5px;">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-person-bounding-box" viewBox="0 0 16 16">
@@ -62,7 +62,12 @@
         <path d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1H.5zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm-1.646-7.646-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L8 8.293l2.646-2.647a.5.5 0 0 1 .708.708z"/>
     </svg>
 
+    
+
     <div class="card-box" style="width: 90%; margin: 0 auto; margin-top: 30px; justify-content: space-between;">
+
+        <button id="change-passwd" class="btn btn-primary" style="position: absolute; z-index: 100; left:85%; top: 5%">Change Password</button>
+
         <div id="user-head">
             <div id="edit-box" class="edit-box transparent">
                 <div style="width: 100%; display: flex; justify-content: center; padding-top: 12px;">
@@ -163,6 +168,34 @@
                 },
                 onBeforeConfirm: function() {
                     $('#submit-intro').click();
+                },
+                onConfirm: function() {
+                    $('#submit-intro').click();
+                },
+                onCancel: function() {
+                    console.log('点击取消！');
+                },
+                onClose: function() {
+                    console.log('点击关闭！');
+                }
+            });
+        });
+        $('#change-passwd').click(function() {
+            $.sendConfirm({
+                title: 'Change Password',
+                withNoMinWidth: true,
+                width: '400px',
+                content: '<form method="post">'
+                    + '{% csrf_token %}'
+                    + '<input type="text" name="changePasswd" style=" font-size: large; padding: 3px;">'
+                    + '<button id="submit-passwd" type="submit" hidden="hidden"></button>'
+                    + '</form>',
+                button: {
+                    confirm: 'Confirm',
+                    cancel: 'Cancel'
+                },
+                onBeforeConfirm: function() {
+                    $('#submit-passwd').click();
                 },
                 onConfirm: function() {
                     $('#submit-intro').click();
