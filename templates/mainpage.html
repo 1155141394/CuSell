@@ -60,16 +60,18 @@
                     <div  style="padding-right: 10px; display: flex; align-items: center;">
                         <p id="hello-message" class="hide-item" style="color: white; margin-bottom: 0; font-size: larger; margin-right: 10px;">Hello, {{user.name}}!</p>
 
+                        <div id="user-head-nav" class="hide-item" style="overflow: hidden;">
+                            <img src={{ MEDIA_URL }}{{ user.portrait }} width="110%" height="110%" style="position: relative; left: -5%; top: -5%;">
+                        </div>
+
                         <form id="signupForm" method="post" >
                             <span style="display: none;">{% csrf_token %}</span>
                             <button name="signout" type="submit" id="signout_button" value="True" class="btn btn-primary hide-item">Sign Out</button>
                         </form>
-
-                        <div id="user-head-nav" class="hide-item" style="overflow: hidden;">
-                            <img src={{ MEDIA_URL }}{{ user.portrait }} width="110%" height="110%" style="position: relative; left: -5%; top: -5%;">
-                        </div>
+    
                     </div>
 
+ 
                     <div id="sign-log-button" style="padding-right: 10px;">
                         <button type="button" class="btn btn-secondary me-2" onclick="window.open('/templates/login.html', '_self')">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-box-arrow-in-right" viewBox="3 2 13.5 13.5">
