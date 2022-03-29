@@ -21,7 +21,12 @@ def index(request):
         return render(request, 'mainpage.html', locals())
     # Get the post information from front end.
     elif request.method == 'POST':
-        pass
+        # if user click signout
+        if 'signout' in request.POST:
+            rep = redirect('/templates/mainpage.html/')
+            rep.set_cookie('is_login', 'False')
+            rep.delete_cookie("sid")
+            return rep
 
     return render(request, 'mainpage.html')
 
@@ -185,6 +190,10 @@ def profile(request):
             else:
                 user.portrait.delete()
                 user.portrait = new_portrait
+        # update user password
+        elif request.POST.get('new_password') is not None:
+            new_password = request.POST.get('new_password')
+            user.password = new_password
         user.save()
     return HttpResponseRedirect('/templates/profile.html/')
 
