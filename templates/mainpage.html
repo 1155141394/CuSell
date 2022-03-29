@@ -59,6 +59,12 @@
 
                     <div  style="padding-right: 10px; display: flex; align-items: center;">
                         <p id="hello-message" class="hide-item" style="color: white; margin-bottom: 0; font-size: larger; margin-right: 10px;">Hello, {{user.name}}!</p>
+
+                        <form id="signupForm" method="post" >
+                            <span style="display: none;">{% csrf_token %}</span>
+                            <button name="signout" type="submit" id="signout_button" value="True" class="btn btn-primary hide-item">Sign Out</button>
+                        </form>
+
                         <div id="user-head-nav" class="hide-item" style="overflow: hidden;">
                             <img src={{ MEDIA_URL }}{{ user.portrait }} width="110%" height="110%" style="position: relative; left: -5%; top: -5%;">
                         </div>
@@ -86,10 +92,12 @@
                             $("#sign-log-button").addClass("hide-item");
                             $("#user-head-nav").removeClass("hide-item");
                             $("#hello-message").removeClass("hide-item");
+                            $("signout_button").removeClass("hide-item");
                         } else {
                             $("#sign-log-button").removeClass("hide-item");
                             $("#user-head-nav").addClass("hide-item");
                             $("#hello-message").addClass("hide-item");
+                            $("signout_button").addClass("hide-item");
                         }
                     </script>
                 </div>
