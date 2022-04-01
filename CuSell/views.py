@@ -254,7 +254,7 @@ def post_mech(request):
             rep.delete_cookie("sid")
             return rep
         # get the merchandise information from front end
-        user_id = request.COOKIES.get('sid')
+        user_id = request.COOKIES.get('sid_id')
         merchandise_name=request.POST.get('postName')
         price = request.POST.get('postPrice')
         keyword = request.POST.get('postKeyword')
@@ -265,7 +265,7 @@ def post_mech(request):
         image_4 = request.FILES.get('pic-4')
         # put the information into database
         merchandise = Merchandise()
-        merchandise.sid = user_id
+        merchandise.sid_id = user_id
         merchandise.name = merchandise_name
         merchandise.price = price
         merchandise.keyword = keyword
