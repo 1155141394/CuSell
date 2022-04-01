@@ -31,9 +31,13 @@ def index(request):
         print(user_view_order)
         # get first 6 merchandise according to the user_view_order
         runout = False
-        merchandise = Merchandise.objects.raw("select * from merchandise m where m.mid in (%d,%d,%d,%d,%d,%d);"
-                                              %(user_view_order[0],user_view_order[1],user_view_order[2],
-                                                user_view_order[3],user_view_order[4],user_view_order[5],))
+        # merchandise is a list
+        merchandise = []
+        for order in user_view_order:
+            tmpt = Merchandise.objects.get(mid = order)
+            merchandise.append(tmpt)
+            if len(merchandise) == 6:
+                break
         
         return render(request, 'mainpage.html', locals())
 
@@ -254,7 +258,7 @@ def post_mech(request):
             rep.delete_cookie("sid")
             return rep
         # get the merchandise information from front end
-        user_id = request.COOKIES.get('sid_id')
+        user_id = request.COOKIES.get('sid')
         merchandise_name=request.POST.get('postName')
         price = request.POST.get('postPrice')
         keyword = request.POST.get('postKeyword')
@@ -299,9 +303,13 @@ def get_Merchandise(request):
         print(user_view_order)
         # get first 6 merchandise according to the user_view_order
         runout = False
-        merchandise = Merchandise.objects.raw("select * from merchandise m where m.mid in (%d,%d,%d,%d,%d,%d);"
-                                              %(user_view_order[0],user_view_order[1],user_view_order[2],
-                                                user_view_order[3],user_view_order[4],user_view_order[5],))
+        # merchandise is a list
+        merchandise = []
+        for order in user_view_order:
+            tmpt = Merchandise.objects.get(mid = order)
+            merchandise.append(tmpt)
+            if len(merchandise) == 6:
+                break
         
         return render(request, 'mainpage.html', locals())
 
