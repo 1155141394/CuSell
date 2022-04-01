@@ -10,27 +10,27 @@ import numpy as np
 
 # Create your views here.
 def index(request):
-    # get the page from the mainpage
+    # get the user information from cookie and database
+    user_id = request.COOKIES.get('sid')
+    try:
+        user = User.objects.get(sid=user_id)
+    except Exception as e:
+        print('Get user error is %s ' % e)
+    # get all merchandise
+    all_merchandise = Merchandise.objects.all()
+    # get a random list of merchandise id
+    count = 0   # count indicates how many times user clicks "show more"
+    number = len(all_merchandise)
+    user_view_order = np.arange(number)
+    for x in range(number):
+        user_view_order[x] = all_merchandise[x].mid
+    np.random.shuffle(user_view_order)
+    print(user_view_order)
+    # get first 6 merchandise according to the user_view_order
+    runout = False
+    
     if request.method == 'GET':
-        # get the user information from cookie and database
-        user_id = request.COOKIES.get('sid')
-        try:
-            user = User.objects.get(sid=user_id)
-        except Exception as e:
-            print('Get user error is %s ' % e)
-
-        # get all merchandise
-        all_merchandise = Merchandise.objects.all()
-        # get a random list of merchandise id
-        count = 0   # count indicates how many times user clicks "show more"
-        number = len(all_merchandise)
-        user_view_order = np.arange(number)
-        for x in range(number):
-            user_view_order[x] = all_merchandise[x].mid
-        np.random.shuffle(user_view_order)
-        print(user_view_order)
-        # get first 6 merchandise according to the user_view_order
-        runout = False
+        
         # merchandise is a list
         merchandise = []
         for order in user_view_order:
