@@ -6,7 +6,7 @@ from django.core.mail import send_mail
 from django.shortcuts import HttpResponse
 from testdj import settings
 from django.http import HttpResponseRedirect
-
+import numpy as np
 
 # Create your views here.
 def index(request):
@@ -18,7 +18,25 @@ def index(request):
             user = User.objects.get(sid=user_id)
         except Exception as e:
             print('Get user error is %s ' % e)
+
+        # get all merchandise
+        all_merchandise = Merchandise.objects.all()
+        # get a random list of merchandise id
+        count = 0   # count indicates how many times user clicks "show more"
+        number = len(all_merchandise)
+        user_view_order = np.arange(number)
+        for x in range(number):
+            user_view_order[x] = all_merchandise[x].mid
+        np.random.shuffle(user_view_order)
+        print(user_view_order)
+        # get first 6 merchandise according to the user_view_order
+        runout = False
+        merchandise = Merchandise.objects.raw("select * from merchandise m where m.mid in (%d,%d,%d,%d,%d,%d);"
+                                              %(user_view_order[0],user_view_order[1],user_view_order[2],
+                                                user_view_order[3],user_view_order[4],user_view_order[5],))
+        
         return render(request, 'mainpage.html', locals())
+
     # Get the post information from front end.
     elif request.method == 'POST':
         # if user click signout
@@ -195,7 +213,8 @@ def profile(request):
             new_password = request.POST.get('new_password')
             user.password = new_password
         user.save()
-    return HttpResponseRedirect('/templates/profile.html/')
+        rep = redirect('/templates/profile.html')
+    return rep
 
 
 # Test for the picture uploading
@@ -234,7 +253,7 @@ def post_mech(request):
             rep.set_cookie('is_login', 'False')
             rep.delete_cookie("sid")
             return rep
-
+        # get the merchandise information from front end
         user_id = request.COOKIES.get('sid')
         merchandise_name=request.POST.get('postName')
         price = request.POST.get('postPrice')
@@ -244,6 +263,7 @@ def post_mech(request):
         image_2 = request.FILES.get('pic-2')
         image_3 = request.FILES.get('pic-3')
         image_4 = request.FILES.get('pic-4')
+        # put the information into database
         merchandise = Merchandise()
         merchandise.sid = user_id
         merchandise.name = merchandise_name
@@ -257,5 +277,57 @@ def post_mech(request):
         merchandise.save()
         rep = redirect('/templates/profile.html/')
         return rep
-
     return render(request, 'post.html')
+
+
+
+
+
+
+def get_Merchandise(request):
+    # generate a random list and first 6 merchandises
+    if request.method == 'GET':
+        # get all merchandise
+        all_merchandise = Merchandise.objects.all()
+        # get a random list of merchandise id
+        count = 0   # count indicates how many times user clicks "show more"
+        number = len(all_merchandise)
+        user_view_order = np.arange(number)
+        for x in range(number):
+            user_view_order[x] = all_merchandise[x].mid
+        np.random.shuffle(user_view_order)
+        print(user_view_order)
+        # get first 6 merchandise according to the user_view_order
+        runout = False
+        merchandise = Merchandise.objects.raw("select * from merchandise m where m.mid in (%d,%d,%d,%d,%d,%d);"
+                                              %(user_view_order[0],user_view_order[1],user_view_order[2],
+                                                user_view_order[3],user_view_order[4],user_view_order[5],))
+        
+        return render(request, 'mainpage.html', locals())
+
+    # generate new 6 merchandises and return
+    if request.method == 'POST':
+        # get user_view_order form client
+        user_view_order = request.POST.get("user_view_order")
+        # get count
+        count = request.POST.get("count")
+        # get runout: true iff all the merchandsie has been run out
+        runout = request.POST.get("runout")
+        count += 1
+        merchandise = request.POST.get("merchandise")
+        # if there are enough merchandise to present
+        if len(user_view_order)>=6*count+5:
+            new_merchandise = Merchandise.objects.raw("select * from merchandise m where m.mid in (%d,%d,%d,%d,%d,%d);"
+                                                      %(user_view_order[6*count],user_view_order[6*count+1],user_view_order[6*count+2],
+                                                      user_view_order[6*count+3],user_view_order[6*count+4],user_view_order[6*count+5],))
+            merchandise.extend(new_merchandise)
+        # if the merchandise will be view out
+        else:
+            i = 6*count
+            runout = True
+            while i<len(user_view_order):
+                merchandise.extend(Merchandise.objects.raw("select * from merchandise m where m.mid=%d")%user_view_order[i])
+                i += 1 
+        print(merchandise)
+        return render(request, 'mainpage.html' , user_view_order , merchandise, count, runout)
+

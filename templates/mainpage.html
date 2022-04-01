@@ -143,16 +143,23 @@
         </div>
         
         <div class="container">
-            <a id="1" href="#" style="text-decoration: none; color: black;">
-                <div class="bg">
-                    <div class="card">
-                        <div class="content">
-                            
+            {%for good in merchandise%}
+                <a id={{forloop.counter}} href="#" style="text-decoration: none; color: black;">
+                    <div class="bg">
+                        <div class="card">
+                            <div class="content">
+                                <img src={{ MEDIA_URL }}{{ good.image_1 }} height="250px" width="250px">
+                            </div>
+                            <div>
+                                {{good.name}}
+                            </div>
                         </div>
                     </div>
-                </div>
-            </a>
-            <a id="2" href="#" style="text-decoration: none; color: black;">
+                </a>
+            {% endfor %}
+
+            
+            <!-- <a id="2" href="#" style="text-decoration: none; color: black;">
                 <div class="bg">
                     <div class="card">
                         <div class="content">
@@ -195,7 +202,7 @@
                         </div>
                     </div>
                 </div>
-            </a>
+            </a>-->
         </div>
         
         <div style="display: flex; justify-content: center;">
