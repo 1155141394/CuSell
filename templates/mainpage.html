@@ -61,7 +61,7 @@
                         <p id="hello-message" class="hide-item" style="color: white; margin-bottom: 0; font-size: larger; margin-right: 10px;">Hello, {{user.name}}!</p>
 
                         <div id="user-head-nav" class="hide-item" style="overflow: hidden;">
-                            <img src={{ MEDIA_URL }}{{ user.portrait }} width="110%" height="110%" style="position: relative; left: -5%; top: -5%;">
+                            <img src="{{ MEDIA_URL }}{{ user.portrait }}" width="110%" height="110%" style="position: relative; left: -5%; top: -5%;">
                         </div>
 
                         <form id="signupForm" method="post" >
@@ -148,10 +148,11 @@
                     <div class="bg">
                         <div class="card">
                             <div class="content">
-                                <img src={{ MEDIA_URL }}{{ good.image_1 }} height="250px" width="250px">
-                            </div>
-                            <div>
-                                {{good.name}}
+                                <img src={{ MEDIA_URL }}{{ good.image_1 }}>
+                                <h3 class="good-name">
+                                    {{good.name}}
+                                </h3>
+                                <h2>${{good.price}}HKD</h2>
                             </div>
                         </div>
                     </div>
