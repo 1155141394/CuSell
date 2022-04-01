@@ -148,10 +148,11 @@
                     <div class="bg">
                         <div class="card">
                             <div class="content">
-                                <img src={{ MEDIA_URL }}{{ good.image_1 }} height="250px" width="250px">
-                            </div>
-                            <div>
-                                {{good.name}}
+                                <img src={{ MEDIA_URL }}{{ good.image_1 }}>
+                                <h3 class="good-name">
+                                    {{good.name}}
+                                </h3>
+                                <h2>${{good.price}}HKD</h2>
                             </div>
                         </div>
                     </div>

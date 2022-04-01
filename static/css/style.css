@@ -78,6 +78,29 @@ nav .navigator{
   backdrop-filter: blur(5px);
   -webkit-backdrop-filter: blur(5px);
 }
+
+.content img {
+  border: rgba(128, 128, 128, 0.3) 2px solid;
+  border-radius: 15px 15px 0 0;
+  width: 100%;
+  height: 80%;
+}
+
+.content h3 {
+  margin-top: 10px;
+  margin-bottom: 5px;
+  font-size: x-large;
+  font-weight: bold;
+}
+
+.content h2 {
+  margin: 0;
+  font-weight: bolder;
+  font-size: 40px;
+  color: purple;
+}
+
+
 @keyframes shadowPulse {
   0% {
       box-shadow: 20px 20px 50px rgba(0, 0, 0, 0.5);
@@ -111,7 +134,11 @@ nav .navigator{
   animation-fill-mode: forwards;
 }
 .container .bg .card .content{
+  width: 100%;
+  height: 100%;
   padding: 10px;
+  border-radius: 15px;
+  overflow: hidden;
   text-align: center;
 }
 
