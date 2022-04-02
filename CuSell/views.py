@@ -40,7 +40,6 @@ def index(request):
     
     if request.method == 'GET':
         # Initialize global count to 6 
-        global count 
         count = 6
         # Merchandise is a list
         merchandise = []
