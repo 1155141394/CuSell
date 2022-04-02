@@ -140,3 +140,4 @@ EMAIL_USER_TLS=False    #PORT: 25
 # Media Setting
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+

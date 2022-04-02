@@ -5,52 +5,73 @@ import random
 from django.core.mail import send_mail
 from django.shortcuts import HttpResponse
 from testdj import settings
-from django.http import HttpResponseRedirect
 import numpy as np
+
+def merch_order():
+    # Get all merchandise
+    all_merchandise = Merchandise.objects.all()
+    # Get a random list of merchandise id
+    number = len(all_merchandise)
+    user_view_order = np.arange(number)
+    for x in range(number):
+        user_view_order[x] = all_merchandise[x].mid
+    np.random.shuffle(user_view_order)
+    # Get first 6 merchandise according to the user_view_order
+    runout = False
+    return user_view_order
+
+user_view_order = merch_order()
+count = 0   # Count indicates how many times user clicks "show more"
+
+# Up is global variable
 
 # Create your views here.
 def index(request):
-    # get the page from the mainpage
+    dict = {
+        'error': ''
+    }
+    # get the user information from cookie and database
+    user_id = request.COOKIES.get('sid')
+    try:
+        user = User.objects.get(sid=user_id)
+    except Exception as e:
+        print('Get user error is %s ' % e)
+    
+    
     if request.method == 'GET':
-        # get the user information from cookie and database
-        user_id = request.COOKIES.get('sid')
-        try:
-            user = User.objects.get(sid=user_id)
-        except Exception as e:
-            print('Get user error is %s ' % e)
-
-        # get all merchandise
-        all_merchandise = Merchandise.objects.all()
-        # get a random list of merchandise id
-        count = 0   # count indicates how many times user clicks "show more"
-        number = len(all_merchandise)
-        user_view_order = np.arange(number)
-        for x in range(number):
-            user_view_order[x] = all_merchandise[x].mid
-        np.random.shuffle(user_view_order)
-        print(user_view_order)
-        # get first 6 merchandise according to the user_view_order
-        runout = False
-        # merchandise is a list
+        # Initialize global count to 6 
+        count = 6
+        # Merchandise is a list
         merchandise = []
         for order in user_view_order:
             tmpt = Merchandise.objects.get(mid = order)
             merchandise.append(tmpt)
-            if len(merchandise) == 6:
+            if len(merchandise) == count:
                 break
-        
         return render(request, 'mainpage.html', locals())
 
     # Get the post information from front end.
     elif request.method == 'POST':
-        # if user click signout
+        
+        # If user click signout
         if 'signout' in request.POST:
             rep = redirect('/templates/mainpage.html/')
             rep.set_cookie('is_login', 'False')
             rep.delete_cookie("sid")
             return rep
 
-    return render(request, 'mainpage.html')
+        if 'show_more' in request.POST:
+            count = int(request.POST.get('count'))
+            print(count)
+            if count >= len(user_view_order) + 6:
+                dict['error'] = 'You have been browse all merchandises'
+            merchandise = []
+            for order in user_view_order:
+                tmpt = Merchandise.objects.get(mid = order)
+                merchandise.append(tmpt)
+                if len(merchandise) == count:
+                    break
+    return render(request, 'mainpage.html',locals())
 
 
 def reg(request):
@@ -63,24 +84,24 @@ def reg(request):
         password = request.POST.get('password')
         print(email, username, password)
 
-        # check whether this email or username has been used
+        # Check whether this email or username has been used
         check_user = User.objects.raw('SELECT * FROM user a WHERE a.email=\'%s\'' % email)
         if len(check_user) != 0:
             print('Used email, please try to get back your preset password')
             dict['error'] = 'Used email, please try to get back your preset password'
             return render(request, 'registration.html', dict)  # end check
 
-        # when user click submit
+        # When user click submit
         if 'submit' in request.POST:
             # compare the sent_veriCode and input_veriCode
             input_veriCode = request.POST.get('verify')
             sent_veriCode = request.POST.get('sent_veriCode')
-            # check the vericode and check wether user has gotten the code
+            # Check the vericode and check wether user has gotten the code
             if sent_veriCode != input_veriCode or len(sent_veriCode) != 6:
                 print('Verification Failed, click SEND again to get another email')
                 dict['error'] = 'Verification Failed, click SEND again or use another email'
                 return render(request, 'registration.html', dict)
-            # store the user information into database
+            # Store the user information into database
             user = User()
             user.sid = email[0:10]
             user.name = username
@@ -93,15 +114,15 @@ def reg(request):
             rep.set_cookie('sid', email[0:10], max_age=1000)
             return rep
 
-        # when user click send
+        # When user click send
         else:
-            # randomly get a sent_vericode
+            # Randomly get a sent_vericode
             sent_veriCode = '%d%d%d%d%d%d' % (
                 random.randint(0, 9), random.randint(0, 9), random.randint(0, 9), random.randint(0, 9),
                 random.randint(0, 9), random.randint(0, 9))
             subject = 'CuSell VeriCode'
             message = '[CuSell] Your Verification Code for resgistrition is %s.\nUse this code to finish registrition' % sent_veriCode + '\n\nPlease ignore this mail if it is not performed by yourself.' + '\n\nIf there is any confusion or recommandation, please feel free to contact us at cusell2022@163.com'
-            # send email to the user
+            # Send email to the user
             send_mail(subject, message, settings.EMAIL_HOST_USER, [email])
 
             return render(request, 'registration.html', locals())
@@ -131,19 +152,19 @@ def login(request):
                 for x in check_user:
                     subject = 'CuSell Password'
                     message = '[CuSell] Please ignore this emain if the operation is not done by yourself!\nYour Passowrd is %s.\nUse this code to login' % x.password + '\n\nIf there is any confusion or recommandation, please feel free to contact us at cusell2022@163.com'
-                    # send email to the user
+                    # Send email to the user
                     send_mail(subject, message, settings.EMAIL_HOST_USER, [email])
                     break
             return render(request, 'login.html', dict)
-        # check whether such a user exist
+        # Check whether such a user exist
         try:
             user = User.objects.get(email=email)
 
-            # check whether the email match the password
+            # Check whether the email match the password
             if user.password == password:
                 print('Logined in')
                 rep = redirect('/templates/profile.html/')
-                # set the cookie that user has been login (max_age's unit is second)
+                # Set the cookie that user has been login (max_age's unit is second)
                 rep.set_cookie('is_login', 'True', max_age=1000)
                 rep.set_cookie('sid', email[0:10], max_age=1000)
                 return rep
@@ -163,27 +184,31 @@ def error(request):
 
 
 def profile(request):
-    # check whether user is login
+    # Check whether user is login
     is_login = request.COOKIES.get('is_login')
-    # if not, get back to login page
+    # If not, get back to login page
     print(is_login)
     if is_login != 'True':
         print('user have not login')
         rep = redirect('/templates/login.html/')
         return rep
 
-    # return the profile page and user information back to front end
+    # Return the profile page and user information back to front end
     if request.method == 'GET':
-        # get the user information from cookie and database
+        # get return page
+        # get user_id from cookie
         user_id = request.COOKIES.get('sid')
         try:
+            # get user object and merchandise_set from database
             user = User.objects.get(sid=user_id)
+            merchandises = user.merchandise_set.all()
         except Exception as e:
             print('Get user error is %s ' % e)
+        # return the page and user information and merchandise information
         return render(request, 'profile.html', locals())
 
     elif request.method == 'POST':
-        # if user click signout
+        # If user click signout
         if 'signout' in request.POST :
             rep = redirect('/templates/mainpage.html/')
             rep.set_cookie('is_login','False')
@@ -196,15 +221,15 @@ def profile(request):
             user = User.objects.get(sid=user_id)
         except Exception as e:
             print('Get user error is %s' % e)
-        # update user introduction
+        # Update user introduction
         if request.POST.get('introduction') is not None:
             new_introduction = request.POST.get('introduction')
             user.introduction = new_introduction
-        # update user name
+        # Update user name
         elif request.POST.get('name') is not None:
             new_name = request.POST.get('name')
             user.name = new_name
-        # update user portrait
+        # Update user portrait
         elif request.FILES.get('img') is not None:
             new_portrait = request.FILES['img']
             if user.portrait == 'default/default.jpg':
@@ -212,7 +237,7 @@ def profile(request):
             else:
                 user.portrait.delete()
                 user.portrait = new_portrait
-        # update user password
+        # Update user password
         elif request.POST.get('new_password') is not None:
             new_password = request.POST.get('new_password')
             user.password = new_password
@@ -232,17 +257,17 @@ def test_upload(request):
         return HttpResponse('Success')
 
 def post_mech(request):
-    # check whether user is login
+    # Check whether user is login
     is_login = request.COOKIES.get('is_login')
-    # if not, get back to login page
+    # If not, get back to login page
     if is_login != 'True':
         print('user have not login')
         rep = redirect('/templates/login.html/')
         return rep
 
-    # return the post page and user information back to front end
+    # Return the post page and user information back to front end
     if request.method == 'GET':
-        # get the user information from cookie and database
+        # Get the user information from cookie and database
         user_id = request.COOKIES.get('sid')
         try:
             user = User.objects.get(sid=user_id)
@@ -251,13 +276,13 @@ def post_mech(request):
         return render(request, 'post.html', locals())
 
     elif request.method == 'POST':
-        # if user click signout
+        # If user click signout
         if 'signout' in request.POST :
             rep = redirect('/templates/mainpage.html/')
             rep.set_cookie('is_login', 'False')
             rep.delete_cookie("sid")
             return rep
-        # get the merchandise information from front end
+        # Get the merchandise information from front end
         user_id = request.COOKIES.get('sid')
         merchandise_name=request.POST.get('postName')
         price = request.POST.get('postPrice')
@@ -267,7 +292,7 @@ def post_mech(request):
         image_2 = request.FILES.get('pic-2')
         image_3 = request.FILES.get('pic-3')
         image_4 = request.FILES.get('pic-4')
-        # put the information into database
+        # Put the information into database
         merchandise = Merchandise()
         merchandise.sid_id = user_id
         merchandise.name = merchandise_name
@@ -279,63 +304,10 @@ def post_mech(request):
         merchandise.image_3 = image_3
         merchandise.image_4 = image_4
         merchandise.save()
+        # After user post the merhcandise, refresh the global order
+        global user_view_order 
+        user_view_order = merch_order()
         rep = redirect('/templates/profile.html/')
         return rep
     return render(request, 'post.html')
-
-
-
-
-
-
-def get_Merchandise(request):
-    # generate a random list and first 6 merchandises
-    if request.method == 'GET':
-        # get all merchandise
-        all_merchandise = Merchandise.objects.all()
-        # get a random list of merchandise id
-        count = 0   # count indicates how many times user clicks "show more"
-        number = len(all_merchandise)
-        user_view_order = np.arange(number)
-        for x in range(number):
-            user_view_order[x] = all_merchandise[x].mid
-        np.random.shuffle(user_view_order)
-        print(user_view_order)
-        # get first 6 merchandise according to the user_view_order
-        runout = False
-        # merchandise is a list
-        merchandise = []
-        for order in user_view_order:
-            tmpt = Merchandise.objects.get(mid = order)
-            merchandise.append(tmpt)
-            if len(merchandise) == 6:
-                break
-        
-        return render(request, 'mainpage.html', locals())
-
-    # generate new 6 merchandises and return
-    if request.method == 'POST':
-        # get user_view_order form client
-        user_view_order = request.POST.get("user_view_order")
-        # get count
-        count = request.POST.get("count")
-        # get runout: true iff all the merchandsie has been run out
-        runout = request.POST.get("runout")
-        count += 1
-        merchandise = request.POST.get("merchandise")
-        # if there are enough merchandise to present
-        if len(user_view_order)>=6*count+5:
-            new_merchandise = Merchandise.objects.raw("select * from merchandise m where m.mid in (%d,%d,%d,%d,%d,%d);"
-                                                      %(user_view_order[6*count],user_view_order[6*count+1],user_view_order[6*count+2],
-                                                      user_view_order[6*count+3],user_view_order[6*count+4],user_view_order[6*count+5],))
-            merchandise.extend(new_merchandise)
-        # if the merchandise will be view out
-        else:
-            i = 6*count
-            runout = True
-            while i<len(user_view_order):
-                merchandise.extend(Merchandise.objects.raw("select * from merchandise m where m.mid=%d")%user_view_order[i])
-                i += 1 
-        print(merchandise)
-        return render(request, 'mainpage.html' , user_view_order , merchandise, count, runout)
 

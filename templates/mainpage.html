@@ -206,12 +206,12 @@
             </a>-->
         </div>
         
-        <div style="display: flex; justify-content: center;">
-            <button id="show-more" type="button" class="btn btn-primary btn-lg" style="position: relative; top: -60px;">Show More</button>        
-        </div>
-
-        <form id="count-form" hidden>
-            <input type="text" name="count" id="count-num" value="0">
+        <form id="count-form" method="post">
+            <span style="display: none;">{% csrf_token %}</span>
+            <div style="display: flex; justify-content: center;">
+                <button id="show-more" name="show_more" type="submit" class="btn btn-primary btn-lg" style="position: relative; top: -60px;">Show More</button>        
+            </div>
+            <input type="text" name="count" id="count-num" value="{{ count }}" hidden="hidden">
         </form>
 
         <script>
@@ -228,7 +228,8 @@
                 //     });
                 // }
                 // times = times + 1
-                document.getElementById("count-num").value = document.getElementById("count-num").value + 6;
+                document.getElementById("count-num").value = parseInt(document.getElementById("count-num").value) + 6;
+                
                 $("#count-form").submit;
             })
         </script>
