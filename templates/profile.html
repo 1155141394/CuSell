@@ -230,7 +230,7 @@
                     <div class="content">
                         <form method="post" id="delete">
                             
-                            
+
                         </form>
                         <a href="#" style="z-index: 100; position: absolute; opacity: 1; top: 89%; left: 88%;" onclick="$('#delete').submit()">
                             <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="black" class="bi bi-trash3" viewBox="0 0 16 16">
@@ -241,23 +241,24 @@
                         <script>
                             function dialog(){
                                 $.sendConfirm({
-                                title: 'Error!',
-                                withNoMinWidth: true,
-                                width: '400px',
-                                content: 'Are you sure to delete this item?',
-                                button: {
-                                    confirm: 'Confirm',
-                                    cancel: 'Cancel'
-                                },
-                                onConfirm: function() {
-                                    window.open('/templates/profile.html', '_self');
-                                },
-                                onCancel: function() {
-                                    console.log('点击取消！');
-                                },
-                                onClose: function() {
-                                    console.log('点击关闭！');
-                                }
+                                    title: 'Error!',
+                                    withNoMinWidth: true,
+                                    width: '400px',
+                                    content: 'Are you sure to delete this item?',
+                                    button: {
+                                        confirm: 'Confirm',
+                                        cancel: 'Cancel'
+                                    },
+                                    onConfirm: function() {
+                                        window.open('/templates/profile.html', '_self');
+                                    },
+                                    onCancel: function() {
+                                        console.log('点击取消！');
+                                    },
+                                    onClose: function() {
+                                        console.log('点击关闭！');
+                                    }
+                                });
                             }
                         </script>
 
