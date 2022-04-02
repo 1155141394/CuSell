@@ -196,12 +196,16 @@ def profile(request):
 
     # Return the profile page and user information back to front end
     if request.method == 'GET':
-        # Get the user information from cookie and database
+        # get return page
+        # get user_id from cookie
         user_id = request.COOKIES.get('sid')
         try:
+            # get user object and merchandise_set from database
             user = User.objects.get(sid=user_id)
+            merchandises = user.merchandise_set.all()
         except Exception as e:
             print('Get user error is %s ' % e)
+        # return the page and user information and merchandise information
         return render(request, 'profile.html', locals())
 
     elif request.method == 'POST':
