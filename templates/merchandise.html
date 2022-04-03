@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Merchandise</title>
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+    <link href="/static/css/style.css" rel="stylesheet">
+    <script src="/static/js/bootstrap.bundle.min.js"></script>
+    <script src="/static/js/jquery-3.6.0.min.js"></script>
+
+    <script src="/static/js/jquery.dialog.js"></script>
+    <link rel="stylesheet" href="/static/css/dialog.css">
+</head>
+
+<body>
+    <header>
+        <nav class="navbar-dark fixed-top bg-dark" style="border-radius: 0 0 10px 10px;">
+            <div class="navigator">
+                <div style="display: flex;">
+                    <img src="/static/pic/CuSell_icon.jpeg" alt="Icon" height="30px" width="30px" style="margin-top: 4.5px; margin-left: 10px; margin-right: 3px; border-radius: 5px;">
+                    <a class="navbar-brand" href="/templates/mainpage.html" style="padding-top: 2px; padding-bottom: 0;">
+                        <b><span style="color: purple; font-size: x-large;">Cu</span><span style="color: orange; font-size: x-large;">Sell</span></b>
+                    </a>
+                    <ul class="nav">
+                        <li><a href="/templates/mainpage.html" class="nav-link px-2 text-white top_item">Home</a></li>
+                        <li><a id="profile" href="#" class="nav-link px-2 text-white top_item">Profile</a></li>
+                        <li><a href="/templates/post.html" class="nav-link px-2 text-white top_item">Post</a></li>
+                        <li><a href="#" class="nav-link px-2 text-white top_item">Chat</a></li>
+                        <li><a target="_blank" href="https://github.com/1155141394/CuSell" class="nav-link px-2 text-white top_item">About Us</a></li>
+                    </ul>
+                </div>
+
+                <div style="padding-right: 10px; display: flex; align-items: center;">
+                    <p style="color: white; margin-bottom: 0; font-size: larger; margin-right: 10px;">Hello, {{user.name}}!</p>
+                    <div id="user-head-nav" style="overflow: hidden;">
+                        <img src="{{ MEDIA_URL }}{{ user.portrait }}" width="110%" height="110%" style="position: relative; left: -5%; top: -5%;">
+                    </div>
+                    <form id="signupForm" method="post" >
+                        <span style="display: none;">{% csrf_token %}</span>
+                        <button name="signout" type="submit" id="signout_button" value="True" class="btn btn-primary">Sign Out</button>
+                    </form>
+                    
+                </div>
+
+            </div>
+        </nav>
+    </header>
+
+
+     
+    <div style="width: 100%; height: 90%; position: fixed; z-index: -1; display: flex; justify-content: flex-end; align-items: flex-end;">
+        <svg xmlns="http://www.w3.org/2000/svg" width="500" height="500" fill="currentColor" class="bi bi-bag-heart" viewBox="0 0 16 16" style="opacity: 0.4; color: orange">
+            <path fill-rule="evenodd" d="M10.5 3.5a2.5 2.5 0 0 0-5 0V4h5v-.5Zm1 0V4H15v10a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V4h3.5v-.5a3.5 3.5 0 1 1 7 0ZM14 14V5H2v9a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1ZM8 7.993c1.664-1.711 5.825 1.283 0 5.132-5.825-3.85-1.664-6.843 0-5.132Z"/>
+        </svg>
+    </div>
+    <svg xmlns="http://www.w3.org/2000/svg" width="500" height="500" fill="currentColor" class="bi bi-cart-check-fill" viewBox="0 0 16 16" style="opacity: 0.3; position:fixed ; z-index: -1; left: 10px; top: 30px; color: purple">
+        <path d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1H.5zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm-1.646-7.646-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L8 8.293l2.646-2.647a.5.5 0 0 1 .708.708z"/>
+    </svg>
+
+    <div class="card-box" style="width: 90%;  height: auto; margin: 0 auto; margin-top: 30px; align-items: flex-start; justify-content: left;">
+        <div style="display: flex;">
+            <!-- User Info here -->
+            <img src="#" style="border: #6c757d 2px solid; border-radius: 50%; height: 200px; width: 200px; margin: 20px;">
+            <div class="user-info" style="display: flex; flex-direction: column; justify-content: end;">
+                <p style="font-size: x-large;">User Name: {{}}</p>
+                <p style="font-size: x-large;">Contact Info: {{}}</p>
+            </div>
+
+
+            <div style="position: absolute; right:5%; top: 2%;">
+                <a id="before-like" href="javascript:" style="color: black; text-decoration: none;">
+                    <svg id="empty" xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-heart" viewBox="0 0 16 16">
+                        <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"/>
+                    </svg>
+                    <svg id="filled" xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="rgb(248, 85, 115)" class="bi bi-heart-fill hide-item" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
+                    </svg>
+                    <script>
+                        $("#empty").mouseenter(function(){
+                            $("#empty").addClass("hide-item");
+                            $("#filled").removeClass("hide-item");
+                        })
+                        $("#filled").mouseleave(function(){
+                            $("#empty").removeClass("hide-item");
+                            $("#filled").addClass("hide-item");
+                        })
+
+                    </script>
+                    <span style="font-size: x-large;">Add to wish list</span>
+                </a>
+                <div id="after-like">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="rgb(248, 85, 115)" class="bi bi-heart-fill" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
+                    </svg>
+                    <span style="font-size: x-large;">{{}} people like it</span>
+                </div>
+            </div>
+        </div>
+
+        <div style="border-bottom: #6c757d 2px solid; width: 95%; margin: 0 auto; opacity: 0.5;position: relative; top: -10px;"></div>
+        
+        <div style="display: flex;">
+            <div>
+                <h2 style="margin-left: 20px; color: purple; font-weight: bolder;">${{good.price}}HKD</h2>
+                <p style="margin-left: 20px; font-size: x-large; font-weight: bold;">Merchandise name: {{}}</p>
+                <p style="margin-left: 20px; font-size: x-large; font-weight: bold; position: relative; top: -20px;">discription: </p>
+                <p style="margin-left: 20px; width: 300px; position: relative; top: -35px;">{{}}</p>
+                <p style="margin-left: 20px;">Posted on: {{}}</p>
+            </div>
+
+            <div style="display: flex;flex-wrap: wrap; justify-content: space-evenly; min-width: 800px">
+                <img src="#" style="width: 350px; height: 500px; border-radius: 25px; border: #6c757d 2px solid; margin: 30px;">
+                <img src="#" style="width: 350px; height: 500px; border-radius: 25px; border: #6c757d 2px solid; margin: 30px;">
+                <img src="#" style="width: 350px; height: 500px; border-radius: 25px; border: #6c757d 2px solid; margin: 30px;">
+                <img src="#" style="width: 350px; height: 500px; border-radius: 25px; border: #6c757d 2px solid; margin: 30px;">
+            </div>
+        </div>
+    </div>
+
+    <div style="height: 50px;"></div>
+
+
+
+</body>
