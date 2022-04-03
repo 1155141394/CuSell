@@ -144,11 +144,11 @@
         
         <div class="container">
             {%for good in merchandise%}
-                <a id={{forloop.counter}} href="#" style="text-decoration: none; color: black;">
+                <a id={{forloop.counter}} href="/merchandise/{{ good.mid }}" style="text-decoration: none; color: black;">
                     <div class="bg">
                         <div class="card">
                             <div class="content">
-                                <img src={{ MEDIA_URL }}{{ good.image_1 }}>
+                                    <img src={{ MEDIA_URL }}{{ good.image_1 }}>
                                 <h3 class="good-name">
                                     {{good.name}}
                                 </h3>

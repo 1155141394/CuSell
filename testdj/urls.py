@@ -28,6 +28,7 @@ urlpatterns = [
     path('templates/profile.html/', views.profile),
     path('test_upload', views.test_upload),
     path('templates/post.html', views.post_mech),
+    path('merchandise/<int:mid>', views.merchandise)
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -60,10 +60,10 @@
     <div class="card-box" style="width: 90%;  height: auto; margin: 0 auto; margin-top: 30px; align-items: flex-start; justify-content: left;">
         <div style="display: flex;">
             <!-- User Info here -->
-            <img src="#" style="border: #6c757d 2px solid; border-radius: 50%; height: 200px; width: 200px; margin: 20px;">
+            <img src="{{ MEDIA_URL }}{{ user.portrait }}" style="border: #6c757d 2px solid; border-radius: 50%; height: 200px; width: 200px; margin: 20px;">
             <div class="user-info" style="display: flex; flex-direction: column; justify-content: end;">
-                <p style="font-size: x-large;">User Name: {{}}</p>
-                <p style="font-size: x-large;">Contact Info: {{}}</p>
+                <p style="font-size: x-large;">User Name: {{user.name}}</p>
+                <p style="font-size: x-large;">Contact Info: {{user.email}}</p>
             </div>
 
 
@@ -92,7 +92,7 @@
                     <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="rgb(248, 85, 115)" class="bi bi-heart-fill" viewBox="0 0 16 16">
                         <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
                     </svg>
-                    <span style="font-size: x-large;">{{}} people like it</span>
+                    <span style="font-size: x-large;">{{merchandise.Liked}} people like it</span>
                 </div>
             </div>
         </div>
@@ -101,18 +101,17 @@
         
         <div style="display: flex;">
             <div>
-                <h2 style="margin-left: 20px; color: purple; font-weight: bolder;">${{good.price}}HKD</h2>
-                <p style="margin-left: 20px; font-size: x-large; font-weight: bold;">Merchandise name: {{}}</p>
-                <p style="margin-left: 20px; font-size: x-large; font-weight: bold; position: relative; top: -20px;">discription: </p>
-                <p style="margin-left: 20px; width: 300px; position: relative; top: -35px;">{{}}</p>
-                <p style="margin-left: 20px;">Posted on: {{}}</p>
+                <h2 style="margin-left: 20px; color: purple; font-weight: bolder;">${{merchandise.price}}HKD</h2>
+                <p style="margin-left: 20px; font-size: x-large; font-weight: bold;">Merchandise name: {{merchandise.name}}</p>
+                <p style="margin-left: 20px; font-size: x-large; font-weight: bold; position: relative; top: -20px;">discription: {{ merchandise.description }}</p>
+{#                <p style="margin-left: 20px; width: 300px; position: relative; top: -35px;">{{}}</p>#}
+                <p style="margin-left: 20px;">Posted on: {{merchandise.pub_date}}</p>
             </div>
 
             <div style="display: flex;flex-wrap: wrap; justify-content: space-evenly; min-width: 800px">
-                <img src="#" style="width: 350px; height: 500px; border-radius: 25px; border: #6c757d 2px solid; margin: 30px;">
-                <img src="#" style="width: 350px; height: 500px; border-radius: 25px; border: #6c757d 2px solid; margin: 30px;">
-                <img src="#" style="width: 350px; height: 500px; border-radius: 25px; border: #6c757d 2px solid; margin: 30px;">
-                <img src="#" style="width: 350px; height: 500px; border-radius: 25px; border: #6c757d 2px solid; margin: 30px;">
+                {% for i in image %}
+                <img src="{{ MEDIA_URL }}{{ i }}" style="width: 350px; height: 500px; border-radius: 25px; border: #6c757d 2px solid; margin: 30px;">
+                {% endfor %}
             </div>
         </div>
     </div>

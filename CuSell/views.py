@@ -1,6 +1,6 @@
 from django.shortcuts import redirect, render
 from django.shortcuts import HttpResponse
-from .models import User, Merchandise, Image
+from .models import User, Merchandise
 import random
 from django.core.mail import send_mail
 from django.shortcuts import HttpResponse
@@ -20,7 +20,7 @@ def merch_order():
     runout = False
     return user_view_order
 
-user_view_order = merch_order()
+
 count = 0   # Count indicates how many times user clicks "show more"
 
 # Up is global variable
@@ -43,6 +43,7 @@ def index(request):
         count = 6
         # Merchandise is a list
         merchandise = []
+        user_view_order = merch_order()
         for order in user_view_order:
             tmpt = Merchandise.objects.get(mid = order)
             merchandise.append(tmpt)
@@ -54,6 +55,7 @@ def index(request):
     elif request.method == 'POST':
         
         # If user click signout
+        user_view_order = merch_order()
         if 'signout' in request.POST:
             rep = redirect('/templates/mainpage.html/')
             rep.set_cookie('is_login', 'False')
@@ -221,6 +223,11 @@ def profile(request):
             user = User.objects.get(sid=user_id)
         except Exception as e:
             print('Get user error is %s' % e)
+        # Delete merchandise
+        if 'delete' in request.POST:
+            del_mid = int(request.POST.get('delete'))
+            merchandise = Merchandise.objects.get(mid=del_mid)
+            merchandise.delete()
         # Update user introduction
         if request.POST.get('introduction') is not None:
             new_introduction = request.POST.get('introduction')
@@ -310,4 +317,36 @@ def post_mech(request):
         rep = redirect('/templates/profile.html/')
         return rep
     return render(request, 'post.html')
+
+
+# merchandise view function
+def merchandise(request, mid):
+    # Check whether user is login
+    is_login = request.COOKIES.get('is_login')
+    # If not, get back to login page
+    print(is_login)
+    if is_login != 'True':
+        print('user have not login')
+        rep = redirect('/templates/login.html/')
+        return rep
+
+    if request.method == 'GET':
+        # get user information
+        sid = request.COOKIES.get('sid')
+        # get merchandise information
+        merchandise = Merchandise.objects.get(mid=mid)
+        # put image into one list
+        image = []
+        # if image is not none add into list
+        if merchandise.image_1 != '':
+            image.append(merchandise.image_1)
+        if merchandise.image_2 != '':
+            print(merchandise.image_2)
+            image.append(merchandise.image_2)
+        if merchandise.image_3 != '':
+            image.append(merchandise.image_3)
+        if merchandise.image_4 != '':
+            image.append(merchandise.image_4)
+        user = User.objects.get(sid=sid)
+        return render(request, 'merchandise.html', locals())
 
