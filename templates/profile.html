@@ -224,7 +224,7 @@
     </script>
     <div class="container" style="margin-top: 100px;">
         {% for merchandise in merchandises %}
-        <a id={{ forloop.counter }} href="/merchandise/{{ merchandise.mid }}" style="text-decoration: none; color: black;">
+        <a href="/merchandise/{{ merchandise.mid }}" id="{{ forloop.counter }}" style="text-decoration: none; color: black;">
             <div class="bg">
                 <div class="card">
                     <div class="content">
