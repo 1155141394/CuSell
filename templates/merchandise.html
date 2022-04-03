@@ -88,12 +88,26 @@
                     </script>
                     <span style="font-size: x-large;">Add to wish list</span>
                 </a>
-                <div id="after-like">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="rgb(248, 85, 115)" class="bi bi-heart-fill" viewBox="0 0 16 16">
+                <a id="after-like" href="javascript:" style="color: black; text-decoration: none;">
+                    <svg id="filled-after" xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="rgb(248, 85, 115)" class="bi bi-heart-fill" viewBox="0 0 16 16">
                         <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
                     </svg>
+                    <svg id="empty-after" xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-heart hide-item" viewBox="0 0 16 16">
+                        <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"/>
+                    </svg>
+                    <script>
+                        $("#filled-after").mouseenter(function(){
+                            $("#filled-after").addClass("hide-item");
+                            $("#empty-after").removeClass("hide-item");
+                        })
+                        $("#empty-after").mouseleave(function(){
+                            $("#filled-after").removeClass("hide-item");
+                            $("#empty-after").addClass("hide-item");
+                        })
+
+                    </script>
                     <span style="font-size: x-large;">{{merchandise.Liked}} people like it</span>
-                </div>
+                </a>
             </div>
         </div>
 
@@ -103,8 +117,8 @@
             <div>
                 <h2 style="margin-left: 20px; color: purple; font-weight: bolder;">${{merchandise.price}}HKD</h2>
                 <p style="margin-left: 20px; font-size: x-large; font-weight: bold;">Merchandise name: {{merchandise.name}}</p>
-                <p style="margin-left: 20px; font-size: x-large; font-weight: bold; position: relative; top: -20px;">discription: {{ merchandise.description }}</p>
-{#                <p style="margin-left: 20px; width: 300px; position: relative; top: -35px;">{{}}</p>#}
+                <p style="margin-left: 20px; font-size: x-large; font-weight: bold; position: relative; top: -20px;">discription: </p>
+                <p style="margin-left: 20px; width: 300px; position: relative; top: -35px;">{{ merchandise.description }}</p>
                 <p style="margin-left: 20px;">Posted on: {{merchandise.pub_date}}</p>
             </div>
 
