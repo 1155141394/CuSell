@@ -37,6 +37,7 @@ class Merchandise(models.Model):
     image_2 = models.ImageField(verbose_name='image_2', upload_to='image', default='')
     image_3 = models.ImageField(verbose_name='image_3', upload_to='image', default='')
     image_4 = models.ImageField(verbose_name='image_4', upload_to='image', default='')
+    Liked = models.IntegerField(verbose_name='Liked_Number', default=0)
 
     # change the output format
     def __str__(self):
@@ -47,11 +48,10 @@ class Merchandise(models.Model):
         db_table = 'Merchandise'
 
 
-class Image(models.Model):
-    image_id = models.CharField('Image ID', max_length=10, default='', primary_key=True)
-
-    def __str__(self):
-        return '%s' % self.image_id
+class Liked(models.Model):
+    sid = models.CharField(verbose_name='User ID', max_length=10, default='')
+    mid = models.AutoField(verbose_name='Merchandise ID', default='')
+    add_date = models.DateTimeField(verbose_name='Add time', auto_now_add=True)
 
     class Meta:
-        db_table = 'Image'
+        db_table = 'Liked'

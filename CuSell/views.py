@@ -1,6 +1,6 @@
 from django.shortcuts import redirect, render
 from django.shortcuts import HttpResponse
-from .models import User, Merchandise, Image
+from .models import User, Merchandise, Liked
 import random
 from django.core.mail import send_mail
 from django.shortcuts import HttpResponse
@@ -310,4 +310,57 @@ def post_mech(request):
         rep = redirect('/templates/profile.html/')
         return rep
     return render(request, 'post.html')
+
+# user can view his saved merchandise in "Like"/"Shopping Cart"
+def Like(request):
+    # Check whether user is login
+    is_login = request.COOKIES.get('is_login')
+    # If not, get back to login page
+    if is_login != 'True':
+        print('user have not login')
+        rep = redirect('/templates/login.html/')
+        return rep
+    # Return first 6 Liked Merchandise when first open this
+    if request.method == 'GET':
+        sid = request.COOKIES.get('sid')
+        show_number = 0;    # show_number indicates how many merchandises will be shown in Like
+        all_liked = Liked.objects.raw("select * from Liked where sid = %s"%sid)     # all_liked contains all merchandises liked by this sid
+        total = len(all_liked)  # total indicates how many merhchandises this sid like.
+        like = [];  # like will contain the merchandise return to client
+        # if this sid like less than 6 merchandise
+        if total<6:
+            show_number = total
+            like = all_liked[:total]
+            return render(request, 'like.html',locals())
+        # if this sid like more than 6 merchandise
+        else:
+            show_number = 6
+            like = all_liked[:6]
+            return render(request, 'like.html', locals())
+    elif request.method == 'POST':
+        # If user click signout
+        if 'signout' in request.POST:
+            rep = redirect('/templates/mainpage.html/')
+            rep.set_cookie('is_login', 'False')
+            rep.delete_cookie("sid")
+            return rep
+
+        # If user click Show More
+        if 'show_more' in request.POST:
+            sid = request.COOKIES.get('sid')
+            show_number = int(request.POST.get('show_number'))      # please do increase this variable when user clicks show more
+            print(show_number)
+            all_liked = Liked.objects.raw(
+                "select * from Liked where sid = %s" % sid)  # all_liked contains all merchandises liked by this sid
+            like = []
+            if show_number >= len(all_liked) + 6:
+                dict['error'] = 'You have been browse all merchandises you like'
+                like = all_liked
+                return render(request, 'like.html',locals())
+            else:
+                like = all_liked[:all_liked]
+                return render(request, 'like.html',locals())
+
+
+
 
