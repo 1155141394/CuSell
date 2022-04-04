@@ -20,14 +20,14 @@ class UserManager(admin.ModelAdmin):
 # define the format of merchandise in admin
 class MerchandiseManager(admin.ModelAdmin):
     # show the attributes in the list
-    list_display = ['mid', 'sid', 'name', 'price', 'keyword', 'description', 'pub_date',
+    list_display = ['mid', 'sid', 'name', 'price', 'contact', 'description', 'pub_date',
                     'update_date', 'image_1', 'image_2', 'image_3', 'image_4']
     # filter according to key_word
-    list_filter = ['keyword']
+    list_filter = ['sid']
     # click mid to go to the information change interface
     list_display_links = ['mid']
     # fuzzy query merchandise according to bid, sid, name, key_word
-    search_fields = ['mid', 'sid', 'name', 'keyword']
+    search_fields = ['mid', 'sid', 'name', 'contact']
     # add attribute which could directly changed in list
 
 admin.site.register(User, UserManager)
