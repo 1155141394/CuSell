@@ -1,11 +1,13 @@
+from django.db.models import F
 from django.shortcuts import redirect, render
 from django.shortcuts import HttpResponse
-from .models import User, Merchandise
+from .models import *
 import random
 from django.core.mail import send_mail
 from django.shortcuts import HttpResponse
 from testdj import settings
 import numpy as np
+
 
 def merch_order():
     # Get all merchandise
@@ -21,7 +23,8 @@ def merch_order():
     return user_view_order
 
 
-count = 0   # Count indicates how many times user clicks "show more"
+count = 0  # Count indicates how many times user clicks "show more"
+
 
 # Up is global variable
 
@@ -36,8 +39,7 @@ def index(request):
         user = User.objects.get(sid=user_id)
     except Exception as e:
         print('Get user error is %s ' % e)
-    
-    
+
     if request.method == 'GET':
         # Initialize global count to 6 
         count = 6
@@ -45,7 +47,7 @@ def index(request):
         merchandise = []
         user_view_order = merch_order()
         for order in user_view_order:
-            tmpt = Merchandise.objects.get(mid = order)
+            tmpt = Merchandise.objects.get(mid=order)
             merchandise.append(tmpt)
             if len(merchandise) == count:
                 break
@@ -53,7 +55,7 @@ def index(request):
 
     # Get the post information from front end.
     elif request.method == 'POST':
-        
+
         # If user click signout
         user_view_order = merch_order()
         if 'signout' in request.POST:
@@ -69,11 +71,11 @@ def index(request):
                 dict['error'] = 'You have been browse all merchandises'
             merchandise = []
             for order in user_view_order:
-                tmpt = Merchandise.objects.get(mid = order)
+                tmpt = Merchandise.objects.get(mid=order)
                 merchandise.append(tmpt)
                 if len(merchandise) == count:
                     break
-    return render(request, 'mainpage.html',locals())
+    return render(request, 'mainpage.html', locals())
 
 
 def reg(request):
@@ -143,10 +145,10 @@ def login(request):
     if request.method == 'POST':
         email = request.POST.get('email')
         password = request.POST.get('password')
-        
-        if 'forget_button' in request.POST :
+
+        if 'forget_button' in request.POST:
             check_user = User.objects.raw('SELECT * FROM user a WHERE a.email=\'%s\'' % email)
-            if len(check_user)==0:
+            if len(check_user) == 0:
                 print('No such user, try again')
                 dict['error'] = 'No such user, try again'
             else:
@@ -211,12 +213,11 @@ def profile(request):
 
     elif request.method == 'POST':
         # If user click signout
-        if 'signout' in request.POST :
+        if 'signout' in request.POST:
             rep = redirect('/templates/mainpage.html/')
-            rep.set_cookie('is_login','False')
+            rep.set_cookie('is_login', 'False')
             rep.delete_cookie("sid")
             return rep
-        
 
         user_id = request.COOKIES.get('sid')
         try:
@@ -263,6 +264,7 @@ def test_upload(request):
         User.objects.create(sid=3, portrait=myfile)
         return HttpResponse('Success')
 
+
 def post_mech(request):
     # Check whether user is login
     is_login = request.COOKIES.get('is_login')
@@ -284,16 +286,16 @@ def post_mech(request):
 
     elif request.method == 'POST':
         # If user click signout
-        if 'signout' in request.POST :
+        if 'signout' in request.POST:
             rep = redirect('/templates/mainpage.html/')
             rep.set_cookie('is_login', 'False')
             rep.delete_cookie("sid")
             return rep
         # Get the merchandise information from front end
         user_id = request.COOKIES.get('sid')
-        merchandise_name=request.POST.get('postName')
+        merchandise_name = request.POST.get('postName')
         price = request.POST.get('postPrice')
-        keyword = request.POST.get('postKeyword')
+        contact = request.POST.get('postContact')
         description = request.POST.get('description')
         image_1 = request.FILES.get('pic-1')
         image_2 = request.FILES.get('pic-2')
@@ -304,7 +306,7 @@ def post_mech(request):
         merchandise.sid_id = user_id
         merchandise.name = merchandise_name
         merchandise.price = price
-        merchandise.keyword = keyword
+        merchandise.contact = contact
         merchandise.description = description
         merchandise.image_1 = image_1
         merchandise.image_2 = image_2
@@ -312,7 +314,7 @@ def post_mech(request):
         merchandise.image_4 = image_4
         merchandise.save()
         # After user post the merhcandise, refresh the global order
-        global user_view_order 
+        global user_view_order
         user_view_order = merch_order()
         rep = redirect('/templates/profile.html/')
         return rep
@@ -348,5 +350,30 @@ def merchandise(request, mid):
         if merchandise.image_4 != '':
             image.append(merchandise.image_4)
         user = User.objects.get(sid=sid)
+        # check whether user has liked this merchandise
+        user_liked = Liked.objects.filter(sid=sid, mid=merchandise.mid)
+        if user_liked:
+            like = 'True'
         return render(request, 'merchandise.html', locals())
+
+    elif request.method == 'POST':
+        # If user click signout
+        if 'signout' in request.POST:
+            resp = redirect('/templates/mainpage.html/')
+            resp.set_cookie('is_login', 'False')
+            resp.delete_cookie("sid")
+            return resp
+        # if user click like button
+        if 'like' in request.POST:
+            # get the merchandise information
+            merchandise = Merchandise.objects.get(mid=mid)
+            merchandise.Liked = F('Liked') + 1
+            # add the relation into liked table
+            like_relation = Liked()
+            like_relation.sid = merchandise.sid_id
+            like_relation.mid = merchandise.mid
+            like_relation.save()
+        resp = redirect('/merchandise/%d' % mid)
+        return resp
+
 

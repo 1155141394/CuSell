@@ -29,7 +29,7 @@ class Merchandise(models.Model):
     sid = models.ForeignKey(User, models.CASCADE)
     name = models.CharField(verbose_name='Merchandise Name', max_length=30, default='')
     price = models.DecimalField(verbose_name='Price', max_digits=10, decimal_places=2, default=0)
-    keyword = models.CharField(verbose_name='Keyword', max_length=15, default='')
+    contact = models.CharField(verbose_name='Contact', max_length=15, default='')
     description = models.TextField(verbose_name='Description', default='')
     pub_date = models.DateTimeField(verbose_name='Publish time', auto_now_add=True)
     update_date = models.DateTimeField('Update time', auto_now=True)
