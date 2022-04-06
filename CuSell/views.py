@@ -228,14 +228,16 @@ def profile(request):
         if 'delete' in request.POST:
             del_mid = int(request.POST.get('delete'))
             merchandise = Merchandise.objects.get(mid=del_mid)
+            like_relation = Liked.objects.filter(mid=merchandise.mid)
+            like_relation.delete()
             merchandise.delete()
         # Update user introduction
         if request.POST.get('introduction') is not None:
             new_introduction = request.POST.get('introduction')
             user.introduction = new_introduction
         # Update user name
-        elif request.POST.get('name') is not None:
-            new_name = request.POST.get('name')
+        elif request.POST.get('UserName') is not None:
+            new_name = request.POST.get('UserName')
             user.name = new_name
         # Update user portrait
         elif request.FILES.get('img') is not None:
@@ -250,7 +252,7 @@ def profile(request):
             new_password = request.POST.get('new_password')
             user.password = new_password
         user.save()
-        rep = redirect('/templates/profile.html')
+    rep = redirect('/templates/profile.html')
     return rep
 
 
@@ -353,10 +355,13 @@ def merchandise(request, mid):
         # check whether user has liked this merchandise
         user_liked = Liked.objects.filter(sid=sid, mid=merchandise.mid)
         if user_liked:
-            like = 'True'
+            isLiked = 'True'
+        else:
+            isLiked = 'False'
         return render(request, 'merchandise.html', locals())
 
     elif request.method == 'POST':
+        user_id = request.COOKIES.get('sid')
         # If user click signout
         if 'signout' in request.POST:
             resp = redirect('/templates/mainpage.html/')
@@ -364,16 +369,88 @@ def merchandise(request, mid):
             resp.delete_cookie("sid")
             return resp
         # if user click like button
-        if 'like' in request.POST:
+        if request.POST.get('merchandiseLiked') == 'beLiked':
             # get the merchandise information
             merchandise = Merchandise.objects.get(mid=mid)
             merchandise.Liked = F('Liked') + 1
             # add the relation into liked table
             like_relation = Liked()
-            like_relation.sid = merchandise.sid_id
+            like_relation.sid = user_id
             like_relation.mid = merchandise.mid
             like_relation.save()
+            merchandise.save()
+        # if user click dislike button
+        if request.POST.get('merchandiseLiked') == 'beDisliked':
+            # get the merchandise information
+            merchandise = Merchandise.objects.get(mid=mid)
+            merchandise.Liked = F('Liked') - 1
+            # delete from the liked table
+            like_relation = Liked.objects.filter(sid=user_id, mid=merchandise.mid)
+            like_relation.delete()
+            merchandise.save()
         resp = redirect('/merchandise/%d' % mid)
         return resp
+
+
+def my_liked(request):
+    # Check whether user is login
+    is_login = request.COOKIES.get('is_login')
+    # If not, get back to login page
+    print(is_login)
+    if is_login != 'True':
+        print('user have not login')
+        rep = redirect('/templates/login.html/')
+        return rep
+
+    # Return the profile page and user information back to front end
+    if request.method == 'GET':
+        # get return page
+        # get user_id from cookie
+        user_id = request.COOKIES.get('sid')
+        try:
+            # get user object and merchandise_set from database
+            user = User.objects.get(sid=user_id)
+            like_relation = Liked.objects.filter(sid=user_id)
+            merchandises = []
+            for i in like_relation:
+                m = Merchandise.objects.get(mid=i.mid)
+                merchandises.append(m)
+        except Exception as e:
+            print('Get user error is %s ' % e)
+        # return the page and user information and merchandise information
+        return render(request, 'liked.html', locals())
+
+    if request.method == 'POST':
+        user_id = request.COOKIES.get('sid')
+        user = User.objects.get(sid=user_id)
+        if 'dislike' in request.POST:
+            merchandise_id = int(request.POST.get('dislike'))
+            merchandise = Merchandise.objects.get(mid=merchandise_id)
+            merchandise.Liked = F('Liked') - 1
+            merchandise.save()
+            like_relation = Liked.objects.filter(sid=user_id, mid=merchandise.mid)
+            like_relation.delete()
+        if request.POST.get('introduction') is not None:
+            new_introduction = request.POST.get('introduction')
+            user.introduction = new_introduction
+        # Update user name
+        elif request.POST.get('userName') is not None:
+            new_name = request.POST.get('userName')
+            user.name = new_name
+        # Update user portrait
+        elif request.FILES.get('img') is not None:
+            new_portrait = request.FILES['img']
+            if user.portrait == 'default/default.jpg':
+                user.portrait = new_portrait
+            else:
+                user.portrait.delete()
+                user.portrait = new_portrait
+        # Update user password
+        elif request.POST.get('new_password') is not None:
+            new_password = request.POST.get('new_password')
+            user.password = new_password
+        user.save()
+    resp = redirect('/templates/liked.html')
+    return resp
 
 
