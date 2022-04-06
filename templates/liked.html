@@ -130,7 +130,33 @@
                 $("#userName-icon").addClass("transparent").css("pointer-events","none")
             });
             $("#userName-icon").click(function(){
-                prompt('Input your new User Name here')
+                $.sendConfirm({
+                    title: 'Change Username',
+                    withNoMinWidth: true,
+                    width: '400px',
+                    content: '<form method="post">'
+                        + '{% csrf_token %}'
+                        + '<p>Input your new username:</p>'
+                        + '<input type="text" name="new_username" style="font-size: large; padding: 3px; width: 100%">'
+                        + '<button id="submit-username" type="submit" hidden></button>'
+                        + '</form>',
+                    button: {
+                        confirm: 'Confirm',
+                        cancel: 'Cancel'
+                    },
+                    onBeforeConfirm: function() {
+                        $('#submit-username').click();
+                    },
+                    onConfirm: function() {
+                        $('#submit-username').click();
+                    },
+                    onCancel: function() {
+                        console.log('点击取消！');
+                    },
+                    onClose: function() {
+                        console.log('点击关闭！');
+                    }
+                });
             })
         </script>
 

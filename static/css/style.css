@@ -308,7 +308,7 @@ nav .navigator{
 
 #user-head {
   width: 250px;
-  height: 250px;
+  height: 263px;
   margin-top: 30px;
   border: #6c757d 2px solid;
   border-radius: 50%;
@@ -331,7 +331,7 @@ nav .navigator{
   width: 100%;
   height: 50%;
   position: relative;
-  top: 70%;
+  top: 75%;
   background-color: rgba(0, 0, 0, 0.5);
 }
 
