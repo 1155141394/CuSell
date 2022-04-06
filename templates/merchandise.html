@@ -23,7 +23,7 @@
                     </a>
                     <ul class="nav">
                         <li><a href="/templates/mainpage.html" class="nav-link px-2 text-white top_item">Home</a></li>
-                        <li><a id="profile" href="#" class="nav-link px-2 text-white top_item">Profile</a></li>
+                        <li><a id="profile" href="/templates/profile.html" class="nav-link px-2 text-white top_item">Profile</a></li>
                         <li><a href="/templates/post.html" class="nav-link px-2 text-white top_item">Post</a></li>
                         <li><a href="#" class="nav-link px-2 text-white top_item">Chat</a></li>
                         <li><a target="_blank" href="https://github.com/1155141394/CuSell" class="nav-link px-2 text-white top_item">About Us</a></li>
@@ -67,8 +67,9 @@
                 <p style="font-size: x-large;">Contact Info: {{merchandise.contact}}</p>
             </div>
 
-            <form id="like-form" hidden>
-                <input name="?" id="like-submit">
+            <form id="like-form" method="post">
+                {% csrf_token %}
+                <input name="merchandiseLiked" id="like-submit"  hidden="hidden">
             </form>
 
 
