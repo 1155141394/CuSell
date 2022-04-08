@@ -25,7 +25,7 @@
                         <li><a href="/templates/mainpage.html" class="nav-link px-2 text-white top_item">Home</a></li>
                         <li><a id="profile" href="/templates/profile.html" class="nav-link px-2 text-white top_item">Profile</a></li>
                         <li><a href="/templates/post.html" class="nav-link px-2 text-white top_item">Post</a></li>
-                        <li><a href="#" class="nav-link px-2 text-white top_item">Chat</a></li>
+{#                        <li><a href="#" class="nav-link px-2 text-white top_item">Chat</a></li>#}
                         <li><a target="_blank" href="https://github.com/1155141394/CuSell" class="nav-link px-2 text-white top_item">About Us</a></li>
                     </ul>
                 </div>
@@ -131,7 +131,8 @@
         <div style="display: flex;">
             <div>
                 <h2 style="margin-left: 20px; color: purple; font-weight: bolder;">${{merchandise.price}}HKD</h2>
-                <p style="margin-left: 20px; font-size: x-large; font-weight: bold;">Merchandise name: {{merchandise.name}}</p>
+                <p style="margin-left: 20px; font-size: x-large; font-weight: bold;">Merchandise name:</p>
+                <p style="margin-left: 20px; font-size: x-large; font-weight: bold;position: relative; top: -20px;">{{merchandise.name}}</p>
                 <p style="margin-left: 20px; font-size: x-large; font-weight: bold; position: relative; top: -20px;">Discription: </p>
                 <p style="margin-left: 20px; width: 300px; position: relative; top: -35px;">{{ merchandise.description }}</p>
                 <p style="margin-left: 20px;">Posted on: {{merchandise.pub_date}}</p>
