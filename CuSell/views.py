@@ -47,8 +47,8 @@ def index(request):
         merchandise = []
         user_view_order = merch_order()
         for order in user_view_order:
-            tmpt = Merchandise.objects.get(mid=order)
-            merchandise.append(tmpt)
+            good = Merchandise.objects.get(mid=order)
+            merchandise.append(good)
             if len(merchandise) == count:
                 break
         return render(request, 'mainpage.html', locals())
@@ -71,8 +71,8 @@ def index(request):
                 dict['error'] = 'You have been browse all merchandises'
             merchandise = []
             for order in user_view_order:
-                tmpt = Merchandise.objects.get(mid=order)
-                merchandise.append(tmpt)
+                good = Merchandise.objects.get(mid=order)
+                merchandise.append(good)
                 if len(merchandise) == count:
                     break
     return render(request, 'mainpage.html', locals())
@@ -89,7 +89,7 @@ def reg(request):
         print(email, username, password)
 
         # Check whether this email or username has been used
-        check_user = User.objects.raw('SELECT * FROM user a WHERE a.email=\'%s\'' % email)
+        check_user = User.objects.filter(email=email)
         if len(check_user) != 0:
             print('Used email, please try to get back your preset password')
             dict['error'] = 'Used email, please try to get back your preset password'
@@ -107,19 +107,26 @@ def reg(request):
                 return render(request, 'registration.html', dict)
             # Store the user information into database
             user = User()
-            user.sid = email[0:10]
+            user_id = ''
+            for letter in email:
+                if letter != '@':
+                    user_id = user_id + letter
+                else:
+                    break
+            user.sid = user_id
             user.name = username
             user.email = email
             user.password = password
             user.save()
             rep = redirect('/templates/profile.html/')
             # set the cookie that user has been login (max_age's unit is second)
-            rep.set_cookie('is_login', 'True', max_age=1000)
-            rep.set_cookie('sid', email[0:10], max_age=1000)
+            rep.set_cookie('is_login', 'True', max_age=2000)
+            rep.set_cookie('sid', user_id, max_age=2000)
             return rep
 
         # When user click send
         else:
+            error = 'Vericode has been sent to your email.'
             # Randomly get a sent_vericode
             sent_veriCode = '%d%d%d%d%d%d' % (
                 random.randint(0, 9), random.randint(0, 9), random.randint(0, 9), random.randint(0, 9),
@@ -337,6 +344,7 @@ def merchandise(request, mid):
     if request.method == 'GET':
         # get user information
         sid = request.COOKIES.get('sid')
+        user = User.objects.get(sid=sid)
         # get merchandise information
         merchandise = Merchandise.objects.get(mid=mid)
         # put image into one list
@@ -351,7 +359,9 @@ def merchandise(request, mid):
             image.append(merchandise.image_3)
         if merchandise.image_4 != '':
             image.append(merchandise.image_4)
-        user = User.objects.get(sid=sid)
+        # get owner information
+        owner_id = merchandise.sid_id
+        owner = User.objects.get(sid=owner_id)
         # check whether user has liked this merchandise
         user_liked = Liked.objects.filter(sid=sid, mid=merchandise.mid)
         if user_liked:

@@ -57,14 +57,14 @@
         <path d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1H.5zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm-1.646-7.646-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L8 8.293l2.646-2.647a.5.5 0 0 1 .708.708z"/>
     </svg>
 
-    <div class="card-box" style="width: 90%;  height: auto; margin: 0 auto; margin-top: 30px; align-items: flex-start; justify-content: left;">
+    <div class="card-box" style="min-width: 1000px; width: 90%;  height: auto; margin: 0 auto; margin-top: 30px; align-items: flex-start; justify-content: left;">
         <div style="display: flex;">
             <!-- User Info here -->
-            <img src="{{ MEDIA_URL }}{{ user.portrait }}" style="border: #6c757d 2px solid; border-radius: 50%; height: 200px; width: 200px; margin: 20px;">
+            <img src="{{ MEDIA_URL }}{{ owner.portrait }}" style="border: #6c757d 2px solid; border-radius: 50%; height: 200px; width: 200px; margin: 20px;">
             <div class="user-info" style="display: flex; flex-direction: column; justify-content: end;">
-                <p style="font-size: x-large;">User Name: {{user.name}}</p>
-                <p style="font-size: x-large;">User Email: {{user.email}}</p>
-                <p style="font-size: x-large;">Contact Info: {{merchandise.contact}}</p>
+                <p style="font-size: x-large; font-weight: bold;">User Name: {{owner.name}}</p>
+                <p style="font-size: x-large; font-weight: bold;">User Email: {{owner.email}}</p>
+                <p style="font-size: x-large; font-weight: bold;">Contact Info: {{merchandise.contact}}</p>
             </div>
 
             <form id="like-form" method="post">
@@ -92,7 +92,7 @@
                         })
 
                     </script>
-                    <span style="font-size: x-large;">Add to wish list</span>
+                    <span style="font-size: x-large;">ADD TO WISH LIST</span>
                 </a>
                 <a id="after-like" onclick="document.getElementById('like-submit').value='beDisliked'; $('#like-form').submit();" href="javascript:" style="color: black; text-decoration: none;" class="hide-item">
                     <svg id="filled-after" xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="rgb(248, 85, 115)" class="bi bi-heart-fill" viewBox="0 0 16 16">
@@ -112,7 +112,7 @@
                         })
 
                     </script>
-                    <span style="font-size: x-large;">{{merchandise.Liked}} people like it</span>
+                    <span style="font-size: x-large;">{{merchandise.Liked}} PEOPLE LIKED</span>
                 </a>
 
                 <script>
@@ -130,15 +130,15 @@
         
         <div style="display: flex;">
             <div>
-                <h2 style="margin-left: 20px; color: purple; font-weight: bolder;">${{merchandise.price}}HKD</h2>
-                <p style="margin-left: 20px; font-size: x-large; font-weight: bold;">Merchandise name:</p>
-                <p style="margin-left: 20px; font-size: x-large; font-weight: bold;position: relative; top: -20px;">{{merchandise.name}}</p>
+                <h2 style="margin-left: 20px; color: rebeccapurple; font-weight: bolder;">${{merchandise.price}}HKD</h2>
+                <p style="margin-left: 20px; font-size: x-large; font-weight: bold;">Merchandise Name:</p>
+                <p style="margin-left: 20px;  color: rebeccapurple; font-size: xx-large; font-weight: bold;position: relative; top: -20px;">{{merchandise.name}}</p>
                 <p style="margin-left: 20px; font-size: x-large; font-weight: bold; position: relative; top: -20px;">Discription: </p>
-                <p style="margin-left: 20px; width: 300px; position: relative; top: -35px;">{{ merchandise.description }}</p>
+                <p style="margin-left: 20px; color: rebeccapurple; width: 300px; position: relative; top: -35px;">{{ merchandise.description }}</p>
                 <p style="margin-left: 20px;">Posted on: {{merchandise.pub_date}}</p>
             </div>
 
-            <div style="display: flex;flex-wrap: wrap; justify-content: space-evenly; min-width: 800px">
+            <div style="display: flex;flex-wrap: wrap; justify-content: space-evenly; width: 80%">
                 {% for i in image %}
                 <img src="{{ MEDIA_URL }}{{ i }}" style="width: 350px; height: 500px; border-radius: 25px; border: #6c757d 2px solid; margin: 30px;">
                 {% endfor %}

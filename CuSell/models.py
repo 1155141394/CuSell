@@ -20,7 +20,7 @@ class User(models.Model):
 
     # change the table name from cusell_user to user
     class Meta:
-        db_table = 'User'
+        db_table = 'user'
 
 
 class Merchandise(models.Model):
@@ -45,7 +45,7 @@ class Merchandise(models.Model):
 
     # change the table name from cusell_merchandise to merchandise
     class Meta:
-        db_table = 'Merchandise'
+        db_table = 'merchandise'
 
 
 class Liked(models.Model):
@@ -54,4 +54,4 @@ class Liked(models.Model):
     add_date = models.DateTimeField(verbose_name='Add time', auto_now_add=True)
 
     class Meta:
-        db_table = 'Liked'
+        db_table = 'liked'

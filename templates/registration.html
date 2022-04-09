@@ -156,7 +156,7 @@
         jQuery.validator.addMethod("cuEmail", function(value, element) {
         var cuEmail = /^\w+([-+.]\w+)*@link.cuhk.edu.hk/;
         return this.optional(element) || (cuEmail.test(value));
-    }, "Invalid CUHK Email address");
+    }, "Invalid Email address");
         $("#signupForm").validate({
             rules: {
                 username: {
@@ -229,9 +229,15 @@
     <div id="error-box" style="display: none;"></div>
     <script>
         var error = "{{error}}";
+        var title;
+        if (error == 'Vericode has been sent to your email.'){
+            title = 'Information'
+        } else{
+            title = 'Error'
+        }
         $("#show-error").click(function(){
             $.sendConfirm({
-                title: 'Error!',
+                title: title,
                 withNoMinWidth: true,
                 width: '400px',
                 content: error,
@@ -250,6 +256,7 @@
                 }
             });
         });
+
         $("#error-box").bind("DOMNodeInserted",function(e){
             $("#show-error").click()
         });
