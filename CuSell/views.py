@@ -8,7 +8,7 @@ from django.shortcuts import HttpResponse
 from testdj import settings
 import numpy as np
 
-
+'''
 def merch_order():
     # Get all merchandise
     all_merchandise = Merchandise.objects.all()
@@ -24,7 +24,7 @@ def merch_order():
 
 
 count = 0  # Count indicates how many times user clicks "show more"
-
+'''
 
 # Up is global variable
 

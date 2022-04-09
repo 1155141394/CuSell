@@ -4,8 +4,8 @@ from django.db import models
 # Create your models here.
 class User(models.Model):
     # create the attributes of user
-    sid = models.CharField(verbose_name='User ID', max_length=10, default='', primary_key=True)
-    name = models.CharField(verbose_name='Name', max_length=10, default='')
+    sid = models.CharField(verbose_name='User ID', max_length=30, default='', primary_key=True)
+    name = models.CharField(verbose_name='Name', max_length=30, default='')
     email = models.EmailField(verbose_name='Email', default='')
     password = models.CharField(verbose_name='Password', max_length=20,default='')
     introduction = models.TextField(verbose_name='Personal introduction', default='')
