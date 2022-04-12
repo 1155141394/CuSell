@@ -176,8 +176,14 @@ def login(request):
                 print('Logined in')
                 rep = redirect('/templates/profile.html/')
                 # Set the cookie that user has been login (max_age's unit is second)
-                rep.set_cookie('is_login', 'True', max_age=1000)
-                rep.set_cookie('sid', email[0:10], max_age=1000)
+                user_id = ''
+                for letter in email:
+                    if letter != '@':
+                        user_id = user_id + letter
+                    else:
+                        break
+                rep.set_cookie('is_login', 'True', max_age=2000)
+                rep.set_cookie('sid', user_id, max_age=2000)
                 return rep
             else:
                 dict['error'] = 'Wrong password! Please Try Again or click Forget? button'
