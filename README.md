@@ -1,5 +1,10 @@
 # CuSell
 
+<div>
+<img src="./static/pic/Icon.png" height=120>
+<img src="./static/pic/CuSell.png" height=120>
+</div>
+
 ### Project Overview
 
 We are aiming at providing all CUHK students the most convenient and reliable platform where they can trade their second-hand merchandise. We also focus on minimizing the procedures and accelerating the speed when the users are dealing with each other. Hopefully, users will be able to finish trading and transactions within a day.
