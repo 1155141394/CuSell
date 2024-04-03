@@ -1,6 +1,6 @@
 # CuSell
 
-<div>
+<div align="center">
 <img src="./static/pic/Icon.png" height=120>
 <img src="./static/pic/CuSell.png" height=120>
 </div>
