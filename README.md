@@ -12,7 +12,7 @@ During the hostel check-out period, our team discovered an inspiring opportunity
 1. Designed and built specifically for students in CUHK.
 2. Trading second-hand merchandise is the main function of this platform.
 
-Therefore, in order to fill the vacuum in the trading tools of CUHK’s secondary market, we would love to put forward our project: CuSell. This platform consists of 5 noteworthy features that include Users Signup & Login, Surfing System, Communication System, Merchandise System and Personal Information System. The combination of these features provides the users with a smooth and efficient way of trading second-hand merchandise among CUHK students.
+Therefore, in order to fill the vacuum in the trading tools of CUHK`s secondary market, we would love to put forward our project: CuSell. This platform consists of 5 noteworthy features that include Users Signup & Login, Surfing System, Communication System, Merchandise System and Personal Information System. The combination of these features provides the users with a smooth and efficient way of trading second-hand merchandise among CUHK students.
 
 ## Objective
 
@@ -122,11 +122,11 @@ Eventually, we are dedicated to building our product to be the best platform at 
 
 #### 1.1. Registration
 
-The user can sign up for a new account for log in via entering email and password that is not taken by others before. There is an email containing verification code sent to user email account to verify registration email. If the email is not used and the verification code is correct, then it goes to user’s home page. Otherwise, alert the user with the specific error.
+The user can sign up for a new account for log in via entering email and password that is not taken by others before. There is an email containing verification code sent to user email account to verify registration email. If the email is not used and the verification code is correct, then it goes to user`s home page. Otherwise, alert the user with the specific error.
 
 #### 1.2. Log in
 
-The user is required to log in using their email and password. Our system will check whether that user exists or not by comparing server data. If they are consistent with the data in the database, then go to user’s home page. Otherwise, alert the user that they have entered something wrong.
+The user is required to log in using their email and password. Our system will check whether that user exists or not by comparing server data. If they are consistent with the data in the database, then go to user`s home page. Otherwise, alert the user that they have entered something wrong.
 
 #### 1.3. Retrieve password
 
@@ -140,11 +140,11 @@ The user can click the edit button besides name and information, then user needs
 
 #### 2.2. Change password
 
-The user can click ‘Change password’, and they need to input the new password and click save bottom, then the system would update their login details and contents in the database and redirect to the user home page.
+The user can click `Change password`, and they need to input the new password and click save bottom, then the system would update their login details and contents in the database and redirect to the user home page.
 
 #### 2.3. Upload image
 
-The user can click ‘upload image’ in the user home page, and then they can choose local image to upload to change their portrait image and merchandise image.
+The user can click `upload image` in the user home page, and then they can choose local image to upload to change their portrait image and merchandise image.
 
 ### 3. Merchandise
 
@@ -174,7 +174,7 @@ In the merchandise page, the user could click the red heart to delete the mercha
 
 In technical level, we all get familiar with Python, Django and MySQL database operation, and then we learned and practice some knowledge of JavaScript, HTML and cloud base setting. Additionally, we practice a lot in GitHub and Word operation skills.
 
-In general, our process follows the waterfall model. The first thing we do is to analyze the market requirement and set our target. Then we perform a high-level design and try to divide the terrible problem into many easy sub-questions. The division of labor and schedule came out and was assigned to teammates at this time. After that, we start coding, integrating, and testing. In the development process, we realized that some functions of our first design are redundant or not urgent. For example, from our experience of using many Apps, people seldom use the built-in “Chat” to communicate. In opposite they prefer to use WeChat or WhatsApp directly, so we cut off the “Chat” function from our project.
+In general, our process follows the waterfall model. The first thing we do is to analyze the market requirement and set our target. Then we perform a high-level design and try to divide the terrible problem into many easy sub-questions. The division of labor and schedule came out and was assigned to teammates at this time. After that, we start coding, integrating, and testing. In the development process, we realized that some functions of our first design are redundant or not urgent. For example, from our experience of using many Apps, people seldom use the built-in `Chat` to communicate. In opposite they prefer to use WeChat or WhatsApp directly, so we cut off the `Chat` function from our project.
 
 Although we realized the importance of good timing at the very beginning, scheduling still becomes a big problem. During the developing process, there are always some trivial unexpected happening to delay us. For example, the GitHub setting, and pulling/pushing operation confused us for two days. In the end, we have to delete some meaningful functions like Searching to meet the deadline. Another problem is that we did not follow the guidelines of the project closely, which resulted in some required functions lacking in our project. Although we found and built them in the end, the emergency patches are not well designed and tested. So, if we do this project again, we will leave more time for accidents, consider the plan more reality, and pay more attention to project requirements.
 
