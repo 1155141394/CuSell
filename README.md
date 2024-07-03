@@ -26,17 +26,69 @@ Eventually, we are dedicated to building our product to be the best platform at 
 
 ## System Architectural Design
 
-### System Architecture
+### 1. System Architecture
 
-![architecture](static/pic/architecture.png)
+<img src="./static/pic/architecture.png" align="center">
 
-### Data Flow Diagram
+### 2. Data Flow Diagram
 
-![data_flow_diagram](static/pic/data_flow_diagram.png)
+<img src="./static/pic/data_flow_diagram.png" align="center">
 
-### ER Diagram
+### 3. ER Diagram
 
-![ER_diagram](static/pic/ER_diagram.jpg)
+<img src="./static/pic/ER_diagram.jpg" align="center">
+
+## Detailed Description of Component
+
+### 1. User-case Diagrams
+
+<img src="./static/pic/User-case Diagrams.jpg" align="center">
+
+### 2. Sequence Diagrams
+
+#### 2.1. Authentication
+
+##### 2.1.1. Registration
+
+<img src="./static/pic/Registration.jpg" align="center">
+
+##### 2.1.2. Login
+
+<img src="./static/pic/Login.jpg" align="center">
+
+##### 2.1.3. Forget Password
+
+<img src="./static/pic/Forget Password.jpg" align="center">
+
+#### 2.2. Profile
+
+##### 2.2.1. Edit user information
+
+<img src="./static/pic/Edit user information.jpg" align="center">
+
+#### 2.3. Merchandise
+
+##### 2.3.1. Browse Merchandise
+
+<img src="./static/pic/Browse Merchandise.jpg" align="center">
+
+##### 2.3.2. Post Merchandise
+
+<img src="./static/pic/Post Merchandise.jpg" align="center">
+
+##### 2.3.3. Delete Merchandise
+
+<img src="./static/pic/Delete Merchandise.jpg" align="center">
+
+#### 2.4. Liked List
+
+##### 2.4.1. Add Merchandise to Liked List
+
+<img src="./static/pic/Add Merchandise to Liked List.jpg" align="center">
+
+##### 2.4.2. Delete Merchandise from Liked List
+
+<img src="./static/pic/Delete Merchandise from Liked List.jpg" align="center">
 
 ## Procedures and Functions
 
