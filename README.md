@@ -28,21 +28,29 @@ Eventually, we are dedicated to building our product to be the best platform at 
 
 ### 1. System Architecture
 
-<img src="./static/pic/architecture.png" align="center">
+<p align="center">
+  <img src="./static/pic/architecture.png">
+</p>
 
 ### 2. Data Flow Diagram
 
-<img src="./static/pic/data_flow_diagram.png" align="center">
+<p align="center">
+  <img src="./static/pic/data_flow_diagram.png">
+</p>
 
 ### 3. ER Diagram
 
-<img src="./static/pic/ER_diagram.jpg" align="center">
+<p align="center">
+  <img src="./static/pic/ER_diagram.jpg">
+</p>
 
 ## Detailed Description of Component
 
 ### 1. User-case Diagrams
 
-<img src="./static/pic/User-case Diagrams.jpg" align="center">
+<p align="center">
+  <img src="./static/pic/User-case Diagrams.jpg">
+</p>
 
 ### 2. Sequence Diagrams
 
@@ -50,45 +58,63 @@ Eventually, we are dedicated to building our product to be the best platform at 
 
 ##### 2.1.1. Registration
 
-<img src="./static/pic/Registration.jpg" align="center">
+<p align="center">
+  <img src="./static/pic/Registration.jpg">
+</p>
 
 ##### 2.1.2. Login
 
-<img src="./static/pic/Login.jpg" align="center">
+<p align="center">
+  <img src="./static/pic/Login.jpg">
+</p>
 
 ##### 2.1.3. Forget Password
 
-<img src="./static/pic/Forget Password.jpg" align="center">
+<p align="center">
+  <img src="./static/pic/Forget Password.jpg">
+</p>
 
 #### 2.2. Profile
 
 ##### 2.2.1. Edit user information
 
-<img src="./static/pic/Edit user information.jpg" align="center">
+<p align="center">
+  <img src="./static/pic/Edit user information.jpg">
+</p>
 
 #### 2.3. Merchandise
 
 ##### 2.3.1. Browse Merchandise
 
-<img src="./static/pic/Browse Merchandise.jpg" align="center">
+<p align="center">
+  <img src="./static/pic/Browse Merchandise.jpg">
+</p>
 
 ##### 2.3.2. Post Merchandise
 
-<img src="./static/pic/Post Merchandise.jpg" align="center">
+<p align="center">
+  <img src="./static/pic/Post Merchandise.jpg">
+</p>
 
 ##### 2.3.3. Delete Merchandise
 
-<img src="./static/pic/Delete Merchandise.jpg" align="center">
+<p align="center">
+  <img src="./static/pic/Delete Merchandise.jpg">
+</p>
 
 #### 2.4. Liked List
 
 ##### 2.4.1. Add Merchandise to Liked List
 
-<img src="./static/pic/Add Merchandise to Liked List.jpg" align="center">
+<p align="center">
+  <img src="./static/pic/Add Merchandise to Liked List.jpg">
+</p>
 
 ##### 2.4.2. Delete Merchandise from Liked List
 
-<img src="./static/pic/Delete Merchandise from Liked List.jpg" align="center">
+<p align="center">
+  <img src="./static/pic/Delete Merchandise from Liked List.jpg">
+</p>
 
 ## Procedures and Functions
 
